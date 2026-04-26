@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="150" height="150" viewBox="0 0 120 130" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <!-- Geometric Icon -->
+  <g>
+    <!-- Outer Teal Frame -->
+    <path d="M0 0 H120 V130 H0 Z M12 12 V118 H108 V12 H12 Z" fill="#00828A"/>
+    
+    <!-- Gold Detail -->
+    <path d="M0 55 H15 V75 H0 Z" fill="#D99B41"/>
+    
+    <!-- Main Diagonal -->
+    <path d="M12 118 L108 12" stroke="#00828A" stroke-width="12"/>
+    
+    <!-- Gold Circle with Hole -->
+    <path d="M60 33 A32 32 0 1 0 60 97 A32 32 0 1 0 60 33 Z M60 49 A16 16 0 1 1 60 81 A16 16 0 1 1 60 49 Z" fill="#D99B41" fill-rule="evenodd"/>
+  </g>
+</svg>
