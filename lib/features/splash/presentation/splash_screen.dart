@@ -68,8 +68,8 @@ class _SplashScreenState extends State<SplashScreen>
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isDark
-                ? [AppColors.darkBackground, const Color(0xFF0D2137)]
-                : [AppColors.white, const Color(0xFFE0F7FA)],
+                ? [AppColors.darkBackground, const Color(0xFF0D2116)]
+                : [AppColors.white, const Color(0xFFE8F5E9)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -122,14 +122,14 @@ class _SplashScreenState extends State<SplashScreen>
                     child: ScaleTransition(
                       scale: _pulseAnimation,
                       child: Image.asset(
-                        'assets/images/logo2.png',
+                        'assets/images/panda.png',
                         height: 200,
                         width: 200,
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 0),
 
                   // Title
                   FadeInUp(
@@ -141,7 +141,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
                       child: Text(
-                        'INFORABIA',
+                        'Panda',
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w900,
@@ -172,7 +172,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
                       child: Text(
-                        'SOLUTIONS AND CONSULTANCY',
+                        'Panda Hypermarket',
                         style: TextStyle(
                           fontSize: 12,
                           letterSpacing: 5,

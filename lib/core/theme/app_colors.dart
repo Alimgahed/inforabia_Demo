@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Brand Colors
-  static const Color primary = Color(0xFF00838F);
-  static const Color secondary = Color(0xFFD4AF37);
-  static const Color accent = Color(0xFF00B8D4);
-  static const Color darkTeal = Color(0xFF006064);
+  static const Color primary = Color(0xFF1B432C); // Panda Green
+  static const Color secondary = Color(0xFFE53E2E); // Panda Red
+  static const Color accent = Color(0xFF388E3C); // Success Green
+  static const Color darkTeal = Color(0xFF0D2116); // Deep Forest Green
 
   // Light Mode
   static const Color background = Color(0xFFF8F9FA);
@@ -40,19 +40,19 @@ class AppColors {
 
   // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [primary, darkTeal],
+    colors: [primary, Color(0xFF2E7D32)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient accentGradient = LinearGradient(
-    colors: [accent, primary],
+    colors: [secondary, primary],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
 
   static const LinearGradient darkGradient = LinearGradient(
-    colors: [Color(0xFF1A237E), Color(0xFF0D47A1)],
+    colors: [Color(0xFF0D2116), Color(0xFF1B432C)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -63,16 +63,16 @@ class AppColors {
   );
 
   static const LinearGradient tealGradient = LinearGradient(
-    colors: [Color(0xFF1A4D4E), Color(0xFF607D8B)],
+    colors: [Color(0xFF1B432C), Color(0xFF4C7D5E)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient goldenGradient = LinearGradient(
     colors: [
-      Color(0xFFBD7C31),
-      Color(0xFFF2A13D),
-      Color(0xFFBD7C31),
+      Color(0xFFE53E2E),
+      Color(0xFFFF5252),
+      Color(0xFFE53E2E),
     ],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
@@ -83,7 +83,7 @@ class AppColors {
   static const Color darkText = darkTextPrimary;
   static const Color darkBorder = darkDivider;
   static const Color darkMuted = darkTextSecondary;
-  static const Color primaryLight = Color(0xFFE0F2F1);
+  static const Color primaryLight = Color(0xFFE8F5E9);
   static const Color successLight = Color(0xFFE8F5E9);
   static const Color danger = error;
   static const Color dangerLight = Color(0xFFFFEBEE);

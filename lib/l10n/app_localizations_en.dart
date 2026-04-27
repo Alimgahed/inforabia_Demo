@@ -15,25 +15,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get employeeSwitch => 'Employee Switch';
 
   @override
-  String get onboardingTitle1 => 'HR Self-Services';
+  String get onboardingTitle1 => 'Panda Retail Services';
 
   @override
   String get onboardingSubtitle1 =>
-      'Manage your leave requests, personal information updates, and all HR services from anywhere, anytime.';
+      'Access all your retail employee self-services, leave requests, and digital ID in one place.';
 
   @override
-  String get onboardingTitle2 => 'Smart Dashboards';
+  String get onboardingTitle2 => 'Smart Store Analytics';
 
   @override
   String get onboardingSubtitle2 =>
-      'Interactive charts and analytics for attendance, performance, payroll and team management insights.';
+      'Stay updated with store performance, attendance metrics, and regional benchmarks.';
 
   @override
-  String get onboardingTitle3 => 'Secure & Bilingual';
+  String get onboardingTitle3 => 'Bilingual & Secure';
 
   @override
   String get onboardingSubtitle3 =>
-      'Face ID authentication, full Arabic & English support, and enterprise-grade security for your data.';
+      'Seamless support for Arabic and English with enterprise-grade biometric security.';
 
   @override
   String get login => 'Login';
@@ -695,25 +695,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dark => 'Dark';
 
   @override
-  String get onboardingTitle4 => 'Worklist & Approvals';
+  String get onboardingTitle4 => 'Approvals & Tasks';
 
   @override
   String get onboardingSubtitle4 =>
-      'Manage your tasks and pending approvals efficiently from a single dashboard.';
+      'Swiftly manage store requests and task approvals directly from your mobile device.';
 
   @override
-  String get onboardingTitle5 => 'Financial Insights';
+  String get onboardingTitle5 => 'Panda Rewards & Payroll';
 
   @override
   String get onboardingSubtitle5 =>
-      'Access your payslips, financial notifications, and salary breakdowns in real-time.';
+      'View your payslips and redeem exclusive Panda colleague benefits and AlFursan miles.';
 
   @override
-  String get onboardingTitle6 => 'Learning & Development';
+  String get onboardingTitle6 => 'Excellence & Growth';
 
   @override
   String get onboardingSubtitle6 =>
-      'Enhance your skills with integrated training modules and track your career growth.';
+      'Join the Panda Academy to sharpen your retail skills and advance your career path.';
 
   @override
   String get history => 'History';

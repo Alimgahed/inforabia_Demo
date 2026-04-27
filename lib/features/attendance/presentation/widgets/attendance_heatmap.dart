@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF00838F);
-  static const Color darkTeal = Color(0xFF006064);
+  static const Color primary = Color(0xFF1B432C);
+  static const Color darkTeal = Color(0xFF0D2116);
   static const Color success = Color(0xFF388E3C);
   static const Color warning = Color(0xFFFBC02D);
   static const Color error = Color(0xFFD32F2F);

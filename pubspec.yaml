@@ -76,7 +76,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo2.png"
+  image_path: "assets/images/panda.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 # For information on the generic Dart part of this file, see the
@@ -94,7 +94,6 @@ flutter:
   assets:
     - assets/images/
     - assets/images/people/
-    - assets/animations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

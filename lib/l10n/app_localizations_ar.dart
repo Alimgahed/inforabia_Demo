@@ -15,25 +15,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get employeeSwitch => 'بوابة الموظف';
 
   @override
-  String get onboardingTitle1 => 'خدمات الموارد البشرية';
+  String get onboardingTitle1 => 'خدمات بندة للتجزئة';
 
   @override
   String get onboardingSubtitle1 =>
-      'إدارة طلبات الإجازات، تحديث البيانات الشخصية، وجميع خدمات الموارد البشرية من أي مكان وفي أي وقت.';
+      'الوصول إلى جميع الخدمات الذاتية لموظفي التجزئة، وطلبات الإجازة، والهوية الرقمية في مكان واحد.';
 
   @override
-  String get onboardingTitle2 => 'لوحات بيانات ذكية';
+  String get onboardingTitle2 => 'تحليلات المتجر الذكية';
 
   @override
   String get onboardingSubtitle2 =>
-      'رسوم بيانية تفاعلية وتحليلات للحضور والأداء والرواتب ورؤى إدارة الفريق.';
+      'ابق على اطلاع بأداء المتجر، ومقاييس الحضور، والمعايير الإقليمية.';
 
   @override
-  String get onboardingTitle3 => 'آمن وثنائي اللغة';
+  String get onboardingTitle3 => 'ثنائي اللغة وآمن';
 
   @override
   String get onboardingSubtitle3 =>
-      'مصادقة بصمة الوجه، دعم كامل للعربية والإنجليزية، وأمان على مستوى المؤسسات لبياناتك.';
+      'دعم سلس للغتين العربية والإنجليزية مع أمان بيومتري بمستوى المؤسسات.';
 
   @override
   String get login => 'تسجيل الدخول';
@@ -695,25 +695,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dark => 'داكن';
 
   @override
-  String get onboardingTitle4 => 'قائمة العمل والاعتمادات';
+  String get onboardingTitle4 => 'الموافقات والمهام';
 
   @override
   String get onboardingSubtitle4 =>
-      'إدارة مهامك والاعتمادات المعلقة بكفاءة من لوحة بيانات موحدة.';
+      'إدارة طلبات المتجر والموافقات على المهام بسرعة مباشرة من جهازك المحمول.';
 
   @override
-  String get onboardingTitle5 => 'الرؤى المالية';
+  String get onboardingTitle5 => 'مكافآت بندة والرواتب';
 
   @override
   String get onboardingSubtitle5 =>
-      'الوصول إلى قسائم الراتب، التنبيهات المالية، وتفاصيل الراتب في وقتها الحقيقي.';
+      'عرض كشوف الرواتب واستبدال مزايا زملاء بندة الحصرية وأميال الفرسان.';
 
   @override
-  String get onboardingTitle6 => 'التعلم والتطوير';
+  String get onboardingTitle6 => 'التميز والنمو';
 
   @override
   String get onboardingSubtitle6 =>
-      'عزز مهاراتك من خلال وحدات التدريب المتكاملة وتابع نموك المهني.';
+      'انضم إلى أكاديمية بندة لصقل مهاراتك في مجال التجزئة والتقدم في مسارك المهني.';
 
   @override
   String get history => 'السجل';

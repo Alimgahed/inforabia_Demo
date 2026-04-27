@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:inforabia/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       /// Logo
-                      Image.asset('assets/images/logo2.png', height: 90),
+                      Image.asset('assets/images/panda.png', height: 90),
 
                       const SizedBox(height: 10),
 
@@ -266,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       "Register",
                       style: TextStyle(
-                        color: AppColors.secondary, // GOLD 🔥
+                        color: AppColors.secondary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

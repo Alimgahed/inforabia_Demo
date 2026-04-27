@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -24,8 +25,8 @@ class InitialSetupScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: isDark
-                ? [AppColors.darkBackground, const Color(0xFF0D2137)]
-                : [AppColors.white, const Color(0xFFE0F7FA)],
+                ? [AppColors.darkBackground, const Color(0xFF0D2116)]
+                : [AppColors.white, const Color(0xFFE8F5E9)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -193,7 +194,7 @@ class InitialSetupScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 6.0),
           child: Image.asset(
-            'assets/images/logo2.png',
+            'assets/images/panda.png',
             height: 60,
             // You can also adjust for dark mode if you have a separate asset
             // colorBlendMode: isDark ? BlendMode.srcIn : BlendMode.srcOver,

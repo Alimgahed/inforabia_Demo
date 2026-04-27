@@ -75,10 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     FadeInDown(
                       duration: const Duration(milliseconds: 800),
-                      child: SvgPicture.asset(
-                        'assets/images/logo.svg',
-                        height: 80,
-                      ),
+                      child: Image.asset('assets/images/panda.png', height: 80),
                     ),
 
                     const SizedBox(height: 20),

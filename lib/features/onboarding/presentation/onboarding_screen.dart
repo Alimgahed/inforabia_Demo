@@ -25,12 +25,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   ];
 
   static const List<Color> _thematicColors = [
-    AppColors.accent,      // HR - Cyan
-    AppColors.chartTeal,   // Dashboard - Teal
-    AppColors.chartPurple, // Security - Purple
-    AppColors.chartBlue,   // Worklist - Blue
-    AppColors.secondary,   // Finance - Gold
-    AppColors.chartGreen,  // Learning - Green
+    AppColors.primary,     // Retail Services - Dark Green
+    AppColors.accent,      // Store Analytics - Green
+    AppColors.primaryLight,// Bilingual & Secure - Light Green
+    AppColors.info,        // Approvals & Tasks - Teal
+    AppColors.secondary,   // Rewards & Payroll - Panda Red
+    AppColors.success,     // Excellence & Growth - Green
   ];
 
   @override

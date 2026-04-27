@@ -57,8 +57,8 @@ final List<LeaveBalance> saudiLeaveBalances = [
     used: 7,
     total: 21,
     color: AppColors.primary,
-    bgColor: Color(0xFFE0F2F1),
-    textColor: Color(0xFF004D40),
+    bgColor: Color(0xFFE8F5E9),
+    textColor: Color(0xFF1B432C),
   ),
   const LeaveBalance(
     label: 'Sick',
@@ -241,26 +241,9 @@ class _EmployeeSummaryStrip extends StatelessWidget {
       child: Row(
         children: [
           // Avatar
-          Container(
-            width: 44,
-            height: 44,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                colors: [Color(0xFFD4AF37), Color(0xFFF0C040)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              'AK',
-              style: TextStyle(
-                color: Color(0xFF4A3200),
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-            ),
+          _buildProfileAvatar(
+            'assets/images/pngtree-a-saudi-man-traditional-attire-middle-aged-wearing-white-thobe-and-png-image_16610073.webp',
+            AppColors.primary,
           ),
           const SizedBox(width: 12),
           // Name & title
@@ -1636,3 +1619,31 @@ InputDecoration _inputDeco(String hint, bool isDark) => InputDecoration(
     borderSide: const BorderSide(color: AppColors.primary, width: 1.2),
   ),
 );
+
+Widget _buildProfileAvatar(String imagePath, Color primaryColor) {
+  return Container(
+    padding: const EdgeInsets.all(3), // Increased padding for a "ring" effect
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      border: Border.all(
+        color: primaryColor.withOpacity(0.5), // Softer ring
+        width: 1.5,
+      ),
+    ),
+    child: CircleAvatar(
+      radius: 24,
+      backgroundColor: primaryColor.withOpacity(0.1),
+      child: ClipOval(
+        child: Image.asset(
+          imagePath,
+          fit: BoxFit.cover,
+          width: 48, // Double the radius
+          height: 48,
+          // Error handling is essential for professional apps
+          errorBuilder: (context, error, stackTrace) =>
+              Icon(Icons.person_rounded, color: primaryColor, size: 24),
+        ),
+      ),
+    ),
+  );
+}

@@ -1576,32 +1576,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ) {
     final items = [
       {
-        'title': 'Ramadan Working Hours Updated',
-        'desc': 'New schedule effective from March 10',
-        'image': 'assets/images/news_ramadan.png',
-        'tag': 'Holiday',
-        'color': AppColors.warning,
-      },
-      {
-        'title': 'Annual Performance Bonus',
-        'desc': 'Performance bonus distribution Q1 details',
-        'image': 'assets/images/news_bonus.png',
-        'tag': 'Financial',
-        'color': AppColors.success,
-      },
-      {
-        'title': 'New Leadership Workshop',
-        'desc': 'Registration open until Apr 18',
-        'image': 'assets/images/news_workshop.png',
-        'tag': 'Training',
+        'title': 'Panda Signs MoU with Arsan',
+        'desc':
+            'Collaborating on parking management across the Kingdom markets',
+        'image':
+            'https://corp-website-strapi.panda.sa/uploads/medium_DSC_4195_01_d1e7b31585.jpg',
+        'tag': 'Operations',
         'color': AppColors.info,
+        'fallback': 'assets/images/news_workshop.png',
       },
       {
-        'title': 'IT Policy Update',
-        'desc': 'New BYOD and security guidelines released',
-        'image': 'assets/images/news_security.png',
-        'tag': 'Security',
+        'title': 'RLC Global Forum 2026',
+        'desc': 'CEO Dr. Bander Hamooh on rebuilding resilient growth',
+        'image':
+            'https://corp-website-strapi.panda.sa/uploads/medium_PHOTO_2026_02_03_18_37_07_dbb3aa2b1a.jpg',
+        'tag': 'Leadership',
+        'color': AppColors.warning,
+        'fallback': 'assets/images/news_ramadan.png',
+      },
+      {
+        'title': 'Energy Efficiency with Tarshid',
+        'desc': 'Reducing emissions and saving energy across all stores',
+        'image':
+            'https://corp-website-strapi.panda.sa/uploads/medium_P2_63e19a52b2.png',
+        'tag': 'Sustainability',
         'color': AppColors.primary,
+        'fallback': 'assets/images/news_security.png',
+      },
+      {
+        'title': 'AlFursan Miles Exchange',
+        'desc': 'Redeem AlFursan miles for shopping rewards at Panda',
+        'image':
+            'https://corp-website-strapi.panda.sa/uploads/medium_1_d92d3297d3.jpg',
+        'tag': 'Rewards',
+        'color': AppColors.success,
+        'fallback': 'assets/images/news_bonus.png',
       },
     ];
 
@@ -1682,11 +1691,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: Stack(
                       children: [
                         // Background Image
-                        Image.asset(
+                        Image.network(
                           item['image'] as String,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Image.asset(
+                                item['fallback'] as String,
+                                width: double.infinity,
+                                height: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                         ),
                         // Gradient Overlay
                         Container(
@@ -1896,7 +1912,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Row(
       children: [
         _buildProfileAvatar(
-          'assets/images/522857168_2687827868079555_4260036537523520364_n.jpg',
+          'assets/images/pngtree-a-saudi-man-traditional-attire-middle-aged-wearing-white-thobe-and-png-image_16610073.webp',
           AppColors.primary,
         ),
         const SizedBox(width: 12),
@@ -1995,7 +2011,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Senior Consultant',
+                  'Store Manager',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -2004,7 +2020,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Solutions & Consultancy Division',
+                  'Retail Operations - Panda Market',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 12,
@@ -2013,15 +2029,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    _bannerChip(
-                      'Active',
-                      Icons.check_circle_outline,
-                      Colors.greenAccent,
-                    ),
+                    _bannerChip('Active', Icons.done, Colors.greenAccent),
                     const SizedBox(width: 8),
                     _bannerChip(
-                      'Grade 12',
-                      Icons.military_tech_outlined,
+                      'Top Performer',
+                      Icons.emoji_events_outlined,
                       Colors.amberAccent,
                     ),
                   ],
@@ -2038,7 +2050,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Column(
               children: [
                 const Text(
-                  '4.8',
+                  '4.9',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24,
@@ -2046,7 +2058,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                 ),
                 Text(
-                  'Rating',
+                  'Store Rating',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.7),
                     fontSize: 10,
@@ -2794,7 +2806,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF00838F), Color(0xFF006064), Color(0xFF004D50)],
+          colors: [Color(0xFF1B432C), Color(0xFF0D2116), Color(0xFF07120B)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -2909,7 +2921,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     color: AppColors.secondary,
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: const Color(0xFF006064),
+                                      color: const Color(0xFF0D2116),
                                       width: 1.5,
                                     ),
                                   ),
@@ -2925,7 +2937,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           height: 38,
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [Color(0xFFD4AF37), Color(0xFFB8960C)],
+                              colors: [Color(0xFFE53E2E), Color(0xFFB73225)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),

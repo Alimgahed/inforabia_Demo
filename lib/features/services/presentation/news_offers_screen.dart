@@ -55,49 +55,36 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
   Widget _buildNewsTab(bool isDark) {
     final news = [
       {
-        'title': 'Ramadan 2024 Working Hours',
-        'desc':
-            'Work from 9:00 AM to 3:00 PM during Ramadan. Remote work available on Thursdays.',
-        'date': '10 Mar 2024',
-        'icon': Icons.access_time_filled_rounded,
-        'color': AppColors.warning,
+        'title': 'Panda Signs MoU with Arsan',
+        'desc': 'Collaborating on parking management across the Kingdom markets to enhance customer journey.',
+        'date': '04 Feb 2026',
+        'icon': Icons.local_parking_rounded,
+        'color': AppColors.info,
         'tag': 'Operations',
       },
       {
-        'title': 'Annual Performance Bonus Distribution',
-        'desc':
-            'Q1 performance bonuses will be processed with April payroll. Contact HR for queries.',
-        'date': '05 Apr 2024',
-        'icon': Icons.monetization_on_rounded,
-        'color': AppColors.success,
-        'tag': 'Finance',
-      },
-      {
-        'title': 'IT Infrastructure Upgrade',
-        'desc':
-            'New fiber optic connections deployed across all floors. WiFi 6E now available.',
-        'date': '01 Apr 2024',
-        'icon': Icons.wifi_rounded,
-        'color': AppColors.info,
-        'tag': 'IT',
-      },
-      {
-        'title': 'CEO Town Hall: Vision 2030 Update',
-        'desc':
-            'Join the CEO virtual town hall on Apr 20 at 2 PM for strategic updates.',
-        'date': '12 Apr 2024',
+        'title': 'RLC Global Forum 2026',
+        'desc': 'CEO Dr. Bander Hamooh on rebuilding resilient growth in a pressured market.',
+        'date': '03 Feb 2026',
         'icon': Icons.campaign_rounded,
-        'color': AppColors.primary,
+        'color': AppColors.warning,
         'tag': 'Leadership',
       },
       {
-        'title': 'New BYOD Security Policy',
-        'desc':
-            'All personal devices must be enrolled in MDM by May 1. Contact IT for assistance.',
-        'date': '08 Apr 2024',
-        'icon': Icons.security_rounded,
-        'color': AppColors.error,
-        'tag': 'Security',
+        'title': 'Energy Efficiency with Tarshid',
+        'desc': 'Implementing energy-saving initiatives and reducing emissions across all Panda facilities.',
+        'date': '01 Feb 2026',
+        'icon': Icons.eco_rounded,
+        'color': AppColors.primary,
+        'tag': 'Sustainability',
+      },
+      {
+        'title': 'AlFursan Miles Exchange',
+        'desc': 'Redeem your AlFursan miles for shopping rewards at any Panda store across the Kingdom.',
+        'date': '28 Jan 2026',
+        'icon': Icons.airplanemode_active_rounded,
+        'color': AppColors.success,
+        'tag': 'Rewards',
       },
     ];
     return ListView.builder(
@@ -193,36 +180,28 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
   Widget _buildOffersTab(bool isDark) {
     final offers = [
       {
-        'title': '30% Off Gym Memberships',
-        'vendor': 'Fitness First KSA',
-        'valid': 'Until 30 Jun 2024',
-        'desc': 'Valid for all Inforabia employees and their families.',
-        'icon': Icons.fitness_center_rounded,
+        'title': '15% Colleague Discount',
+        'vendor': 'Panda Retail Company',
+        'valid': 'Ongoing',
+        'desc': 'Exclusive 15% discount for all Panda colleagues on your monthly grocery shopping.',
+        'icon': Icons.shopping_bag_rounded,
         'color': AppColors.success,
       },
       {
-        'title': 'Free Eye Exam + 25% Off Glasses',
-        'vendor': 'Magrabi Optical',
-        'valid': 'Until 31 May 2024',
-        'desc': 'Present your employee ID badge at any branch.',
-        'icon': Icons.visibility_rounded,
-        'color': AppColors.info,
-      },
-      {
-        'title': '20% Off Hotel Stays',
-        'vendor': 'Hilton Hotels Group',
-        'valid': 'Ongoing',
-        'desc': 'Corporate rate for business and leisure travel.',
-        'icon': Icons.hotel_rounded,
+        'title': '2X AlFursan Miles',
+        'vendor': 'AlFursan x Panda',
+        'valid': 'Until 31 Mar 2026',
+        'desc': 'Earn double AlFursan miles on all weekend purchases at any Panda Hypermarket.',
+        'icon': Icons.star_rounded,
         'color': AppColors.secondary,
       },
       {
-        'title': 'Free Online Coursera Access',
-        'vendor': 'Coursera for Business',
-        'valid': 'Until 31 Dec 2024',
-        'desc': 'Unlimited access to professional certificates.',
-        'icon': Icons.school_rounded,
-        'color': AppColors.chartPurple,
+        'title': 'Special Salary Package',
+        'vendor': 'SAIB Bank',
+        'valid': 'Ongoing',
+        'desc': 'Transfer your salary to SAIB and enjoy zero-fee banking and a welcome cash bonus.',
+        'icon': Icons.account_balance_rounded,
+        'color': AppColors.info,
       },
     ];
     return ListView.builder(

@@ -113,37 +113,37 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle1.
   ///
   /// In en, this message translates to:
-  /// **'HR Self-Services'**
+  /// **'Panda Retail Services'**
   String get onboardingTitle1;
 
   /// No description provided for @onboardingSubtitle1.
   ///
   /// In en, this message translates to:
-  /// **'Manage your leave requests, personal information updates, and all HR services from anywhere, anytime.'**
+  /// **'Access all your retail employee self-services, leave requests, and digital ID in one place.'**
   String get onboardingSubtitle1;
 
   /// No description provided for @onboardingTitle2.
   ///
   /// In en, this message translates to:
-  /// **'Smart Dashboards'**
+  /// **'Smart Store Analytics'**
   String get onboardingTitle2;
 
   /// No description provided for @onboardingSubtitle2.
   ///
   /// In en, this message translates to:
-  /// **'Interactive charts and analytics for attendance, performance, payroll and team management insights.'**
+  /// **'Stay updated with store performance, attendance metrics, and regional benchmarks.'**
   String get onboardingSubtitle2;
 
   /// No description provided for @onboardingTitle3.
   ///
   /// In en, this message translates to:
-  /// **'Secure & Bilingual'**
+  /// **'Bilingual & Secure'**
   String get onboardingTitle3;
 
   /// No description provided for @onboardingSubtitle3.
   ///
   /// In en, this message translates to:
-  /// **'Face ID authentication, full Arabic & English support, and enterprise-grade security for your data.'**
+  /// **'Seamless support for Arabic and English with enterprise-grade biometric security.'**
   String get onboardingSubtitle3;
 
   /// No description provided for @login.
@@ -1463,37 +1463,37 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle4.
   ///
   /// In en, this message translates to:
-  /// **'Worklist & Approvals'**
+  /// **'Approvals & Tasks'**
   String get onboardingTitle4;
 
   /// No description provided for @onboardingSubtitle4.
   ///
   /// In en, this message translates to:
-  /// **'Manage your tasks and pending approvals efficiently from a single dashboard.'**
+  /// **'Swiftly manage store requests and task approvals directly from your mobile device.'**
   String get onboardingSubtitle4;
 
   /// No description provided for @onboardingTitle5.
   ///
   /// In en, this message translates to:
-  /// **'Financial Insights'**
+  /// **'Panda Rewards & Payroll'**
   String get onboardingTitle5;
 
   /// No description provided for @onboardingSubtitle5.
   ///
   /// In en, this message translates to:
-  /// **'Access your payslips, financial notifications, and salary breakdowns in real-time.'**
+  /// **'View your payslips and redeem exclusive Panda colleague benefits and AlFursan miles.'**
   String get onboardingSubtitle5;
 
   /// No description provided for @onboardingTitle6.
   ///
   /// In en, this message translates to:
-  /// **'Learning & Development'**
+  /// **'Excellence & Growth'**
   String get onboardingTitle6;
 
   /// No description provided for @onboardingSubtitle6.
   ///
   /// In en, this message translates to:
-  /// **'Enhance your skills with integrated training modules and track your career growth.'**
+  /// **'Join the Panda Academy to sharpen your retail skills and advance your career path.'**
   String get onboardingSubtitle6;
 
   /// No description provided for @history.
