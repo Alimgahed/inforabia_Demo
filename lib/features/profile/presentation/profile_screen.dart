@@ -4,10 +4,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:inforabia/core/theme/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
-import 'dart:typed_data';
+import 'dart:ui';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -190,61 +189,61 @@ class _ProfileScreenState extends State<ProfileScreen>
                 const SizedBox(height: 16),
 
                 // Update buttons row 1
-                FadeInUp(
-                  delay: const Duration(milliseconds: 800),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _updateButton(
-                          'Basic Data',
-                          Icons.edit_note_rounded,
-                          isDark,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _updateButton(
-                          'Phone Data',
-                          Icons.phone_android_rounded,
-                          isDark,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 12),
+                //     FadeInUp(
+                //       delay: const Duration(milliseconds: 800),
+                //       child: Row(
+                //         children: [
+                //           Expanded(
+                //             child: _updateButton(
+                //               'Basic Data',
+                //               Icons.edit_note_rounded,
+                //               isDark,
+                //             ),
+                //           ),
+                //           const SizedBox(width: 12),
+                //           Expanded(
+                //             child: _updateButton(
+                //               'Phone Data',
+                //               Icons.phone_android_rounded,
+                //               isDark,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     const SizedBox(height: 12),
 
-                // Update buttons row 2
-                FadeInUp(
-                  delay: const Duration(milliseconds: 900),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _updateButton(
-                          'Address Data',
-                          Icons.location_on_outlined,
-                          isDark,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _updateButton(
-                          'Documents',
-                          Icons.folder_open_outlined,
-                          isDark,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
+                //     // Update buttons row 2
+                //     FadeInUp(
+                //       delay: const Duration(milliseconds: 900),
+                //       child: Row(
+                //         children: [
+                //           Expanded(
+                //             child: _updateButton(
+                //               'Address Data',
+                //               Icons.location_on_outlined,
+                //               isDark,
+                //             ),
+                //           ),
+                //           const SizedBox(width: 12),
+                //           Expanded(
+                //             child: _updateButton(
+                //               'Documents',
+                //               Icons.folder_open_outlined,
+                //               isDark,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     const SizedBox(height: 20),
 
-                // Settings button
-                FadeInUp(
-                  delay: const Duration(milliseconds: 1000),
-                  child: _buildSettingsButton(),
-                ),
-                const SizedBox(height: 40),
+                //     // Settings button
+                //     FadeInUp(
+                //       delay: const Duration(milliseconds: 1000),
+                //       child: _buildSettingsButton(),
+                //     ),
+                //     const SizedBox(height: 40),
               ]),
             ),
           ),
@@ -1536,7 +1535,7 @@ class ProfileHeader extends StatelessWidget {
                   icon: const Icon(Icons.share),
                   label: const Text("Share QR"),
                   onPressed: () {
-                    shareQrWithLoading(context, "Mahmoued hamady");
+                    shareQrWithLoading(context, empId);
                   },
                 ),
               ),
@@ -1614,10 +1613,32 @@ void _showLoadingDialog(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: false,
-    builder: (_) => WillPopScope(
-      onWillPop: () async => false,
-      child: const Center(
-        child: CircularProgressIndicator(color: AppColors.primary),
+    builder: (_) => BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Text(
+            "Preparing QR...",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primary,
+              decoration: TextDecoration.none,
+            ),
+          ),
+        ),
       ),
     ),
   );
@@ -1627,24 +1648,28 @@ Future<void> shareQrWithLoading(BuildContext context, String empId) async {
   _showLoadingDialog(context);
 
   try {
+    // Artificial delay to ensure user sees the transition
+    await Future.delayed(const Duration(milliseconds: 800));
+
     /// load image
     final byteData = await rootBundle.load('assets/images/qrcode.jpeg');
     final bytes = byteData.buffer.asUint8List();
 
     /// temp file
     final dir = await getTemporaryDirectory();
-    final file = File('${dir.path}/qr.png');
+    final file = File(
+      '${dir.path}/qr_code_${DateTime.now().millisecondsSinceEpoch}.png',
+    );
     await file.writeAsBytes(bytes);
 
-    /// close loader BEFORE share sheet
-    _hideLoadingDialog(context);
+    if (context.mounted) _hideLoadingDialog(context);
 
     /// share
     await Share.shareXFiles([
       XFile(file.path),
-    ], text: 'Employee QR Code\nID: $empId');
+    ], text: 'Employee Digital ID Card\nEmployee ID: $empId');
   } catch (e) {
-    _hideLoadingDialog(context);
+    if (context.mounted) _hideLoadingDialog(context);
     debugPrint("Share error: $e");
   }
 }

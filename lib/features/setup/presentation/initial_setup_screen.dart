@@ -15,6 +15,9 @@ class InitialSetupScreen extends StatelessWidget {
     final settings = Provider.of<AppSettingsProvider>(context);
     final isDark = settings.isDarkMode;
 
+    // Base padding rhythm
+    const double verticalPad = 20.0;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -32,7 +35,10 @@ class InitialSetupScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 28),
+                // Logo + Welcome Row
+                _buildHeaderLogo(isDark),
+                const SizedBox(height: 16),
                 FadeInDown(
                   child: Text(
                     l10n.welcomeToInforabia,
@@ -44,16 +50,31 @@ class InitialSetupScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 14),
+
+                // Optional subtitle or tagline
+                FadeInDown(
+                  delay: const Duration(milliseconds: 60),
+                  child: Text(
+                    l10n.welcomeToInforabia,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDark ? Colors.white70 : Colors.black54,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 40),
 
                 // Language Selection
                 FadeInLeft(
                   delay: const Duration(milliseconds: 200),
                   child: _buildSectionTitle(l10n.chooseLanguage, isDark),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 FadeInLeft(
-                  delay: const Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 260),
                   child: Row(
                     children: [
                       _buildOptionCard(
@@ -86,9 +107,9 @@ class InitialSetupScreen extends StatelessWidget {
                   delay: const Duration(milliseconds: 400),
                   child: _buildSectionTitle(l10n.chooseTheme, isDark),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 500),
+                  delay: const Duration(milliseconds: 460),
                   child: Row(
                     children: [
                       _buildOptionCard(
@@ -120,6 +141,7 @@ class InitialSetupScreen extends StatelessWidget {
 
                 const Spacer(),
 
+                // Start Button
                 FadeInUp(
                   delay: const Duration(milliseconds: 600),
                   child: SizedBox(
@@ -163,8 +185,36 @@ class InitialSetupScreen extends StatelessWidget {
     );
   }
 
+  // Header with logo
+  Widget _buildHeaderLogo(bool isDark) {
+    return Column(
+      children: [
+        // App logo (light/dark variants can be swapped by theme if desired)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 6.0),
+          child: Image.asset(
+            'assets/images/logo2.png',
+            height: 60,
+            // You can also adjust for dark mode if you have a separate asset
+            // colorBlendMode: isDark ? BlendMode.srcIn : BlendMode.srcOver,
+          ),
+        ),
+        // Optional subtle divider line under the logo
+        Container(
+          width: 120,
+          height: 2,
+          decoration: BoxDecoration(
+            color: isDark ? Colors.white24 : Colors.black12,
+            borderRadius: BorderRadius.circular(1),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildSectionTitle(String title, bool isDark) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           width: 4,
@@ -175,12 +225,14 @@ class InitialSetupScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: isDark ? Colors.white : AppColors.primary,
+        Expanded(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : AppColors.primary,
+            ),
           ),
         ),
       ],
@@ -229,6 +281,7 @@ class InitialSetupScreen extends StatelessWidget {
             ],
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 icon,
@@ -246,11 +299,12 @@ class InitialSetupScreen extends StatelessWidget {
                       : (isDark ? Colors.white : AppColors.primary),
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 6),
               Text(
                 subtitle,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 11,
                   color: isSelected ? Colors.white70 : AppColors.grey,
                 ),
               ),
