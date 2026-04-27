@@ -527,7 +527,7 @@ abstract class AppLocalizations {
   /// No description provided for @tax.
   ///
   /// In en, this message translates to:
-  /// **'Tax'**
+  /// **'Income Tax'**
   String get tax;
 
   /// No description provided for @netSalary.
@@ -1430,6 +1430,12 @@ abstract class AppLocalizations {
   /// **'Welcome to Inforabia'**
   String get welcomeToInforabia;
 
+  /// No description provided for @welcomeToPanda.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Panda'**
+  String get welcomeToPanda;
+
   /// No description provided for @chooseLanguage.
   ///
   /// In en, this message translates to:
@@ -1454,11 +1460,35 @@ abstract class AppLocalizations {
   /// **'Light'**
   String get light;
 
+  /// No description provided for @lightThemeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clean & Bright'**
+  String get lightThemeSubtitle;
+
   /// No description provided for @dark.
   ///
   /// In en, this message translates to:
   /// **'Dark'**
   String get dark;
+
+  /// No description provided for @darkThemeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Elegant & Modern'**
+  String get darkThemeSubtitle;
+
+  /// No description provided for @englishSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'US English'**
+  String get englishSubtitle;
+
+  /// No description provided for @arabicSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Arabic Language'**
+  String get arabicSubtitle;
 
   /// No description provided for @onboardingTitle4.
   ///
@@ -1507,6 +1537,864 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'HR Self-Services'**
   String get standardHRServices;
+
+  /// No description provided for @chatbotGreeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello! I am HCM Assistant.\nHow can I help you today?'**
+  String get chatbotGreeting;
+
+  /// No description provided for @chatbotLeaveReply.
+  ///
+  /// In en, this message translates to:
+  /// **'📅 Here are your leave balance details:'**
+  String get chatbotLeaveReply;
+
+  /// No description provided for @chatbotSalaryReply.
+  ///
+  /// In en, this message translates to:
+  /// **'💰 Salary data for this month:'**
+  String get chatbotSalaryReply;
+
+  /// No description provided for @chatbotAttendanceReply.
+  ///
+  /// In en, this message translates to:
+  /// **'⏱️ Attendance and departure record today:'**
+  String get chatbotAttendanceReply;
+
+  /// No description provided for @chatbotApprovalsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Pending requests that need your approval:'**
+  String get chatbotApprovalsReply;
+
+  /// No description provided for @chatbotProfileReply.
+  ///
+  /// In en, this message translates to:
+  /// **'👤 Your personal data and employment information:'**
+  String get chatbotProfileReply;
+
+  /// No description provided for @chatbotDocumentsReply.
+  ///
+  /// In en, this message translates to:
+  /// **'📄 Documents and records available to you:'**
+  String get chatbotDocumentsReply;
+
+  /// No description provided for @chatbotRequestReply.
+  ///
+  /// In en, this message translates to:
+  /// **'📝 I can help you submit a new request:'**
+  String get chatbotRequestReply;
+
+  /// No description provided for @chatbotDefaultReply.
+  ///
+  /// In en, this message translates to:
+  /// **'🤖 I can help you with leaves, salary, attendance, approvals, documents, and more.'**
+  String get chatbotDefaultReply;
+
+  /// No description provided for @typeYourMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Type your message...'**
+  String get typeYourMessage;
+
+  /// No description provided for @availableNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Now'**
+  String get availableNow;
+
+  /// No description provided for @chooseFromQuickOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from quick options'**
+  String get chooseFromQuickOptions;
+
+  /// No description provided for @leaveKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'leave'**
+  String get leaveKeyword;
+
+  /// No description provided for @salaryKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'salary'**
+  String get salaryKeyword;
+
+  /// No description provided for @attendanceKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'attendance'**
+  String get attendanceKeyword;
+
+  /// No description provided for @approvalKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'approval'**
+  String get approvalKeyword;
+
+  /// No description provided for @documentKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'document'**
+  String get documentKeyword;
+
+  /// No description provided for @dataKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'data'**
+  String get dataKeyword;
+
+  /// No description provided for @requestKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'request'**
+  String get requestKeyword;
+
+  /// No description provided for @performanceKeyword.
+  ///
+  /// In en, this message translates to:
+  /// **'performance'**
+  String get performanceKeyword;
+
+  /// No description provided for @topTalentRetained.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Talent Retained'**
+  String get topTalentRetained;
+
+  /// No description provided for @totalEmployeesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Employees'**
+  String get totalEmployeesCount;
+
+  /// No description provided for @annualizedRetention.
+  ///
+  /// In en, this message translates to:
+  /// **'Annualized Retention'**
+  String get annualizedRetention;
+
+  /// No description provided for @avgTenure.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Tenure (yrs)'**
+  String get avgTenure;
+
+  /// No description provided for @predictedRetentionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Predicted Retention by High Performer'**
+  String get predictedRetentionTitle;
+
+  /// No description provided for @predictedRetentionPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Q2 2018 – Q2 2020'**
+  String get predictedRetentionPeriod;
+
+  /// No description provided for @highPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'High Performance'**
+  String get highPerformance;
+
+  /// No description provided for @highPotential.
+  ///
+  /// In en, this message translates to:
+  /// **'High Potential'**
+  String get highPotential;
+
+  /// No description provided for @topTalent.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Talent'**
+  String get topTalent;
+
+  /// No description provided for @forecast.
+  ///
+  /// In en, this message translates to:
+  /// **'Forecast'**
+  String get forecast;
+
+  /// No description provided for @retentionByBUTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Talent Retention by Business Unit'**
+  String get retentionByBUTitle;
+
+  /// No description provided for @thisYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This Year'**
+  String get thisYear;
+
+  /// No description provided for @humanResources.
+  ///
+  /// In en, this message translates to:
+  /// **'Human Resources'**
+  String get humanResources;
+
+  /// No description provided for @researchAndDevelopment.
+  ///
+  /// In en, this message translates to:
+  /// **'R&D'**
+  String get researchAndDevelopment;
+
+  /// No description provided for @sales.
+  ///
+  /// In en, this message translates to:
+  /// **'Sales'**
+  String get sales;
+
+  /// No description provided for @marketing.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketing'**
+  String get marketing;
+
+  /// No description provided for @operations.
+  ///
+  /// In en, this message translates to:
+  /// **'Operations'**
+  String get operations;
+
+  /// No description provided for @predictedAttritionRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Predicted Attrition Risk'**
+  String get predictedAttritionRisk;
+
+  /// No description provided for @lowRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Low Risk'**
+  String get lowRisk;
+
+  /// No description provided for @mediumRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium Risk'**
+  String get mediumRisk;
+
+  /// No description provided for @highRisk.
+  ///
+  /// In en, this message translates to:
+  /// **'High Risk'**
+  String get highRisk;
+
+  /// No description provided for @topTalentHeatMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Talent Heat Map'**
+  String get topTalentHeatMap;
+
+  /// No description provided for @performancePotential.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance × Potential'**
+  String get performancePotential;
+
+  /// No description provided for @high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get high;
+
+  /// No description provided for @med.
+  ///
+  /// In en, this message translates to:
+  /// **'Med'**
+  String get med;
+
+  /// No description provided for @low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get low;
+
+  /// No description provided for @avgTenureYears.
+  ///
+  /// In en, this message translates to:
+  /// **'Average Tenure (years)'**
+  String get avgTenureYears;
+
+  /// No description provided for @headcountDistribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Headcount Distribution'**
+  String get headcountDistribution;
+
+  /// No description provided for @femaleGenderRatio.
+  ///
+  /// In en, this message translates to:
+  /// **'Female Gender Ratio'**
+  String get femaleGenderRatio;
+
+  /// No description provided for @womenRatio.
+  ///
+  /// In en, this message translates to:
+  /// **'Women Ratio'**
+  String get womenRatio;
+
+  /// No description provided for @salaryOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary Overview'**
+  String get salaryOverview;
+
+  /// No description provided for @goalsProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals Progress'**
+  String get goalsProgress;
+
+  /// No description provided for @feedbackScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback Score'**
+  String get feedbackScore;
+
+  /// No description provided for @performanceSnapshot.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Snapshot'**
+  String get performanceSnapshot;
+
+  /// No description provided for @retained.
+  ///
+  /// In en, this message translates to:
+  /// **'Retained'**
+  String get retained;
+
+  /// No description provided for @quickRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Registration'**
+  String get quickRegistration;
+
+  /// No description provided for @joinEnterprisePortal.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the enterprise portal in less than 2 minutes'**
+  String get joinEnterprisePortal;
+
+  /// No description provided for @performanceReviewDeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Review Deadline'**
+  String get performanceReviewDeadline;
+
+  /// No description provided for @trainingFlutterAdvanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Training: Flutter Advanced'**
+  String get trainingFlutterAdvanced;
+
+  /// No description provided for @annualLeaveStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual Leave Start'**
+  String get annualLeaveStart;
+
+  /// No description provided for @newsTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Panda Signs MoU with Arsan'**
+  String get newsTitle1;
+
+  /// No description provided for @newsDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Collaborating on parking management across the Kingdom markets'**
+  String get newsDesc1;
+
+  /// No description provided for @newsTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'RLC Global Forum 2026'**
+  String get newsTitle2;
+
+  /// No description provided for @newsDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'CEO Dr. Bander Hamooh on rebuilding resilient growth'**
+  String get newsDesc2;
+
+  /// No description provided for @newsTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Energy Efficiency with Tarshid'**
+  String get newsTitle3;
+
+  /// No description provided for @newsDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Reducing emissions and saving energy across all stores'**
+  String get newsDesc3;
+
+  /// No description provided for @trackManageRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Track, submit & manage your requests'**
+  String get trackManageRequests;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filterAll;
+
+  /// No description provided for @filterApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get filterApproved;
+
+  /// No description provided for @filterPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get filterPending;
+
+  /// No description provided for @filterRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get filterRejected;
+
+  /// No description provided for @totalRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get totalRequests;
+
+  /// No description provided for @prsCertsWarehouse.
+  ///
+  /// In en, this message translates to:
+  /// **'PRs, achievement certs & warehouse'**
+  String get prsCertsWarehouse;
+
+  /// No description provided for @prsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'PRs'**
+  String get prsShort;
+
+  /// No description provided for @certsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Certs'**
+  String get certsShort;
+
+  /// No description provided for @transfers.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfers'**
+  String get transfers;
+
+  /// No description provided for @percentComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% Complete'**
+  String percentComplete(Object percent);
+
+  /// No description provided for @docsPoliciesTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents, policies & training courses'**
+  String get docsPoliciesTraining;
+
+  /// No description provided for @docsShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Docs'**
+  String get docsShort;
+
+  /// No description provided for @coursesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Courses'**
+  String get coursesShort;
+
+  /// No description provided for @doneShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get doneShort;
+
+  /// No description provided for @activeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get activeShort;
+
+  /// No description provided for @pagesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages'**
+  String pagesCount(Object count);
+
+  /// No description provided for @activeCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Active'**
+  String activeCount(Object count);
+
+  /// No description provided for @completedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Completed'**
+  String completedCount(Object count);
+
+  /// No description provided for @due.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get due;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @tomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Tomorrow'**
+  String get tomorrow;
+
+  /// No description provided for @workProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Work progress'**
+  String get workProgress;
+
+  /// No description provided for @recorded.
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded'**
+  String get recorded;
+
+  /// No description provided for @hours.
+  ///
+  /// In en, this message translates to:
+  /// **'Hours'**
+  String get hours;
+
+  /// No description provided for @tapToCheckOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to Check-Out'**
+  String get tapToCheckOut;
+
+  /// No description provided for @workDayComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Work day complete'**
+  String get workDayComplete;
+
+  /// No description provided for @scanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning…'**
+  String get scanning;
+
+  /// No description provided for @tapToCheckIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to Check-In'**
+  String get tapToCheckIn;
+
+  /// No description provided for @faceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Face ID'**
+  String get faceId;
+
+  /// No description provided for @fingerprint.
+  ///
+  /// In en, this message translates to:
+  /// **'Fingerprint'**
+  String get fingerprint;
+
+  /// No description provided for @biometric.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric'**
+  String get biometric;
+
+  /// No description provided for @checkInWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-In with'**
+  String get checkInWith;
+
+  /// No description provided for @checkOutWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-Out with'**
+  String get checkOutWith;
+
+  /// No description provided for @checkInShort.
+  ///
+  /// In en, this message translates to:
+  /// **'In'**
+  String get checkInShort;
+
+  /// No description provided for @checkOutShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Out'**
+  String get checkOutShort;
+
+  /// No description provided for @am.
+  ///
+  /// In en, this message translates to:
+  /// **'AM'**
+  String get am;
+
+  /// No description provided for @pm.
+  ///
+  /// In en, this message translates to:
+  /// **'PM'**
+  String get pm;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get days;
+
+  /// No description provided for @requestAbsence.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Absence'**
+  String get requestAbsence;
+
+  /// No description provided for @sar.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR'**
+  String get sar;
+
+  /// No description provided for @transferred.
+  ///
+  /// In en, this message translates to:
+  /// **'Transferred'**
+  String get transferred;
+
+  /// No description provided for @insurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance'**
+  String get insurance;
+
+  /// No description provided for @downloadPdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Download PDF'**
+  String get downloadPdf;
+
+  /// No description provided for @mins.
+  ///
+  /// In en, this message translates to:
+  /// **'Mins'**
+  String get mins;
+
+  /// No description provided for @present.
+  ///
+  /// In en, this message translates to:
+  /// **'Present'**
+  String get present;
+
+  /// No description provided for @viewMonthlyReport.
+  ///
+  /// In en, this message translates to:
+  /// **'View Monthly Report'**
+  String get viewMonthlyReport;
+
+  /// No description provided for @pendingRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending Requests'**
+  String get pendingRequests;
+
+  /// No description provided for @approveAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve All'**
+  String get approveAll;
+
+  /// No description provided for @softwareEngineer.
+  ///
+  /// In en, this message translates to:
+  /// **'Software Engineer'**
+  String get softwareEngineer;
+
+  /// No description provided for @itDept.
+  ///
+  /// In en, this message translates to:
+  /// **'IT Department'**
+  String get itDept;
+
+  /// No description provided for @joinDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Date'**
+  String get joinDate;
+
+  /// No description provided for @jan.
+  ///
+  /// In en, this message translates to:
+  /// **'Jan'**
+  String get jan;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @contract.
+  ///
+  /// In en, this message translates to:
+  /// **'Contract'**
+  String get contract;
+
+  /// No description provided for @salaryCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary Certificate'**
+  String get salaryCertificate;
+
+  /// No description provided for @recommendationLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommendation Letter'**
+  String get recommendationLetter;
+
+  /// No description provided for @uploadDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Document'**
+  String get uploadDocument;
+
+  /// No description provided for @loan.
+  ///
+  /// In en, this message translates to:
+  /// **'Loan'**
+  String get loan;
+
+  /// No description provided for @salaryLoanRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary Loan Request'**
+  String get salaryLoanRequest;
+
+  /// No description provided for @officialEntityRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Entity Request'**
+  String get officialEntityRequest;
+
+  /// No description provided for @dataUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Data Update'**
+  String get dataUpdate;
+
+  /// No description provided for @updatePersonalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Personal Info'**
+  String get updatePersonalInfo;
+
+  /// No description provided for @annual.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual'**
+  String get annual;
+
+  /// No description provided for @sick.
+  ///
+  /// In en, this message translates to:
+  /// **'Sick'**
+  String get sick;
+
+  /// No description provided for @emergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency'**
+  String get emergency;
+
+  /// No description provided for @leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leave;
+
+  /// No description provided for @workFromHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Work From Home'**
+  String get workFromHome;
+
+  /// No description provided for @biometricReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your identity to proceed'**
+  String get biometricReason;
+
+  /// No description provided for @checkInSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-in recorded successfully'**
+  String get checkInSuccess;
+
+  /// No description provided for @checkInSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-In Successful'**
+  String get checkInSuccessful;
+
+  /// No description provided for @welcomeDayMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome! Have a productive day.'**
+  String get welcomeDayMessage;
+
+  /// No description provided for @checkOutSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-out recorded successfully'**
+  String get checkOutSuccess;
+
+  /// No description provided for @checkOutSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-Out Successful'**
+  String get checkOutSuccessful;
+
+  /// No description provided for @greatWorkMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Great work today! See you tomorrow.'**
+  String get greatWorkMessage;
+
+  /// No description provided for @finance.
+  ///
+  /// In en, this message translates to:
+  /// **'Finance'**
+  String get finance;
+
+  /// No description provided for @genderRatioTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Men Ratio'**
+  String get genderRatioTitle;
 }
 
 class _AppLocalizationsDelegate

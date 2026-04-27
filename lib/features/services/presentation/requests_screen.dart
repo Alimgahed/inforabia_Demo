@@ -150,12 +150,30 @@ class _RequestsScreenState extends State<RequestsScreen>
     },
   ];
 
-  List<String> get _filters => ['All', 'Approved', 'Pending', 'Rejected'];
+  List<String> get _filters => [
+        l10n.filterAll,
+        l10n.filterApproved,
+        l10n.filterPending,
+        l10n.filterRejected,
+      ];
+
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
 
   List<Map<String, dynamic>> get _filteredRequests {
     if (_filterIndex == 0) return _myRequests;
+    final statusMap = {
+      1: 'Approved',
+      2: 'Pending',
+      3: 'Rejected',
+    };
     return _myRequests
-        .where((r) => r['status'] == _filters[_filterIndex])
+        .where((r) => r['status'] == statusMap[_filterIndex])
         .toList();
   }
 
@@ -174,7 +192,6 @@ class _RequestsScreenState extends State<RequestsScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context)!;
     final approved = _myRequests.where((r) => r['status'] == 'Approved').length;
     final pending = _myRequests.where((r) => r['status'] == 'Pending').length;
     final rejected = _myRequests.where((r) => r['status'] == 'Rejected').length;
@@ -234,7 +251,7 @@ class _RequestsScreenState extends State<RequestsScreen>
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Track, submit & manage your requests',
+                            l10n.trackManageRequests,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.75),
                               fontSize: 12,
@@ -243,26 +260,26 @@ class _RequestsScreenState extends State<RequestsScreen>
                           const SizedBox(height: 16),
                           Row(
                             children: [
-                              _headerStat(
-                                'Approved',
+                               _headerStat(
+                                l10n.filterApproved,
                                 '$approved',
                                 AppColors.accent,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Pending',
+                                l10n.filterPending,
                                 '$pending',
                                 AppColors.secondary,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Rejected',
+                                l10n.filterRejected,
                                 '$rejected',
                                 Colors.redAccent.shade100,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Total',
+                                l10n.totalRequests,
                                 '${_myRequests.length}',
                                 Colors.white,
                               ),
@@ -282,9 +299,9 @@ class _RequestsScreenState extends State<RequestsScreen>
                 decoration: const BoxDecoration(color: AppColors.darkTeal),
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppColors.secondary,
+                  indicatorColor: Colors.white,
                   indicatorWeight: 3,
-                  labelColor: AppColors.secondary,
+                  labelColor: Colors.white,
                   unselectedLabelColor: Colors.white70,
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
@@ -496,7 +513,13 @@ class _RequestsScreenState extends State<RequestsScreen>
                                       ),
                                     ),
                                     child: Text(
-                                      req['status'] as String,
+                                      req['status'] == 'Approved'
+                                          ? l10n.filterApproved
+                                          : req['status'] == 'Pending'
+                                              ? l10n.filterPending
+                                              : req['status'] == 'Rejected'
+                                                  ? l10n.filterRejected
+                                                  : req['status'] as String,
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w800,

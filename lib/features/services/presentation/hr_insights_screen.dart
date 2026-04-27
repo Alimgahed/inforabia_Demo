@@ -35,11 +35,17 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
           l10n.hrInsights,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: AppColors.primary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
         foregroundColor: Colors.white,
+        elevation: 0,
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
+          indicatorWeight: 3,
           labelStyle: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,

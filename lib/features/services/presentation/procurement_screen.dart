@@ -12,6 +12,13 @@ class ProcurementScreen extends StatefulWidget {
 class _ProcurementScreenState extends State<ProcurementScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
 
   final _prs = [
     {
@@ -186,7 +193,6 @@ class _ProcurementScreenState extends State<ProcurementScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark
@@ -197,16 +203,12 @@ class _ProcurementScreenState extends State<ProcurementScreen>
           SliverAppBar(
             expandedHeight: 210,
             pinned: true,
-            backgroundColor: AppColors.accent,
+            backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.accent, AppColors.primary],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  gradient: AppColors.primaryGradient,
                 ),
                 child: Stack(
                   children: [
@@ -243,7 +245,7 @@ class _ProcurementScreenState extends State<ProcurementScreen>
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'PRs, achievement certs & warehouse',
+                            l10n.prsCertsWarehouse,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.75),
                               fontSize: 12,
@@ -253,19 +255,19 @@ class _ProcurementScreenState extends State<ProcurementScreen>
                           Row(
                             children: [
                               _headerStat(
-                                'PRs',
+                                l10n.prsShort,
                                 '${_prs.length}',
                                 Colors.white,
                               ),
                               const SizedBox(width: 8),
                               _headerStat(
-                                'Certs',
+                                l10n.certsShort,
                                 '${_certs.length}',
                                 AppColors.secondary,
                               ),
                               const SizedBox(width: 8),
                               _headerStat(
-                                'Transfers',
+                                l10n.transfers,
                                 '${_transfers.length}',
                                 Colors.white.withOpacity(0.9),
                               ),
@@ -282,12 +284,12 @@ class _ProcurementScreenState extends State<ProcurementScreen>
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(48),
               child: Container(
-                color: AppColors.primary,
+                color: AppColors.darkTeal,
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppColors.secondary,
+                  indicatorColor: Colors.white,
                   indicatorWeight: 3,
-                  labelColor: AppColors.secondary,
+                  labelColor: Colors.white,
                   unselectedLabelColor: Colors.white70,
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
@@ -576,7 +578,7 @@ class _ProcurementScreenState extends State<ProcurementScreen>
                       Row(
                         children: [
                           Text(
-                            '${(pct * 100).toInt()}% Complete',
+                            l10n.percentComplete((pct * 100).toInt()),
                             style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w700,

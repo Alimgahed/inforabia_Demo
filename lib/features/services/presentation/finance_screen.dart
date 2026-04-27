@@ -187,16 +187,12 @@ class _FinanceScreenState extends State<FinanceScreen>
           SliverAppBar(
             expandedHeight: 220,
             pinned: true,
-            backgroundColor: AppColors.darkTeal,
+            backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.darkTeal, AppColors.primary],
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                  ),
+                  gradient: AppColors.primaryGradient,
                 ),
                 child: Stack(
                   children: [
@@ -271,9 +267,9 @@ class _FinanceScreenState extends State<FinanceScreen>
                 color: AppColors.darkTeal,
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppColors.secondary,
+                  indicatorColor: Colors.white,
                   indicatorWeight: 3,
-                  labelColor: AppColors.secondary,
+                  labelColor: Colors.white,
                   unselectedLabelColor: Colors.white70,
                   labelStyle: const TextStyle(
                     fontWeight: FontWeight.bold,

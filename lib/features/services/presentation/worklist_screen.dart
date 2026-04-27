@@ -13,6 +13,13 @@ class WorklistScreen extends StatefulWidget {
 class _WorklistScreenState extends State<WorklistScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
 
   @override
   void initState() {
@@ -29,7 +36,6 @@ class _WorklistScreenState extends State<WorklistScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: isDark
@@ -45,11 +51,7 @@ class _WorklistScreenState extends State<WorklistScreen>
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.primary, AppColors.darkTeal],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  gradient: AppColors.primaryGradient,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 80, 20, 20),
@@ -68,9 +70,9 @@ class _WorklistScreenState extends State<WorklistScreen>
                       const SizedBox(height: 12),
                       Row(
                         children: [
-                          _statChip('8 Active', AppColors.accent),
+                          _statChip(l10n.activeCount(8), AppColors.accent),
                           const SizedBox(width: 8),
-                          _statChip('24 Completed', AppColors.secondary),
+                          _statChip(l10n.completedCount(24), AppColors.secondary),
                         ],
                       ),
                     ],
@@ -81,10 +83,10 @@ class _WorklistScreenState extends State<WorklistScreen>
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(48),
               child: Container(
-                color: AppColors.primary,
+                color: AppColors.darkTeal,
                 child: TabBar(
                   controller: _tabController,
-                  indicatorColor: AppColors.secondary,
+                  indicatorColor: Colors.white,
                   indicatorWeight: 3,
                   labelColor: Colors.white,
                   unselectedLabelColor: Colors.white.withOpacity(0.6),
@@ -132,21 +134,21 @@ class _WorklistScreenState extends State<WorklistScreen>
     final tasks = [
       {
         'title': 'Review Purchase Request PR-8839',
-        'due': 'Today',
+        'due': l10n.today,
         'priority': 'High',
         'cat': 'Procurement',
         'color': AppColors.error,
       },
       {
         'title': 'Approve Sara\'s Leave Request',
-        'due': 'Today',
+        'due': l10n.today,
         'priority': 'High',
         'cat': 'HR',
         'color': AppColors.error,
       },
       {
         'title': 'Verify Invoice INV-4421',
-        'due': 'Tomorrow',
+        'due': l10n.tomorrow,
         'priority': 'Medium',
         'cat': 'Finance',
         'color': AppColors.warning,
@@ -242,7 +244,7 @@ class _WorklistScreenState extends State<WorklistScreen>
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            'Due: ${t['due']}',
+                            '${l10n.due}: ${t['due']}',
                             style: TextStyle(
                               fontSize: 10,
                               color: color,

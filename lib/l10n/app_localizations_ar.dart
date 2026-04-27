@@ -111,16 +111,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get attendanceHistory => 'سجل الحضور';
 
   @override
-  String get checkIn => 'تسجيل الحضور';
+  String get checkIn => 'تسجيل الدخول';
 
   @override
-  String get checkOut => 'تسجيل الانصراف';
+  String get checkOut => 'تسجيل الخروج';
 
   @override
-  String get checkedIn => 'تم تسجيل الحضور';
+  String get checkedIn => 'تم تسجيل الدخول';
 
   @override
-  String get checkedOut => 'تم تسجيل الانصراف';
+  String get checkedOut => 'تم تسجيل الخروج';
 
   @override
   String get onTime => 'في الوقت';
@@ -225,7 +225,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get socialInsurance => 'التأمينات الاجتماعية';
 
   @override
-  String get tax => 'الضريبة';
+  String get tax => 'ضريبة الدخل';
 
   @override
   String get netSalary => 'صافي الراتب';
@@ -569,7 +569,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pendingApprovals => 'اعتمادات معلقة';
 
   @override
-  String get waiting => 'بانتظار الموافقة';
+  String get waiting => 'في الانتظار';
 
   @override
   String get approve => 'موافقة';
@@ -680,6 +680,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get welcomeToInforabia => 'مرحباً بك في إنفورابيا';
 
   @override
+  String get welcomeToPanda => 'مرحباً بك في بندة';
+
+  @override
   String get chooseLanguage => 'اختر لغتك المفضلة';
 
   @override
@@ -692,7 +695,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get light => 'فاتح';
 
   @override
+  String get lightThemeSubtitle => 'نظيف ومشرق';
+
+  @override
   String get dark => 'داكن';
+
+  @override
+  String get darkThemeSubtitle => 'أنيق وعصري';
+
+  @override
+  String get englishSubtitle => 'الإنجليزية الأمريكية';
+
+  @override
+  String get arabicSubtitle => 'اللغة العربية';
 
   @override
   String get onboardingTitle4 => 'الموافقات والمهام';
@@ -720,4 +735,445 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get standardHRServices => 'خدمات الموارد البشرية';
+
+  @override
+  String get chatbotGreeting =>
+      'مرحباً! أنا HCM Assistant.\nكيف يمكنني مساعدتك اليوم؟';
+
+  @override
+  String get chatbotLeaveReply => '📅 إليك تفاصيل رصيد الإجازات الخاص بك:';
+
+  @override
+  String get chatbotSalaryReply => '💰 بيانات المرتب لهذا الشهر:';
+
+  @override
+  String get chatbotAttendanceReply => '⏱️ سجل الحضور والانصراف اليوم:';
+
+  @override
+  String get chatbotApprovalsReply => '✅ الطلبات المعلقة التي تحتاج موافقتك:';
+
+  @override
+  String get chatbotProfileReply => '👤 بياناتك الشخصية ومعلومات التوظيف:';
+
+  @override
+  String get chatbotDocumentsReply => '📄 المستندات والوثائق المتاحة لك:';
+
+  @override
+  String get chatbotRequestReply => '📝 يمكنني مساعدتك في تقديم طلب جديد:';
+
+  @override
+  String get chatbotDefaultReply =>
+      '🤖 يمكنني مساعدتك في الإجازات، المرتب، الحضور، الموافقات، المستندات، والمزيد.';
+
+  @override
+  String get typeYourMessage => 'اكتب رسالتك...';
+
+  @override
+  String get availableNow => 'متاح الآن';
+
+  @override
+  String get chooseFromQuickOptions => 'اختر من الخيارات السريعة';
+
+  @override
+  String get leaveKeyword => 'اجازة';
+
+  @override
+  String get salaryKeyword => 'مرتب';
+
+  @override
+  String get attendanceKeyword => 'حضور';
+
+  @override
+  String get approvalKeyword => 'موافقة';
+
+  @override
+  String get documentKeyword => 'مستند';
+
+  @override
+  String get dataKeyword => 'بيانات';
+
+  @override
+  String get requestKeyword => 'طلب';
+
+  @override
+  String get performanceKeyword => 'اداء';
+
+  @override
+  String get topTalentRetained => 'المواهب التي تم الاحتفاظ بها';
+
+  @override
+  String get totalEmployeesCount => 'إجمالي الموظفين';
+
+  @override
+  String get annualizedRetention => 'معدل الاحتفاظ السنوي';
+
+  @override
+  String get avgTenure => 'متوسط مدة الخدمة (سنوات)';
+
+  @override
+  String get predictedRetentionTitle => 'الاحتفاظ المتوقع حسب الأداء العالي';
+
+  @override
+  String get predictedRetentionPeriod =>
+      'الربع الثاني 2018 – الربع الثاني 2020';
+
+  @override
+  String get highPerformance => 'أداء عالي';
+
+  @override
+  String get highPotential => 'إمكانات عالية';
+
+  @override
+  String get topTalent => 'موهبة متميزة';
+
+  @override
+  String get forecast => 'التوقعات';
+
+  @override
+  String get retentionByBUTitle => 'الاحتفاظ بالمواهب حسب وحدة العمل';
+
+  @override
+  String get thisYear => 'هذا العام';
+
+  @override
+  String get humanResources => 'الموارد البشرية';
+
+  @override
+  String get researchAndDevelopment => 'البحث والتطوير';
+
+  @override
+  String get sales => 'المبيعات';
+
+  @override
+  String get marketing => 'التسويق';
+
+  @override
+  String get operations => 'العمليات';
+
+  @override
+  String get predictedAttritionRisk => 'مخاطر التناقص المتوقعة';
+
+  @override
+  String get lowRisk => 'مخاطر منخفضة';
+
+  @override
+  String get mediumRisk => 'مخاطر متوسطة';
+
+  @override
+  String get highRisk => 'مخاطر عالية';
+
+  @override
+  String get topTalentHeatMap => 'خريطة حرارة المواهب';
+
+  @override
+  String get performancePotential => 'الأداء × الإمكانات';
+
+  @override
+  String get high => 'مرتفع';
+
+  @override
+  String get med => 'متوسط';
+
+  @override
+  String get low => 'منخفض';
+
+  @override
+  String get avgTenureYears => 'متوسط مدة الخدمة (سنوات)';
+
+  @override
+  String get headcountDistribution => 'توزيع عدد الموظفين';
+
+  @override
+  String get femaleGenderRatio => 'نسبة الإناث';
+
+  @override
+  String get womenRatio => 'نسبة النساء';
+
+  @override
+  String get salaryOverview => 'نظرة عامة على الراتب';
+
+  @override
+  String get goalsProgress => 'التقدم في الأهداف';
+
+  @override
+  String get feedbackScore => 'درجة التغذية الراجعة';
+
+  @override
+  String get performanceSnapshot => 'لقطة الأداء';
+
+  @override
+  String get retained => 'تم الاحتفاظ بهم';
+
+  @override
+  String get quickRegistration => 'تسجيل سريع';
+
+  @override
+  String get joinEnterprisePortal => 'انضم إلى بوابة المؤسسة في أقل من دقيقتين';
+
+  @override
+  String get performanceReviewDeadline => 'الموعد النهائي لمراجعة الأداء';
+
+  @override
+  String get trainingFlutterAdvanced => 'تدريب: فلاتر متقدم';
+
+  @override
+  String get annualLeaveStart => 'بداية الإجازة السنوية';
+
+  @override
+  String get newsTitle1 => 'بندة توقع مذكرة تفاهم مع أرسان';
+
+  @override
+  String get newsDesc1 => 'التعاون في إدارة مواقف السيارات في أسواق المملكة';
+
+  @override
+  String get newsTitle2 => 'منتدى RLC العالمي 2026';
+
+  @override
+  String get newsDesc2 =>
+      'الرئيس التنفيذي د. بندر حموه حول إعادة بناء النمو المرن';
+
+  @override
+  String get newsTitle3 => 'كفاءة الطاقة مع ترشيد';
+
+  @override
+  String get newsDesc3 => 'تقليل الانبعاثات وتوفير الطاقة في جميع المتاجر';
+
+  @override
+  String get trackManageRequests => 'تتبع وتقديم وإدارة طلباتك';
+
+  @override
+  String get filterAll => 'الكل';
+
+  @override
+  String get filterApproved => 'مقبول';
+
+  @override
+  String get filterPending => 'قيد الانتظار';
+
+  @override
+  String get filterRejected => 'مرفوض';
+
+  @override
+  String get totalRequests => 'الإجمالي';
+
+  @override
+  String get prsCertsWarehouse => 'طلبات الشراء، شهادات الإنجاز والمستودع';
+
+  @override
+  String get prsShort => 'طلبات';
+
+  @override
+  String get certsShort => 'شهادات';
+
+  @override
+  String get transfers => 'تحويلات';
+
+  @override
+  String percentComplete(Object percent) {
+    return '$percent% مكتمل';
+  }
+
+  @override
+  String get docsPoliciesTraining => 'المستندات والسياسات والدورات التدريبية';
+
+  @override
+  String get docsShort => 'مستندات';
+
+  @override
+  String get coursesShort => 'دورات';
+
+  @override
+  String get doneShort => 'منجز';
+
+  @override
+  String get activeShort => 'نشط';
+
+  @override
+  String pagesCount(Object count) {
+    return '$count صفحات';
+  }
+
+  @override
+  String activeCount(Object count) {
+    return '$count نشط';
+  }
+
+  @override
+  String completedCount(Object count) {
+    return '$count مكتمل';
+  }
+
+  @override
+  String get due => 'موعد';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get tomorrow => 'غداً';
+
+  @override
+  String get workProgress => 'تقدم العمل';
+
+  @override
+  String get recorded => 'مسجل';
+
+  @override
+  String get hours => 'ساعات';
+
+  @override
+  String get tapToCheckOut => 'اضغط لتسجيل الخروج';
+
+  @override
+  String get workDayComplete => 'اكتمل يوم العمل';
+
+  @override
+  String get scanning => 'جاري المسح…';
+
+  @override
+  String get tapToCheckIn => 'اضغط لتسجيل الحضور';
+
+  @override
+  String get faceId => 'بصمة الوجه';
+
+  @override
+  String get fingerprint => 'بصمة الإصبع';
+
+  @override
+  String get biometric => 'البصمة الحيوية';
+
+  @override
+  String get checkInWith => 'تسجيل الحضور بواسطة';
+
+  @override
+  String get checkOutWith => 'تسجيل الانصراف بواسطة';
+
+  @override
+  String get checkInShort => 'دخول';
+
+  @override
+  String get checkOutShort => 'خروج';
+
+  @override
+  String get am => 'ص';
+
+  @override
+  String get pm => 'م';
+
+  @override
+  String get days => 'أيام';
+
+  @override
+  String get requestAbsence => 'طلب إجازة';
+
+  @override
+  String get sar => 'ر.س';
+
+  @override
+  String get transferred => 'تم التحويل';
+
+  @override
+  String get insurance => 'التأمينات';
+
+  @override
+  String get downloadPdf => 'تحميل PDF';
+
+  @override
+  String get mins => 'دقائق';
+
+  @override
+  String get present => 'حاضر';
+
+  @override
+  String get viewMonthlyReport => 'عرض التقرير الشهري';
+
+  @override
+  String get pendingRequests => 'الطلبات المعلقة';
+
+  @override
+  String get approveAll => 'موافقة على الكل';
+
+  @override
+  String get softwareEngineer => 'مهندس برمجيات';
+
+  @override
+  String get itDept => 'إدارة تقنية المعلومات';
+
+  @override
+  String get joinDate => 'تاريخ التعيين';
+
+  @override
+  String get jan => 'يناير';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get contract => 'العقد';
+
+  @override
+  String get salaryCertificate => 'شهادة راتب';
+
+  @override
+  String get recommendationLetter => 'خطاب توصية';
+
+  @override
+  String get uploadDocument => 'رفع مستند';
+
+  @override
+  String get loan => 'سلفة';
+
+  @override
+  String get salaryLoanRequest => 'طلب سلفة على الراتب';
+
+  @override
+  String get officialEntityRequest => 'طلب لجهة رسمية';
+
+  @override
+  String get dataUpdate => 'تحديث بيانات';
+
+  @override
+  String get updatePersonalInfo => 'تحديث المعلومات الشخصية';
+
+  @override
+  String get annual => 'سنوي';
+
+  @override
+  String get sick => 'مرضي';
+
+  @override
+  String get emergency => 'طارئ';
+
+  @override
+  String get leave => 'إجازة';
+
+  @override
+  String get workFromHome => 'عمل من المنزل';
+
+  @override
+  String get biometricReason => 'تحقق من هويتك للمتابعة';
+
+  @override
+  String get checkInSuccess => 'تم تسجيل الحضور بنجاح';
+
+  @override
+  String get checkInSuccessful => 'تم تسجيل الحضور';
+
+  @override
+  String get welcomeDayMessage => 'مرحباً بك! نتمنى لك يوماً مثمراً.';
+
+  @override
+  String get checkOutSuccess => 'تم تسجيل الانصراف بنجاح';
+
+  @override
+  String get checkOutSuccessful => 'تم تسجيل الانصراف';
+
+  @override
+  String get greatWorkMessage => 'عمل رائع اليوم! نراك غداً.';
+
+  @override
+  String get finance => 'المالية';
+
+  @override
+  String get genderRatioTitle => 'نسبة الرجال';
 }

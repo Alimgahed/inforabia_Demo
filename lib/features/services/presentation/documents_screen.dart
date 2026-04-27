@@ -12,6 +12,13 @@ class DocumentsScreen extends StatefulWidget {
 class _DocumentsScreenState extends State<DocumentsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
 
   final _docs = [
     {
@@ -187,7 +194,6 @@ class _DocumentsScreenState extends State<DocumentsScreen>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final l10n = AppLocalizations.of(context)!;
     final completed = _courses.where((c) => c['status'] == 'Completed').length;
     final enrolled = _courses.where((c) => c['status'] == 'Enrolled').length;
 
@@ -200,16 +206,12 @@ class _DocumentsScreenState extends State<DocumentsScreen>
           SliverAppBar(
             expandedHeight: 210,
             pinned: true,
-            backgroundColor: AppColors.secondary,
+            backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [AppColors.secondary, Color(0xFFB8942B)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  gradient: AppColors.primaryGradient,
                 ),
                 child: Stack(
                   children: [
@@ -246,7 +248,7 @@ class _DocumentsScreenState extends State<DocumentsScreen>
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Documents, policies & training courses',
+                            l10n.docsPoliciesTraining,
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.75),
                               fontSize: 12,
@@ -255,26 +257,26 @@ class _DocumentsScreenState extends State<DocumentsScreen>
                           const SizedBox(height: 16),
                           Row(
                             children: [
-                              _headerStat(
-                                'Docs',
+                               _headerStat(
+                                l10n.docsShort,
                                 '${_docs.length}',
                                 Colors.white,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Courses',
+                                l10n.coursesShort,
                                 '${_courses.length}',
                                 Colors.white,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Done',
+                                l10n.doneShort,
                                 '$completed',
                                 AppColors.accent,
                               ),
                               const SizedBox(width: 10),
                               _headerStat(
-                                'Active',
+                                l10n.activeShort,
                                 '$enrolled',
                                 AppColors.primary,
                               ),
@@ -287,11 +289,11 @@ class _DocumentsScreenState extends State<DocumentsScreen>
                   ],
                 ),
               ),
-            ),
+        ),
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(48),
               child: Container(
-                color: const Color(0xFFB8942B),
+                color: AppColors.darkTeal,
                 child: TabBar(
                   controller: _tabController,
                   indicatorColor: Colors.white,
@@ -388,7 +390,7 @@ class _DocumentsScreenState extends State<DocumentsScreen>
                               children: [
                                 _pill(d['cat'] as String, isDark),
                                 const SizedBox(width: 6),
-                                _pill('${d['pages']} pages', isDark),
+                                 _pill(l10n.pagesCount(d['pages'] as String), isDark),
                                 const SizedBox(width: 6),
                                 _pill(d['updated'] as String, isDark),
                               ],
@@ -497,14 +499,20 @@ class _DocumentsScreenState extends State<DocumentsScreen>
                                 color: color.withOpacity(0.25),
                               ),
                             ),
-                            child: Text(
-                              c['status'] as String,
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w800,
-                                color: color,
-                              ),
-                            ),
+                             child: Text(
+                               c['status'] == 'Enrolled'
+                                   ? l10n.enrolled
+                                   : c['status'] == 'Completed'
+                                       ? l10n.completed
+                                       : c['status'] == 'Not Started'
+                                           ? l10n.notStarted
+                                           : c['status'] as String,
+                               style: TextStyle(
+                                 fontSize: 10,
+                                 fontWeight: FontWeight.w800,
+                                 color: color,
+                               ),
+                             ),
                           ),
                         ],
                       ),

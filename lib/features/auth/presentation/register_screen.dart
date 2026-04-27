@@ -151,20 +151,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                             ),
                             const SizedBox(width: 20),
-                            const Expanded(
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Quick Registration',
-                                    style: TextStyle(
+                                    l10n.quickRegistration,
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
                                     ),
                                   ),
                                   Text(
-                                    'Join the enterprise portal in less than 2 minutes',
-                                    style: TextStyle(
+                                    l10n.joinEnterprisePortal,
+                                    style: const TextStyle(
                                       fontSize: 10,
                                       color: AppColors.grey,
                                     ),

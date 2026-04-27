@@ -31,6 +31,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   int _currentIndex = 0;
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
 
   // Animation controllers for KPI counters
   late AnimationController _kpiController;
@@ -116,7 +123,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? AppColors.accent : AppColors.primary;
 
@@ -351,28 +357,28 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildAnimatedKpiRow(bool isDark) {
     final kpis = [
       _KpiData(
-        'Top Talent\nRetained',
+        '${l10n.topTalent}\n${l10n.retained ?? "Retained"}',
         75,
         '%',
         AppColors.primary,
         Icons.workspace_premium_rounded,
       ),
       _KpiData(
-        'Total\nEmployees',
+        '${l10n.total}\n${l10n.members}',
         1210,
         '',
         AppColors.info,
         Icons.people_rounded,
       ),
       _KpiData(
-        'Annualized\nRetention',
+        '${l10n.annualizedRetention.replaceAll(" ", "\n")}',
         74,
         '%',
         AppColors.secondary,
         Icons.trending_up_rounded,
       ),
       _KpiData(
-        'Avg Tenure\n(yrs)',
+        '${l10n.avgTenure}\n(yrs)',
         9,
         '',
         AppColors.success,
@@ -481,8 +487,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Predicted Retention by High Performer',
-            'Q2 2018 – Q2 2020',
+            l10n.predictedRetentionTitle,
+            l10n.predictedRetentionPeriod,
             primaryColor,
             isDark,
           ),
@@ -653,13 +659,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           const SizedBox(height: 12),
           Row(
             children: [
-              _legendItem('High Performance', AppColors.secondary),
+              _legendItem(l10n.highPerformance, AppColors.secondary),
               const SizedBox(width: 12),
-              _legendItem('High Potential', AppColors.accent),
+              _legendItem(l10n.highPotential, AppColors.accent),
               const SizedBox(width: 12),
-              _legendItem('Top Talent', AppColors.darkTeal),
+              _legendItem(l10n.topTalent, AppColors.darkTeal),
               const SizedBox(width: 12),
-              _legendItemDashed('Forecast', Colors.grey),
+              _legendItemDashed(l10n.forecast, Colors.grey),
             ],
           ),
         ],
@@ -670,12 +676,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // ── Attrition Risk by Business Unit (animated horizontal bars) ──
   Widget _buildAttritionByBU(AppLocalizations l10n, bool isDark) {
     final units = [
-      _BUData('Human Resources', 93, AppColors.primary),
-      _BUData('Finance', 89, AppColors.darkTeal),
-      _BUData('R&D', 77, AppColors.accent),
-      _BUData('Sales', 71, AppColors.secondary),
-      _BUData('Marketing', 65, AppColors.chartOrange),
-      _BUData('Operations', 60, AppColors.chartPurple),
+      _BUData(l10n.humanResources, 93, AppColors.primary),
+      _BUData(l10n.finance, 89, AppColors.darkTeal),
+      _BUData(l10n.researchAndDevelopment, 77, AppColors.accent),
+      _BUData(l10n.sales, 71, AppColors.secondary),
+      _BUData(l10n.marketing, 65, AppColors.chartOrange),
+      _BUData(l10n.operations, 60, AppColors.chartPurple),
     ];
     return Container(
       padding: const EdgeInsets.all(16),
@@ -684,8 +690,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Top Talent Retention by Business Unit',
-            'This Year',
+            l10n.retentionByBUTitle,
+            l10n.thisYear,
             AppColors.primary,
             isDark,
           ),
@@ -778,7 +784,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Predicted Attrition Risk',
+            l10n.predictedAttritionRisk,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.bold,
@@ -838,8 +844,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       [76, 59, 59],
       [59, 68, 80],
     ];
-    final rowLabels = ['High', 'Med', 'Low'];
-    final colLabels = ['Low', 'Med', 'High'];
+    final rowLabels = [l10n.high, l10n.med, l10n.low];
+    final colLabels = [l10n.low, l10n.med, l10n.high];
 
     Color heatColor(int v) {
       if (v >= 80) return AppColors.success;
@@ -856,7 +862,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Top Talent Heat Map',
+            l10n.topTalentHeatMap,
             style: TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.bold,
@@ -865,7 +871,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           const SizedBox(height: 4),
           Text(
-            'Performance × Potential',
+            l10n.performancePotential,
             style: TextStyle(
               fontSize: 9,
               color: isDark ? AppColors.darkTextSecondary : AppColors.grey,
@@ -967,8 +973,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Average Tenure (years)',
-            'Headcount Distribution',
+            l10n.avgTenureYears,
+            l10n.headcountDistribution,
             AppColors.primary,
             isDark,
           ),
@@ -1113,7 +1119,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Female Gender Ratio',
+            l10n.femaleGenderRatio,
             '44% • Target 88.8%',
             AppColors.secondary,
             isDark,
@@ -1205,9 +1211,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           const SizedBox(height: 8),
           Row(
             children: [
-              _legendItem('Women Ratio', AppColors.secondary),
+              _legendItem(l10n.womenRatio, AppColors.secondary),
               const SizedBox(width: 16),
-              _legendItem('Gender Ratio', AppColors.primary),
+              _legendItem(l10n.genderRatioTitle, AppColors.primary),
             ],
           ),
         ],
@@ -1241,7 +1247,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Salary Overview',
+            l10n.salaryOverview,
             'April 2024',
             AppColors.primary,
             isDark,
@@ -1251,7 +1257,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               Expanded(
                 child: _salaryItem(
-                  'Basic',
+                  l10n.basicSalary,
                   'SAR 12,500',
                   AppColors.primary,
                   isDark,
@@ -1259,7 +1265,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: _salaryItem(
-                  'Housing',
+                  l10n.housingAllowance,
                   'SAR 3,125',
                   AppColors.chartOrange,
                   isDark,
@@ -1267,7 +1273,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: _salaryItem(
-                  'Transport',
+                  l10n.transportAllowance,
                   'SAR 1,000',
                   AppColors.success,
                   isDark,
@@ -1287,7 +1293,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Net Salary',
+                l10n.netSalary,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: isDark ? Colors.white : AppColors.primary,
@@ -1366,7 +1372,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _cardHeader(
-            'Performance Snapshot',
+            l10n.performanceSnapshot,
             'FY 2024',
             AppColors.primary,
             isDark,
@@ -1376,7 +1382,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               Expanded(
                 child: _perfItem(
-                  'Overall Rating',
+                  l10n.overallRating,
                   '4.8/5',
                   AppColors.success,
                   isDark,
@@ -1384,7 +1390,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: _perfItem(
-                  'Goals Progress',
+                  l10n.goalsProgress,
                   '85%',
                   AppColors.primary,
                   isDark,
@@ -1392,7 +1398,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
               Expanded(
                 child: _perfItem(
-                  'Feedback Score',
+                  l10n.feedbackScore,
                   '92%',
                   AppColors.info,
                   isDark,
@@ -1482,19 +1488,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ) {
     final events = [
       {
-        'title': 'Performance Review Deadline',
+        'title': l10n.performanceReviewDeadline,
         'date': 'Apr 20, 2024',
         'icon': Icons.rate_review_rounded,
         'color': AppColors.warning,
       },
       {
-        'title': 'Training: Flutter Advanced',
+        'title': l10n.trainingFlutterAdvanced,
         'date': 'Apr 22, 2024',
         'icon': Icons.school_rounded,
         'color': AppColors.info,
       },
       {
-        'title': 'Annual Leave Start',
+        'title': l10n.annualLeaveStart,
         'date': 'Apr 25, 2024',
         'icon': Icons.flight_takeoff_rounded,
         'color': AppColors.success,
@@ -1576,18 +1582,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ) {
     final items = [
       {
-        'title': 'Panda Signs MoU with Arsan',
-        'desc':
-            'Collaborating on parking management across the Kingdom markets',
+        'title': l10n.newsTitle1,
+        'desc': l10n.newsDesc1,
         'image':
             'https://corp-website-strapi.panda.sa/uploads/medium_DSC_4195_01_d1e7b31585.jpg',
-        'tag': 'Operations',
+        'tag': l10n.operations,
         'color': AppColors.info,
         'fallback': 'assets/images/news_workshop.png',
       },
       {
-        'title': 'RLC Global Forum 2026',
-        'desc': 'CEO Dr. Bander Hamooh on rebuilding resilient growth',
+        'title': l10n.newsTitle2,
+        'desc': l10n.newsDesc2,
         'image':
             'https://corp-website-strapi.panda.sa/uploads/medium_PHOTO_2026_02_03_18_37_07_dbb3aa2b1a.jpg',
         'tag': 'Leadership',
@@ -1595,8 +1600,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         'fallback': 'assets/images/news_ramadan.png',
       },
       {
-        'title': 'Energy Efficiency with Tarshid',
-        'desc': 'Reducing emissions and saving energy across all stores',
+        'title': l10n.newsTitle3,
+        'desc': l10n.newsDesc3,
         'image':
             'https://corp-website-strapi.panda.sa/uploads/medium_P2_63e19a52b2.png',
         'tag': 'Sustainability',

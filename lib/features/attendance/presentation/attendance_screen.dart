@@ -33,6 +33,7 @@ import 'package:get/get.dart';
 import 'package:inforabia/core/theme/app_colors.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:inforabia/l10n/app_localizations.dart';
 
 // ─── App Colors ───────────────────────────────────────────────
 
@@ -147,19 +148,19 @@ class AttendanceController extends GetxController {
       supportedBiometrics.contains(BiometricType.strong);
 
   // ── Biometric label for UI ──
-  String get biometricLabel {
-    if (supportedBiometrics.contains(BiometricType.face)) return 'Face ID';
+  String biometricLabel(AppLocalizations l10n) {
+    if (supportedBiometrics.contains(BiometricType.face)) return l10n.faceId;
     if (supportedBiometrics.contains(BiometricType.fingerprint)) {
-      return 'Fingerprint';
+      return l10n.fingerprint;
     }
-    return 'Biometric';
+    return l10n.biometric;
   }
 
   // ── Authenticate with Face ID / Fingerprint ──
   Future<bool> _authenticate(String reason) async {
     try {
       scanState.value = 'scanning';
-      feedbackMsg.value = 'Scanning… hold still';
+      feedbackMsg.value = ''; // Will be set by UI or localized elsewhere if needed
       feedbackType.value = '';
 
       final bool didAuthenticate = await _auth.authenticate(
@@ -178,7 +179,7 @@ class AttendanceController extends GetxController {
         feedbackMsg.value = 'No biometrics enrolled';
       } else if (e.code == LocalAuthExceptionCode.temporaryLockout ||
           e.code == LocalAuthExceptionCode.biometricLockout) {
-        feedbackMsg.value = 'Too many attempts. Try later';
+        feedbackMsg.value = 'Too many attempts. Try later'; // Will be handled by UI l10n if needed
       } else {
         feedbackMsg.value = 'Authentication cancelled';
       }
@@ -189,23 +190,23 @@ class AttendanceController extends GetxController {
   }
 
   // ── Check-In ──
-  Future<void> checkIn() async {
+  Future<void> checkIn(AppLocalizations l10n) async {
     if (isLoading.value) return;
     isLoading.value = true;
 
     final bool success = await _authenticate(
-      'Verify your identity to check in',
+      l10n.biometricReason,
     );
 
     if (success) {
       attendance = DemoAttendance(loginTime: DateTime.now());
       scanState.value = 'checkedin';
-      feedbackMsg.value = '✓ Check-in recorded successfully';
+      feedbackMsg.value = '✓ ${l10n.checkInSuccess}';
       feedbackType.value = 'success';
       _startTimer();
       Get.snackbar(
-        'Check-In Successful',
-        'Welcome! Have a productive day.',
+        l10n.checkInSuccessful,
+        l10n.welcomeDayMessage,
         backgroundColor: AppColors.successLight,
         colorText: AppColors.success,
         icon: const Icon(Icons.check_circle, color: AppColors.success),
@@ -220,12 +221,12 @@ class AttendanceController extends GetxController {
   }
 
   // ── Check-Out ──
-  Future<void> checkOut() async {
+  Future<void> checkOut(AppLocalizations l10n) async {
     if (isLoading.value) return;
     isLoading.value = true;
 
     final bool success = await _authenticate(
-      'Verify your identity to check out',
+      l10n.biometricReason,
     );
 
     if (success) {
@@ -378,7 +379,7 @@ class AttendanceScreen extends StatelessWidget {
         backgroundColor: isDark ? AppColors.darkCard : AppColors.white,
         elevation: 0,
         title: Text(
-          'Attendance',
+          AppLocalizations.of(context)!.attendance,
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 18,
@@ -554,11 +555,11 @@ class _TimeCard extends StatelessWidget {
               Expanded(
                 child: _TimeBox(
                   isDark: isDark,
-                  label: 'CHECK-IN',
+                  label: AppLocalizations.of(context)!.checkIn.toUpperCase(),
                   value: c.checkInTimeStr,
                   statusText: c.attendance?.loginTime != null
-                      ? '✓ Recorded'
-                      : 'Waiting',
+                      ? '✓ ${AppLocalizations.of(context)!.recorded}'
+                      : AppLocalizations.of(context)!.waiting,
                   statusColor: c.attendance?.loginTime != null
                       ? AppColors.success
                       : AppColors.grey,
@@ -572,11 +573,11 @@ class _TimeCard extends StatelessWidget {
               Expanded(
                 child: _TimeBox(
                   isDark: isDark,
-                  label: 'CHECK-OUT',
+                  label: AppLocalizations.of(context)!.checkOut.toUpperCase(),
                   value: c.checkOutTimeStr,
                   statusText: c.attendance?.logoutTime != null
-                      ? '✓ Recorded'
-                      : 'Waiting',
+                      ? '✓ ${AppLocalizations.of(context)!.recorded}'
+                      : AppLocalizations.of(context)!.waiting,
                   statusColor: c.attendance?.logoutTime != null
                       ? AppColors.success
                       : AppColors.grey,
@@ -591,9 +592,9 @@ class _TimeCard extends StatelessWidget {
                 child: Obx(
                   () => _TimeBox(
                     isDark: isDark,
-                    label: 'HOURS',
+                    label: AppLocalizations.of(context)!.hours.toUpperCase(),
                     value: c.spent.value.substring(0, 5),
-                    statusText: 'Today',
+                    statusText: AppLocalizations.of(context)!.today,
                     statusColor: AppColors.grey,
                   ),
                 ),
@@ -686,7 +687,7 @@ class _ProgressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Work progress',
+                '${AppLocalizations.of(context)!.workProgress}',
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -758,7 +759,7 @@ class _ProgressCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  'Remaining: ${controller.remainingTime.value}',
+                  '${AppLocalizations.of(context)!.remaining}: ${controller.remainingTime.value}',
                   style: const TextStyle(
                     fontSize: 11,
                     color: AppColors.grey,
@@ -806,6 +807,14 @@ class _BiometricSectionState extends State<_BiometricSection>
     );
   }
 
+  late AppLocalizations l10n;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+  }
+
   @override
   void dispose() {
     _scanController.dispose();
@@ -817,10 +826,10 @@ class _BiometricSectionState extends State<_BiometricSection>
     final state = widget.controller.scanState.value;
     if (state == 'idle') {
       _scanController.forward(from: 0);
-      widget.controller.checkIn();
+      widget.controller.checkIn(l10n);
     } else if (state == 'checkedin') {
       _scanController.forward(from: 0);
-      widget.controller.checkOut();
+      widget.controller.checkOut(l10n);
     }
   }
 
@@ -831,6 +840,7 @@ class _BiometricSectionState extends State<_BiometricSection>
       final feedbackMsg = widget.controller.feedbackMsg.value;
       final feedbackType = widget.controller.feedbackType.value;
       final isDark = widget.isDark;
+      final l10n = AppLocalizations.of(context)!;
 
       Color ringColor;
       Color innerBg;
@@ -842,25 +852,25 @@ class _BiometricSectionState extends State<_BiometricSection>
           ringColor = AppColors.success;
           innerBg = AppColors.successLight;
           iconColor = AppColors.success;
-          label = 'Tap to Check-Out';
+          label = l10n.tapToCheckOut;
           break;
         case 'done':
           ringColor = AppColors.success;
           innerBg = AppColors.successLight;
           iconColor = AppColors.success;
-          label = 'Work day complete';
+          label = l10n.workDayComplete;
           break;
         case 'scanning':
           ringColor = AppColors.primary;
           innerBg = AppColors.primaryLight;
           iconColor = AppColors.primary;
-          label = 'Scanning…';
+          label = l10n.scanning;
           break;
         default:
           ringColor = AppColors.primary;
           innerBg = isDark ? AppColors.darkBorder : AppColors.lightGrey;
           iconColor = isDark ? AppColors.darkMuted : AppColors.grey;
-          label = 'Tap to Check-In';
+          label = l10n.tapToCheckIn;
       }
 
       return Column(
@@ -977,7 +987,7 @@ class _BiometricSectionState extends State<_BiometricSection>
                   isDark: isDark,
                   state: state,
                   isLoading: widget.controller.isLoading.value,
-                  biometricLabel: widget.controller.biometricLabel,
+                  biometricLabel: widget.controller.biometricLabel(l10n),
                   onTap: _handleTap,
                 ),
               ),
@@ -994,18 +1004,18 @@ class _BiometricSectionState extends State<_BiometricSection>
                   width: 0.5,
                 ),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check_circle_rounded,
                     color: AppColors.success,
                     size: 18,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
-                    'Work day complete',
-                    style: TextStyle(
+                    l10n.workDayComplete,
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: AppColors.success,
@@ -1260,6 +1270,7 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isCheckout = state == 'checkedin';
 
     return GestureDetector(
@@ -1298,8 +1309,8 @@ class _ActionButton extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               isCheckout
-                  ? 'Check-Out with $biometricLabel'
-                  : 'Check-In with $biometricLabel',
+                  ? '${l10n.checkOutWith} $biometricLabel'
+                  : '${l10n.checkInWith} $biometricLabel',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
@@ -1410,6 +1421,7 @@ class _HistorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1417,7 +1429,7 @@ class _HistorySection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Recent attendance',
+              l10n.attendanceOverview,
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
@@ -1425,7 +1437,7 @@ class _HistorySection extends StatelessWidget {
               ),
             ),
             Text(
-              'See all',
+              l10n.viewAll,
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
@@ -1455,24 +1467,25 @@ class _HistorySection extends StatelessWidget {
               Color badgeText;
               String badgeLabel;
 
+              final l10n = AppLocalizations.of(context)!;
               switch (item['status']) {
                 case 'present':
                   dotColor = AppColors.success;
                   badgeBg = AppColors.successLight;
                   badgeText = const Color(0xFF065F46);
-                  badgeLabel = 'On time';
+                  badgeLabel = l10n.onTime;
                   break;
                 case 'late':
                   dotColor = AppColors.warning;
                   badgeBg = AppColors.warningLight;
                   badgeText = const Color(0xFF92400E);
-                  badgeLabel = 'Late';
+                  badgeLabel = l10n.late;
                   break;
                 default:
                   dotColor = AppColors.danger;
                   badgeBg = AppColors.dangerLight;
                   badgeText = const Color(0xFF991B1B);
-                  badgeLabel = 'Absent';
+                  badgeLabel = l10n.absent;
               }
 
               return Column(
@@ -1509,7 +1522,7 @@ class _HistorySection extends StatelessWidget {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'In ${item['in']} · Out ${item['out']} · ${item['hours']}',
+                                '${l10n.checkInShort} ${item['in']} · ${l10n.checkOutShort} ${item['out']} · ${item['hours']}',
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: isDark

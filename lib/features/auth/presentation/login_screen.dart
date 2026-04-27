@@ -63,8 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     context.watch<AppSettingsProvider>().isArabic
-                        ? 'English'
-                        : 'العربية',
+                        ? l10n.english
+                        : l10n.arabic,
                     style: const TextStyle(
                       color: AppColors.white,
                       fontWeight: FontWeight.bold,
@@ -264,9 +264,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      "Register",
-                      style: TextStyle(
+                    child: Text(
+                      l10n.register,
+                      style: const TextStyle(
                         color: AppColors.secondary,
                         fontWeight: FontWeight.bold,
                       ),

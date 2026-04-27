@@ -35,11 +35,17 @@ class _PayrollScreenState extends State<PayrollScreen>
           l10n.payrollAndFinance,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: AppColors.secondary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: AppColors.primaryGradient,
+          ),
+        ),
         foregroundColor: Colors.white,
+        elevation: 0,
         bottom: TabBar(
           controller: _tabController,
           indicatorColor: Colors.white,
+          indicatorWeight: 3,
           isScrollable: true,
           tabs: [
             Tab(text: l10n.payslip),
@@ -103,11 +109,7 @@ class _PayrollScreenState extends State<PayrollScreen>
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [AppColors.primary, AppColors.secondary],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        gradient: AppColors.appGradient,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(

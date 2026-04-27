@@ -354,7 +354,7 @@ class ServiceDetailScreen extends StatelessWidget {
         'stats': [
           {'label': 'Home', 'value': '1', 'color': AppColors.primary},
           {'label': 'Work', 'value': '1', 'color': AppColors.accent},
-          {'label': 'Mailing', 'value': '1', 'color': AppColors.secondary},
+          {'label': 'Mailing', 'value': '1', 'color': AppColors.info},
         ],
         'records': [
           {
@@ -375,7 +375,7 @@ class ServiceDetailScreen extends StatelessWidget {
             'title': 'National Address: RACA1234',
             'subtitle': 'Registered via Absher • Verified ✓',
             'icon': Icons.location_on_rounded,
-            'color': AppColors.secondary,
+            'color': AppColors.info,
             'trailing': 'National',
           },
         ],
@@ -386,7 +386,7 @@ class ServiceDetailScreen extends StatelessWidget {
         'subtitle': 'Educational background',
         'stats': [
           {'label': 'Degrees', 'value': '2', 'color': AppColors.primary},
-          {'label': 'Certs', 'value': '4', 'color': AppColors.secondary},
+          {'label': 'Certs', 'value': '4', 'color': AppColors.primary},
           {'label': 'Languages', 'value': '3', 'color': AppColors.accent},
         ],
         'records': [
@@ -408,7 +408,7 @@ class ServiceDetailScreen extends StatelessWidget {
             'title': 'PMP – Project Management Professional',
             'subtitle': 'PMI Institute • Valid until Dec 2025',
             'icon': Icons.workspace_premium_rounded,
-            'color': AppColors.secondary,
+            'color': AppColors.primary,
             'trailing': 'Active',
           },
           {
@@ -435,7 +435,7 @@ class ServiceDetailScreen extends StatelessWidget {
         'subtitle': 'Dependents & emergency references',
         'stats': [
           {'label': 'Dependents', 'value': '4', 'color': AppColors.primary},
-          {'label': 'References', 'value': '2', 'color': AppColors.secondary},
+          {'label': 'References', 'value': '2', 'color': AppColors.info},
           {'label': 'Insured', 'value': '5', 'color': AppColors.success},
         ],
         'records': [
@@ -464,7 +464,7 @@ class ServiceDetailScreen extends StatelessWidget {
             'title': 'Mohammed Al-Rashid',
             'subtitle': 'Father • DOB: 01 Jan 1960 • Emergency Contact',
             'icon': Icons.person_rounded,
-            'color': AppColors.secondary,
+            'color': AppColors.info,
             'trailing': 'Father',
           },
           {
@@ -553,7 +553,7 @@ class ServiceDetailScreen extends StatelessWidget {
             'title': 'Promotion Adjustment 2023',
             'subtitle': 'SAR 11,000 → SAR 12,500 • Senior Consultant',
             'icon': Icons.military_tech_rounded,
-            'color': AppColors.secondary,
+            'color': AppColors.accent,
             'trailing': '+SAR 1,500',
           },
           {
@@ -614,7 +614,7 @@ class ServiceDetailScreen extends StatelessWidget {
             'title': 'Asset Requests',
             'subtitle': 'Approved: 1 • Pending: 1 • Rejected: 0',
             'icon': Icons.devices_rounded,
-            'color': AppColors.secondary,
+            'color': AppColors.accent,
             'trailing': '2 total',
           },
         ],
@@ -625,7 +625,7 @@ class ServiceDetailScreen extends StatelessWidget {
         'subtitle': 'Employment lifecycle details',
         'stats': [
           {'label': 'Tenure', 'value': '3.2Y', 'color': AppColors.primary},
-          {'label': 'Grade', 'value': '12', 'color': AppColors.secondary},
+          {'label': 'Grade', 'value': '12', 'color': AppColors.accent},
           {'label': 'Band', 'value': 'C', 'color': AppColors.accent},
         ],
         'records': [

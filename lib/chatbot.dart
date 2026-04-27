@@ -2,11 +2,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/theme/app_colors.dart';
+import 'l10n/app_localizations.dart';
 
 // ─── DESIGN TOKENS ──────────────────────────────────────────────────────────
 
 class _C {
-  // Brand
+  // Brandff
   static const primary = AppColors.primary;
   static const primaryLight = AppColors.primaryLight;
   static const primaryDark = AppColors.darkTeal;
@@ -100,71 +101,66 @@ class _ChatBotScreenState extends State<ChatBotScreen>
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _isTyping = false;
-  bool _showQuickActions = true;
+  late List<ChatMessage> _messages;
   late AnimationController _typingAnimController;
+  late AppLocalizations l10n;
+  bool _initialized = false;
+  bool _showQuickActions = true;
 
-  final List<ChatMessage> _messages = [
-    ChatMessage(
-      isUser: false,
-      text: 'مرحباً! أنا HCM Assistant.\nكيف يمكنني مساعدتك اليوم؟',
-      type: MessageType.text,
-    ),
-  ];
-
-  static const List<QuickAction> _quickActions = [
+  List<QuickAction> _getQuickActions(AppLocalizations l10n) => [
     QuickAction(
-      label: 'الإجازات',
+      label: l10n.leaveManagement,
       emoji: '📅',
-      keyword: 'اجازة',
+      keyword: l10n.leaveKeyword,
       color: AppColors.primary,
       bg: AppColors.primaryLight,
     ),
     QuickAction(
-      label: 'المرتب',
+      label: l10n.payslip,
       emoji: '💰',
-      keyword: 'مرتب',
+      keyword: l10n.salaryKeyword,
       color: AppColors.success,
       bg: AppColors.successLight,
     ),
     QuickAction(
-      label: 'الحضور',
+      label: l10n.attendance,
       emoji: '⏱️',
-      keyword: 'حضور',
+      keyword: l10n.attendanceKeyword,
       color: AppColors.warning,
       bg: AppColors.warningLight,
     ),
     QuickAction(
-      label: 'الموافقات',
+      label: l10n.approvals,
       emoji: '✅',
-      keyword: 'موافقة',
+      keyword: l10n.approvalKeyword,
       color: AppColors.info,
       bg: AppColors.primaryLight,
     ),
     QuickAction(
-      label: 'المستندات',
+      label: l10n.documents,
       emoji: '📄',
-      keyword: 'مستند',
+      keyword: l10n.documentKeyword,
       color: AppColors.secondary,
       bg: AppColors.warningLight,
     ),
     QuickAction(
-      label: 'الملف الشخصي',
+      label: l10n.profile,
       emoji: '👤',
-      keyword: 'بيانات',
+      keyword: l10n.dataKeyword,
       color: AppColors.accent,
       bg: AppColors.primaryLight,
     ),
     QuickAction(
-      label: 'طلب جديد',
+      label: l10n.newRequest,
       emoji: '📝',
-      keyword: 'طلب',
+      keyword: l10n.requestKeyword,
       color: AppColors.danger,
       bg: AppColors.dangerLight,
     ),
     QuickAction(
-      label: 'الأداء',
+      label: l10n.performance,
       emoji: '📊',
-      keyword: 'اداء',
+      keyword: l10n.performanceKeyword,
       color: AppColors.darkTeal,
       bg: AppColors.primaryLight,
     ),
@@ -180,6 +176,22 @@ class _ChatBotScreenState extends State<ChatBotScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    l10n = AppLocalizations.of(context)!;
+    if (!_initialized) {
+      _messages = [
+        ChatMessage(
+          isUser: false,
+          text: l10n.chatbotGreeting,
+          type: MessageType.text,
+        ),
+      ];
+      _initialized = true;
+    }
+  }
+
+  @override
   void dispose() {
     _typingAnimController.dispose();
     _controller.dispose();
@@ -187,47 +199,188 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     super.dispose();
   }
 
-  MessageType _detectType(String text) {
-    text = text.toLowerCase();
-    if (text.contains('اجاز') || text.contains('leave'))
-      return MessageType.leave;
-    if (text.contains('مرتب') ||
-        text.contains('salary') ||
-        text.contains('payslip'))
-      return MessageType.payslip;
-    if (text.contains('حضور') || text.contains('attendance'))
+  // ─── FUZZY INTENT DETECTION ─────────────────────────────────────────────
+
+  /// Levenshtein distance — counts edits needed to turn [a] into [b].
+  int _levenshtein(String a, String b) {
+    if (a == b) return 0;
+    if (a.isEmpty) return b.length;
+    if (b.isEmpty) return a.length;
+    final List<List<int>> dp = List.generate(
+      a.length + 1,
+      (i) => List.generate(b.length + 1, (j) => 0),
+    );
+    for (int i = 0; i <= a.length; i++) dp[i][0] = i;
+    for (int j = 0; j <= b.length; j++) dp[0][j] = j;
+    for (int i = 1; i <= a.length; i++) {
+      for (int j = 1; j <= b.length; j++) {
+        dp[i][j] = a[i - 1] == b[j - 1]
+            ? dp[i - 1][j - 1]
+            : 1 + [dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]].reduce(min);
+      }
+    }
+    return dp[a.length][b.length];
+  }
+
+  /// Returns true if [word] is close enough to [target] (typo-tolerant).
+  bool _fuzzyMatch(String word, String target) {
+    if (word == target) return true;
+    if (word.contains(target) || target.contains(word)) return true;
+    final maxDist = target.length <= 4
+        ? 1
+        : target.length <= 7
+        ? 2
+        : 3;
+    return _levenshtein(word, target) <= maxDist;
+  }
+
+  /// Checks if any word in [words] fuzzy-matches any keyword in [keywords].
+  bool _anyMatch(List<String> words, List<String> keywords) =>
+      words.any((w) => keywords.any((k) => _fuzzyMatch(w, k)));
+
+  MessageType _detectType(String text, AppLocalizations l10n) {
+    final lower = text.toLowerCase().trim();
+    final words = lower.split(RegExp(r'\s+'));
+
+    // ── Arabic keyword lists ────────────────────────────────────────────
+    const arLeave = ['إجازة', 'اجازة', 'اجازه', 'إجازه', 'غياب', 'leave'];
+    const arSalary = ['راتب', 'مرتب', 'راتبي', 'payslip', 'salary'];
+    const arAttendance = ['حضور', 'حضوري', 'بصمة', 'دوام', 'attendance'];
+    const arApproval = ['موافقة', 'موافقات', 'اعتماد', 'approval'];
+    const arProfile = ['ملف', 'بياناتي', 'profile', 'معلوماتي'];
+    const arDocuments = ['وثيقة', 'وثائق', 'مستند', 'مستندات', 'document'];
+    const arRequest = ['طلب', 'طلبات', 'request'];
+
+    // ── English keyword lists (with common typo variants) ───────────────
+    const enLeave = [
+      'leave',
+      'leav',
+      'leve',
+      'leeave',
+      'leeve',
+      'vacation',
+      'absence',
+    ];
+    const enSalary = [
+      'salary',
+      'salery',
+      'salry',
+      'payslip',
+      'payslp',
+      'paysleep',
+      'pay',
+      'wage',
+      'income',
+      'allowance',
+    ];
+    const enAttendance = [
+      'attendance',
+      'attencde',
+      'attendnce',
+      'atendance',
+      'attendence',
+      'checkin',
+      'checkout',
+      'timing',
+      'clock',
+    ];
+    const enApproval = [
+      'approval',
+      'aproval',
+      'apporval',
+      'approvl',
+      'approvel',
+      'approve',
+      'approvals',
+      'pending',
+    ];
+    const enProfile = [
+      'profile',
+      'profiel',
+      'profil',
+      'proifle',
+      'mydata',
+      'info',
+      'information',
+      'personal',
+    ];
+    const enDocuments = [
+      'document',
+      'documnets',
+      'documnet',
+      'documment',
+      'doc',
+      'documents',
+      'file',
+      'files',
+      'certificate',
+    ];
+    const enRequest = [
+      'request',
+      'rqeust',
+      'requst',
+      'requets',
+      'rquest',
+      'new',
+    ];
+
+    // ── Localization keywords ───────────────────────────────────────────
+    final locLeave = [l10n.leaveKeyword.toLowerCase()];
+    final locSalary = [l10n.salaryKeyword.toLowerCase()];
+    final locAttendance = [l10n.attendanceKeyword.toLowerCase()];
+    final locApproval = [l10n.approvalKeyword.toLowerCase()];
+    final locData = [l10n.dataKeyword.toLowerCase()];
+    final locDocument = [l10n.documentKeyword.toLowerCase()];
+    final locRequest = [l10n.requestKeyword.toLowerCase()];
+
+    // ── Arabic direct substring check (no fuzzy needed for Arabic) ──────
+    if (arLeave.any((k) => lower.contains(k))) return MessageType.leave;
+    if (arSalary.any((k) => lower.contains(k))) return MessageType.payslip;
+    if (arAttendance.any((k) => lower.contains(k)))
       return MessageType.attendance;
-    if (text.contains('موافق') || text.contains('approval'))
+    if (arApproval.any((k) => lower.contains(k))) return MessageType.approvals;
+    if (arProfile.any((k) => lower.contains(k))) return MessageType.profile;
+    if (arDocuments.any((k) => lower.contains(k))) return MessageType.documents;
+    if (arRequest.any((k) => lower.contains(k))) return MessageType.request;
+
+    // ── Fuzzy English + localization matching ───────────────────────────
+    if (_anyMatch(words, [...enLeave, ...locLeave])) return MessageType.leave;
+    if (_anyMatch(words, [...enSalary, ...locSalary]))
+      return MessageType.payslip;
+    if (_anyMatch(words, [...enAttendance, ...locAttendance]))
+      return MessageType.attendance;
+    if (_anyMatch(words, [...enApproval, ...locApproval]))
       return MessageType.approvals;
-    if (text.contains('بيانات') ||
-        text.contains('profile') ||
-        text.contains('ملف'))
+    if (_anyMatch(words, [...enProfile, ...locData]))
       return MessageType.profile;
-    if (text.contains('مستند') || text.contains('document'))
+    if (_anyMatch(words, [...enDocuments, ...locDocument]))
       return MessageType.documents;
-    if (text.contains('طلب') || text.contains('request'))
+    if (_anyMatch(words, [...enRequest, ...locRequest]))
       return MessageType.request;
+
     return MessageType.text;
   }
 
-  String _getReply(MessageType type) {
+  // ────────────────────────────────────────────────────────────────────────
+
+  String _getReply(MessageType type, AppLocalizations l10n) {
     switch (type) {
       case MessageType.leave:
-        return '📅 إليك تفاصيل رصيد الإجازات الخاص بك:';
+        return l10n.chatbotLeaveReply;
       case MessageType.payslip:
-        return '💰 بيانات المرتب لهذا الشهر:';
+        return l10n.chatbotSalaryReply;
       case MessageType.attendance:
-        return '⏱️ سجل الحضور والانصراف اليوم:';
+        return l10n.chatbotAttendanceReply;
       case MessageType.approvals:
-        return '✅ الطلبات المعلقة التي تحتاج موافقتك:';
+        return l10n.chatbotApprovalsReply;
       case MessageType.profile:
-        return '👤 بياناتك الشخصية ومعلومات التوظيف:';
+        return l10n.chatbotProfileReply;
       case MessageType.documents:
-        return '📄 المستندات والوثائق المتاحة لك:';
+        return l10n.chatbotDocumentsReply;
       case MessageType.request:
-        return '📝 يمكنني مساعدتك في تقديم طلب جديد:';
+        return l10n.chatbotRequestReply;
       default:
-        return '🤖 يمكنني مساعدتك في الإجازات، المرتب، الحضور، الموافقات، المستندات، والمزيد.';
+        return l10n.chatbotDefaultReply;
     }
   }
 
@@ -235,7 +388,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     if (text.trim().isEmpty) return;
     HapticFeedback.lightImpact();
 
-    final type = _detectType(text);
+    final type = _detectType(text, l10n);
     setState(() {
       _messages.add(
         ChatMessage(isUser: true, text: text, type: MessageType.text),
@@ -251,7 +404,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
       setState(() {
         _isTyping = false;
         _messages.add(
-          ChatMessage(isUser: false, text: _getReply(type), type: type),
+          ChatMessage(isUser: false, text: _getReply(type, l10n), type: type),
         );
       });
       _scrollToBottom();
@@ -272,11 +425,12 @@ class _ChatBotScreenState extends State<ChatBotScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: _C.bg,
       body: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(l10n),
           Expanded(
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
@@ -291,13 +445,13 @@ class _ChatBotScreenState extends State<ChatBotScreen>
                   if (i < _messages.length)
                     return _buildMessageItem(_messages[i]);
                   if (_showQuickActions && i == _messages.length)
-                    return _buildQuickActionsGrid();
+                    return _buildQuickActionsGrid(l10n);
                   return _buildTypingBubble();
                 },
               ),
             ),
           ),
-          _buildInputBar(),
+          _buildInputBar(l10n),
         ],
       ),
     );
@@ -305,7 +459,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
 
   // ─── HEADER ─────────────────────────────────────────────────────────────
 
-  Widget _buildHeader() {
+  Widget _buildHeader(AppLocalizations l10n) {
     return Container(
       decoration: const BoxDecoration(color: _C.primary),
       child: SafeArea(
@@ -361,9 +515,12 @@ class _ChatBotScreenState extends State<ChatBotScreen>
                           ),
                         ),
                         const SizedBox(width: 5),
-                        const Text(
-                          'متاح الآن',
-                          style: TextStyle(color: Colors.white70, fontSize: 12),
+                        Text(
+                          l10n.availableNow,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
                         ),
                       ],
                     ),
@@ -546,7 +703,8 @@ class _ChatBotScreenState extends State<ChatBotScreen>
 
   // ─── QUICK ACTIONS GRID ─────────────────────────────────────────────────
 
-  Widget _buildQuickActionsGrid() {
+  Widget _buildQuickActionsGrid(AppLocalizations l10n) {
+    final actions = _getQuickActions(l10n);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Column(
@@ -555,7 +713,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
           Padding(
             padding: const EdgeInsets.only(right: 4, bottom: 10),
             child: Text(
-              'اختر من الخيارات السريعة',
+              l10n.chooseFromQuickOptions,
               style: TextStyle(
                 fontSize: 12,
                 color: _C.textMuted,
@@ -572,10 +730,10 @@ class _ChatBotScreenState extends State<ChatBotScreen>
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
             ),
-            itemCount: _quickActions.length,
+            itemCount: actions.length,
             itemBuilder: (context, i) => _QuickActionChip(
-              action: _quickActions[i],
-              onTap: () => _sendMessage(_quickActions[i].keyword),
+              action: actions[i],
+              onTap: () => _sendMessage(actions[i].keyword),
             ),
           ),
         ],
@@ -585,7 +743,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
 
   // ─── INPUT BAR ──────────────────────────────────────────────────────────
 
-  Widget _buildInputBar() {
+  Widget _buildInputBar(AppLocalizations l10n) {
     return Container(
       decoration: BoxDecoration(
         color: _C.surface,
@@ -616,11 +774,14 @@ class _ChatBotScreenState extends State<ChatBotScreen>
                       fontSize: 14.5,
                       color: _C.textPrimary,
                     ),
-                    decoration: const InputDecoration(
-                      hintText: 'اكتب رسالتك...',
-                      hintStyle: TextStyle(color: _C.textMuted, fontSize: 14),
+                    decoration: InputDecoration(
+                      hintText: l10n.typeYourMessage,
+                      hintStyle: const TextStyle(
+                        color: _C.textMuted,
+                        fontSize: 14,
+                      ),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.fromLTRB(16, 11, 16, 11),
+                      contentPadding: const EdgeInsets.fromLTRB(16, 11, 16, 11),
                     ),
                   ),
                 ),
@@ -728,7 +889,11 @@ class _SmartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [_buildBotIntro(), const SizedBox(height: 8), _buildCard()],
+      children: [
+        _buildBotIntro(),
+        const SizedBox(height: 8),
+        _buildCard(context),
+      ],
     );
   }
 
@@ -763,22 +928,22 @@ class _SmartCard extends StatelessWidget {
     );
   }
 
-  Widget _buildCard() {
+  Widget _buildCard(BuildContext context) {
     switch (type) {
       case MessageType.leave:
-        return _leaveCard();
+        return _leaveCard(context);
       case MessageType.payslip:
-        return _payslipCard();
+        return _payslipCard(context);
       case MessageType.attendance:
-        return _attendanceCard();
+        return _attendanceCard(context);
       case MessageType.approvals:
-        return _approvalsCard();
+        return _approvalsCard(context);
       case MessageType.profile:
-        return _profileCard();
+        return _profileCard(context);
       case MessageType.documents:
-        return _documentsCard();
+        return _documentsCard(context);
       case MessageType.request:
-        return _requestCard();
+        return _requestCard(context);
       default:
         return const SizedBox();
     }
@@ -786,51 +951,58 @@ class _SmartCard extends StatelessWidget {
 
   // ── Leave Card ──
 
-  Widget _leaveCard() {
+  Widget _leaveCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.event_available_rounded,
-        label: 'رصيد الإجازات',
+        label: l10n.leaveBalance,
         color: _C.primary,
       ),
       child: Column(
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             children: [
               _StatBox(
-                label: 'سنوية',
+                label: l10n.annual,
                 value: '12',
-                unit: 'يوم',
+                unit: l10n.days,
                 color: _C.primary,
                 bg: _C.primaryLight,
               ),
               const SizedBox(width: 8),
               _StatBox(
-                label: 'مرضية',
+                label: l10n.sick,
                 value: '6',
-                unit: 'يوم',
+                unit: l10n.days,
                 color: _C.success,
                 bg: _C.successLight,
               ),
               const SizedBox(width: 8),
               _StatBox(
-                label: 'طارئة',
+                label: l10n.emergency,
                 value: '3',
-                unit: 'يوم',
+                unit: l10n.days,
                 color: _C.warning,
                 bg: _C.warningLight,
               ),
             ],
           ),
           const SizedBox(height: 12),
-          _ProgressBar(label: 'مستخدم', used: 8, total: 20, color: _C.primary),
+          _ProgressBar(
+            label: l10n.used,
+            used: 8,
+            total: 20,
+            color: _C.primary,
+            unit: l10n.days,
+          ),
           const SizedBox(height: 12),
           Row(
             children: [
               Expanded(
                 child: _ActionButton(
-                  label: 'طلب إجازة',
+                  label: l10n.requestAbsence,
                   icon: Icons.add_circle_outline_rounded,
                   color: _C.primary,
                   filled: true,
@@ -856,11 +1028,12 @@ class _SmartCard extends StatelessWidget {
 
   // ── Payslip Card ──
 
-  Widget _payslipCard() {
+  Widget _payslipCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.account_balance_wallet_rounded,
-        label: 'كشف المرتب',
+        label: l10n.payslip,
         color: const Color(0xFF059669),
       ),
       child: Column(
@@ -878,14 +1051,17 @@ class _SmartCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'صافي الراتب',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF065F46)),
+                    Text(
+                      l10n.netSalary,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF065F46),
+                      ),
                     ),
                     const SizedBox(height: 2),
-                    const Text(
-                      '12,500 ج.م',
-                      style: TextStyle(
+                    Text(
+                      '12,500 ${l10n.sar}',
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w800,
                         color: Color(0xFF059669),
@@ -902,9 +1078,9 @@ class _SmartCard extends StatelessWidget {
                     color: _C.success,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    'مُحوّل',
-                    style: TextStyle(
+                  child: Text(
+                    l10n.transferred,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
@@ -915,15 +1091,23 @@ class _SmartCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          _PayRow(label: 'الراتب الأساسي', value: '10,000 ج.م'),
-          _PayRow(label: 'بدل السكن', value: '1,500 ج.م'),
-          _PayRow(label: 'بدل النقل', value: '1,000 ج.م'),
+          _PayRow(label: l10n.basicSalary, value: '10,000 ${l10n.sar}'),
+          _PayRow(label: l10n.housingAllowance, value: '1,500 ${l10n.sar}'),
+          _PayRow(label: l10n.transportAllowance, value: '1,000 ${l10n.sar}'),
           const Divider(height: 16, color: _C.border),
-          _PayRow(label: 'التأمينات', value: '- 750 ج.م', isDeduction: true),
-          _PayRow(label: 'ضريبة الدخل', value: '- 250 ج.م', isDeduction: true),
+          _PayRow(
+            label: l10n.insurance,
+            value: '- 750 ${l10n.sar}',
+            isDeduction: true,
+          ),
+          _PayRow(
+            label: l10n.tax,
+            value: '- 250 ${l10n.sar}',
+            isDeduction: true,
+          ),
           const SizedBox(height: 12),
           _ActionButton(
-            label: 'تحميل PDF',
+            label: l10n.downloadPdf,
             icon: Icons.download_rounded,
             color: const Color(0xFF059669),
             filled: true,
@@ -936,29 +1120,30 @@ class _SmartCard extends StatelessWidget {
 
   // ── Attendance Card ──
 
-  Widget _attendanceCard() {
+  Widget _attendanceCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.access_time_rounded,
-        label: 'سجل الحضور',
+        label: l10n.attendanceHistory,
         color: _C.warning,
       ),
       child: Column(
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             children: [
               _AttendanceBadge(
-                label: 'الحضور',
-                time: '9:05 ص',
+                label: l10n.checkIn,
+                time: '9:05 ${l10n.am}',
                 icon: Icons.login_rounded,
                 color: _C.success,
                 bg: _C.successLight,
               ),
               const SizedBox(width: 8),
               _AttendanceBadge(
-                label: 'الانصراف',
-                time: '5:00 م',
+                label: l10n.checkOut,
+                time: '5:00 ${l10n.pm}',
                 icon: Icons.logout_rounded,
                 color: _C.danger,
                 bg: _C.dangerLight,
@@ -966,12 +1151,12 @@ class _SmartCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          _TimelineRow(label: 'إجمالي ساعات العمل', value: '7:55 ساعة'),
-          _TimelineRow(label: 'التأخير', value: '5 دقائق'),
-          _TimelineRow(label: 'الوضع', value: 'حاضر ✓'),
+          _TimelineRow(label: l10n.totalHours, value: '7:55 ${l10n.hours}'),
+          _TimelineRow(label: l10n.late, value: '5 ${l10n.mins}'),
+          _TimelineRow(label: l10n.status, value: '${l10n.present} ✓'),
           const SizedBox(height: 12),
           _ActionButton(
-            label: 'عرض التقرير الشهري',
+            label: l10n.viewMonthlyReport,
             icon: Icons.bar_chart_rounded,
             color: _C.warning,
             filled: true,
@@ -984,28 +1169,28 @@ class _SmartCard extends StatelessWidget {
 
   // ── Approvals Card ──
 
-  Widget _approvalsCard() {
+  Widget _approvalsCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     const purple = Color(0xFF8B5CF6);
-    const purpleLight = Color(0xFFEDE9FE);
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.task_alt_rounded,
-        label: 'الطلبات المعلقة',
+        label: l10n.pendingRequests,
         color: purple,
       ),
       child: Column(
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           _ApprovalItem(
-            title: 'طلب إجازة سنوية',
-            requestedBy: 'أحمد محمد',
-            days: '3 أيام',
+            title: l10n.annualLeave,
+            requestedBy: 'Ahmed Mohamed',
+            days: '3 ${l10n.days}',
             urgent: true,
           ),
           _ApprovalItem(
-            title: 'طلب عمل من المنزل',
-            requestedBy: 'سارة علي',
-            days: '2 أيام',
+            title: l10n.workFromHome,
+            requestedBy: 'Sara Ali',
+            days: '2 ${l10n.days}',
             urgent: false,
           ),
           const SizedBox(height: 8),
@@ -1013,7 +1198,7 @@ class _SmartCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _ActionButton(
-                  label: 'موافقة على الكل',
+                  label: l10n.approveAll,
                   icon: Icons.check_circle_outline,
                   color: _C.success,
                   filled: true,
@@ -1023,7 +1208,7 @@ class _SmartCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: _ActionButton(
-                  label: 'عرض الكل',
+                  label: l10n.viewAll,
                   icon: Icons.open_in_new_rounded,
                   color: purple,
                   filled: false,
@@ -1039,11 +1224,12 @@ class _SmartCard extends StatelessWidget {
 
   // ── Profile Card ──
 
-  Widget _profileCard() {
+  Widget _profileCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.person_rounded,
-        label: 'الملف الشخصي',
+        label: l10n.profile,
         color: _C.accent,
       ),
       child: Column(
@@ -1061,7 +1247,7 @@ class _SmartCard extends StatelessWidget {
                 ),
                 child: const Center(
                   child: Text(
-                    'أم',
+                    'AR',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -1076,7 +1262,7 @@ class _SmartCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'أحمد محمد علي',
+                      'Ahmed Al-Rashid',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
@@ -1084,9 +1270,12 @@ class _SmartCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    const Text(
-                      'مهندس برمجيات',
-                      style: TextStyle(fontSize: 12, color: _C.textSecondary),
+                    Text(
+                      l10n.softwareEngineer,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: _C.textSecondary,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Container(
@@ -1098,9 +1287,9 @@ class _SmartCard extends StatelessWidget {
                         color: _C.primaryLight,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Text(
-                        'تقنية المعلومات',
-                        style: TextStyle(
+                      child: Text(
+                        l10n.itDept,
+                        style: const TextStyle(
                           fontSize: 10,
                           color: _C.primary,
                           fontWeight: FontWeight.w600,
@@ -1113,16 +1302,22 @@ class _SmartCard extends StatelessWidget {
             ],
           ),
           const Divider(height: 20, color: _C.border),
-          _ProfileRow(icon: Icons.email_outlined, label: 'ahmed.m@company.com'),
-          _ProfileRow(icon: Icons.phone_outlined, label: '+20 10 1234 5678'),
-          _ProfileRow(icon: Icons.badge_outlined, label: 'EMP-20234'),
+          const _ProfileRow(
+            icon: Icons.email_outlined,
+            label: 'ahmed.m@company.com',
+          ),
+          const _ProfileRow(
+            icon: Icons.phone_outlined,
+            label: '+966 55 XXX 4567',
+          ),
+          const _ProfileRow(icon: Icons.badge_outlined, label: 'EMP-20234'),
           _ProfileRow(
             icon: Icons.calendar_today_outlined,
-            label: 'تاريخ التعيين: يناير 2020',
+            label: '${l10n.joinDate}: ${l10n.jan} 2020',
           ),
           const SizedBox(height: 12),
           _ActionButton(
-            label: 'تعديل البيانات',
+            label: l10n.editProfile,
             icon: Icons.edit_rounded,
             color: _C.accent,
             filled: true,
@@ -1135,25 +1330,39 @@ class _SmartCard extends StatelessWidget {
 
   // ── Documents Card ──
 
-  Widget _documentsCard() {
+  Widget _documentsCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     const pink = Color(0xFFEC4899);
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.folder_rounded,
-        label: 'المستندات',
+        label: l10n.documents,
         color: pink,
       ),
       child: Column(
         children: [
-          _DocumentItem(name: 'عقد العمل.pdf', size: '1.2 MB', type: 'PDF'),
-          _DocumentItem(name: 'شهادة الراتب.pdf', size: '0.8 MB', type: 'PDF'),
-          _DocumentItem(name: 'خطاب توصية.docx', size: '0.3 MB', type: 'DOC'),
+          SizedBox(height: 10),
+          _DocumentItem(
+            name: '${l10n.contract}.pdf',
+            size: '1.2 MB',
+            type: 'PDF',
+          ),
+          _DocumentItem(
+            name: '${l10n.salaryCertificate}.pdf',
+            size: '0.8 MB',
+            type: 'PDF',
+          ),
+          _DocumentItem(
+            name: '${l10n.recommendationLetter}.docx',
+            size: '0.3 MB',
+            type: 'DOC',
+          ),
           const SizedBox(height: 8),
           Row(
             children: [
               Expanded(
                 child: _ActionButton(
-                  label: 'رفع مستند',
+                  label: l10n.uploadDocument,
                   icon: Icons.upload_rounded,
                   color: pink,
                   filled: true,
@@ -1163,7 +1372,7 @@ class _SmartCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: _ActionButton(
-                  label: 'عرض الكل',
+                  label: l10n.viewAll,
                   icon: Icons.grid_view_rounded,
                   color: pink,
                   filled: false,
@@ -1179,40 +1388,41 @@ class _SmartCard extends StatelessWidget {
 
   // ── Request Card ──
 
-  Widget _requestCard() {
+  Widget _requestCard(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     const red = Color(0xFFEF4444);
     return _BaseCard(
       header: _CardHeader(
         icon: Icons.note_add_rounded,
-        label: 'طلب جديد',
+        label: l10n.newRequest,
         color: red,
       ),
       child: Column(
         children: [
           _RequestOption(
             icon: '📅',
-            title: 'إجازة',
-            subtitle: 'سنوية / مرضية / طارئة',
+            title: l10n.leave,
+            subtitle: '${l10n.annual} / ${l10n.sick} / ${l10n.emergency}',
           ),
           _RequestOption(
             icon: '🏠',
-            title: 'عمل من المنزل',
+            title: l10n.workFromHome,
             subtitle: 'Work From Home',
           ),
           _RequestOption(
             icon: '💰',
-            title: 'سلفة',
-            subtitle: 'طلب سلفة على الراتب',
+            title: l10n.loan,
+            subtitle: l10n.salaryLoanRequest,
           ),
           _RequestOption(
             icon: '📋',
-            title: 'شهادة راتب',
-            subtitle: 'للبنك أو الجهات الرسمية',
+            title: l10n.salaryCertificate,
+            subtitle: l10n.officialEntityRequest,
           ),
           _RequestOption(
             icon: '🔄',
-            title: 'تعديل بيانات',
-            subtitle: 'تحديث معلوماتك الشخصية',
+            title: l10n.dataUpdate,
+            subtitle: l10n.updatePersonalInfo,
           ),
         ],
       ),
@@ -1350,7 +1560,7 @@ class _StatBox extends StatelessWidget {
 }
 
 class _ProgressBar extends StatelessWidget {
-  final String label;
+  final String label, unit;
   final int used, total;
   final Color color;
 
@@ -1359,6 +1569,7 @@ class _ProgressBar extends StatelessWidget {
     required this.used,
     required this.total,
     required this.color,
+    required this.unit,
   });
 
   @override
@@ -1375,7 +1586,7 @@ class _ProgressBar extends StatelessWidget {
               style: const TextStyle(fontSize: 11, color: _C.textSecondary),
             ),
             Text(
-              '$used / $total يوم',
+              '$used / $total $unit',
               style: TextStyle(
                 fontSize: 11,
                 color: color,

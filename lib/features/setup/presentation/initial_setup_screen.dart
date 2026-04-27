@@ -42,7 +42,7 @@ class InitialSetupScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 FadeInDown(
                   child: Text(
-                    l10n.welcomeToInforabia,
+                    l10n.welcomeToPanda,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w900,
@@ -57,7 +57,7 @@ class InitialSetupScreen extends StatelessWidget {
                 FadeInDown(
                   delay: const Duration(milliseconds: 60),
                   child: Text(
-                    l10n.welcomeToInforabia,
+                    l10n.welcomeToPanda,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
@@ -80,8 +80,8 @@ class InitialSetupScreen extends StatelessWidget {
                     children: [
                       _buildOptionCard(
                         context,
-                        title: 'English',
-                        subtitle: 'US English',
+                        title: l10n.english,
+                        subtitle: l10n.englishSubtitle,
                         icon: Icons.language,
                         isSelected: !settings.isArabic,
                         isDark: isDark,
@@ -90,8 +90,8 @@ class InitialSetupScreen extends StatelessWidget {
                       const SizedBox(width: 16),
                       _buildOptionCard(
                         context,
-                        title: 'العربية',
-                        subtitle: 'اللغة العربية',
+                        title: l10n.arabic,
+                        subtitle: l10n.arabicSubtitle,
                         icon: Icons.g_translate_rounded,
                         isSelected: settings.isArabic,
                         isDark: isDark,
@@ -116,7 +116,7 @@ class InitialSetupScreen extends StatelessWidget {
                       _buildOptionCard(
                         context,
                         title: l10n.light,
-                        subtitle: 'Clean & Bright',
+                        subtitle: l10n.lightThemeSubtitle,
                         icon: Icons.light_mode_rounded,
                         isSelected: !isDark,
                         isDark: isDark,
@@ -128,7 +128,7 @@ class InitialSetupScreen extends StatelessWidget {
                       _buildOptionCard(
                         context,
                         title: l10n.dark,
-                        subtitle: 'Elegant & Modern',
+                        subtitle: l10n.darkThemeSubtitle,
                         icon: Icons.dark_mode_rounded,
                         isSelected: isDark,
                         isDark: isDark,

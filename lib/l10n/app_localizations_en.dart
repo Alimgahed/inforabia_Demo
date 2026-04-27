@@ -225,7 +225,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get socialInsurance => 'Social Insurance';
 
   @override
-  String get tax => 'Tax';
+  String get tax => 'Income Tax';
 
   @override
   String get netSalary => 'Net Salary';
@@ -680,6 +680,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeToInforabia => 'Welcome to Inforabia';
 
   @override
+  String get welcomeToPanda => 'Welcome to Panda';
+
+  @override
   String get chooseLanguage => 'Choose Your Language';
 
   @override
@@ -692,7 +695,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get light => 'Light';
 
   @override
+  String get lightThemeSubtitle => 'Clean & Bright';
+
+  @override
   String get dark => 'Dark';
+
+  @override
+  String get darkThemeSubtitle => 'Elegant & Modern';
+
+  @override
+  String get englishSubtitle => 'US English';
+
+  @override
+  String get arabicSubtitle => 'Arabic Language';
 
   @override
   String get onboardingTitle4 => 'Approvals & Tasks';
@@ -720,4 +735,451 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get standardHRServices => 'HR Self-Services';
+
+  @override
+  String get chatbotGreeting =>
+      'Hello! I am HCM Assistant.\nHow can I help you today?';
+
+  @override
+  String get chatbotLeaveReply => '📅 Here are your leave balance details:';
+
+  @override
+  String get chatbotSalaryReply => '💰 Salary data for this month:';
+
+  @override
+  String get chatbotAttendanceReply =>
+      '⏱️ Attendance and departure record today:';
+
+  @override
+  String get chatbotApprovalsReply =>
+      '✅ Pending requests that need your approval:';
+
+  @override
+  String get chatbotProfileReply =>
+      '👤 Your personal data and employment information:';
+
+  @override
+  String get chatbotDocumentsReply =>
+      '📄 Documents and records available to you:';
+
+  @override
+  String get chatbotRequestReply => '📝 I can help you submit a new request:';
+
+  @override
+  String get chatbotDefaultReply =>
+      '🤖 I can help you with leaves, salary, attendance, approvals, documents, and more.';
+
+  @override
+  String get typeYourMessage => 'Type your message...';
+
+  @override
+  String get availableNow => 'Available Now';
+
+  @override
+  String get chooseFromQuickOptions => 'Choose from quick options';
+
+  @override
+  String get leaveKeyword => 'leave';
+
+  @override
+  String get salaryKeyword => 'salary';
+
+  @override
+  String get attendanceKeyword => 'attendance';
+
+  @override
+  String get approvalKeyword => 'approval';
+
+  @override
+  String get documentKeyword => 'document';
+
+  @override
+  String get dataKeyword => 'data';
+
+  @override
+  String get requestKeyword => 'request';
+
+  @override
+  String get performanceKeyword => 'performance';
+
+  @override
+  String get topTalentRetained => 'Top Talent Retained';
+
+  @override
+  String get totalEmployeesCount => 'Total Employees';
+
+  @override
+  String get annualizedRetention => 'Annualized Retention';
+
+  @override
+  String get avgTenure => 'Avg Tenure (yrs)';
+
+  @override
+  String get predictedRetentionTitle => 'Predicted Retention by High Performer';
+
+  @override
+  String get predictedRetentionPeriod => 'Q2 2018 – Q2 2020';
+
+  @override
+  String get highPerformance => 'High Performance';
+
+  @override
+  String get highPotential => 'High Potential';
+
+  @override
+  String get topTalent => 'Top Talent';
+
+  @override
+  String get forecast => 'Forecast';
+
+  @override
+  String get retentionByBUTitle => 'Top Talent Retention by Business Unit';
+
+  @override
+  String get thisYear => 'This Year';
+
+  @override
+  String get humanResources => 'Human Resources';
+
+  @override
+  String get researchAndDevelopment => 'R&D';
+
+  @override
+  String get sales => 'Sales';
+
+  @override
+  String get marketing => 'Marketing';
+
+  @override
+  String get operations => 'Operations';
+
+  @override
+  String get predictedAttritionRisk => 'Predicted Attrition Risk';
+
+  @override
+  String get lowRisk => 'Low Risk';
+
+  @override
+  String get mediumRisk => 'Medium Risk';
+
+  @override
+  String get highRisk => 'High Risk';
+
+  @override
+  String get topTalentHeatMap => 'Top Talent Heat Map';
+
+  @override
+  String get performancePotential => 'Performance × Potential';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get med => 'Med';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get avgTenureYears => 'Average Tenure (years)';
+
+  @override
+  String get headcountDistribution => 'Headcount Distribution';
+
+  @override
+  String get femaleGenderRatio => 'Female Gender Ratio';
+
+  @override
+  String get womenRatio => 'Women Ratio';
+
+  @override
+  String get salaryOverview => 'Salary Overview';
+
+  @override
+  String get goalsProgress => 'Goals Progress';
+
+  @override
+  String get feedbackScore => 'Feedback Score';
+
+  @override
+  String get performanceSnapshot => 'Performance Snapshot';
+
+  @override
+  String get retained => 'Retained';
+
+  @override
+  String get quickRegistration => 'Quick Registration';
+
+  @override
+  String get joinEnterprisePortal =>
+      'Join the enterprise portal in less than 2 minutes';
+
+  @override
+  String get performanceReviewDeadline => 'Performance Review Deadline';
+
+  @override
+  String get trainingFlutterAdvanced => 'Training: Flutter Advanced';
+
+  @override
+  String get annualLeaveStart => 'Annual Leave Start';
+
+  @override
+  String get newsTitle1 => 'Panda Signs MoU with Arsan';
+
+  @override
+  String get newsDesc1 =>
+      'Collaborating on parking management across the Kingdom markets';
+
+  @override
+  String get newsTitle2 => 'RLC Global Forum 2026';
+
+  @override
+  String get newsDesc2 =>
+      'CEO Dr. Bander Hamooh on rebuilding resilient growth';
+
+  @override
+  String get newsTitle3 => 'Energy Efficiency with Tarshid';
+
+  @override
+  String get newsDesc3 =>
+      'Reducing emissions and saving energy across all stores';
+
+  @override
+  String get trackManageRequests => 'Track, submit & manage your requests';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterApproved => 'Approved';
+
+  @override
+  String get filterPending => 'Pending';
+
+  @override
+  String get filterRejected => 'Rejected';
+
+  @override
+  String get totalRequests => 'Total';
+
+  @override
+  String get prsCertsWarehouse => 'PRs, achievement certs & warehouse';
+
+  @override
+  String get prsShort => 'PRs';
+
+  @override
+  String get certsShort => 'Certs';
+
+  @override
+  String get transfers => 'Transfers';
+
+  @override
+  String percentComplete(Object percent) {
+    return '$percent% Complete';
+  }
+
+  @override
+  String get docsPoliciesTraining => 'Documents, policies & training courses';
+
+  @override
+  String get docsShort => 'Docs';
+
+  @override
+  String get coursesShort => 'Courses';
+
+  @override
+  String get doneShort => 'Done';
+
+  @override
+  String get activeShort => 'Active';
+
+  @override
+  String pagesCount(Object count) {
+    return '$count pages';
+  }
+
+  @override
+  String activeCount(Object count) {
+    return '$count Active';
+  }
+
+  @override
+  String completedCount(Object count) {
+    return '$count Completed';
+  }
+
+  @override
+  String get due => 'Due';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get tomorrow => 'Tomorrow';
+
+  @override
+  String get workProgress => 'Work progress';
+
+  @override
+  String get recorded => 'Recorded';
+
+  @override
+  String get hours => 'Hours';
+
+  @override
+  String get tapToCheckOut => 'Tap to Check-Out';
+
+  @override
+  String get workDayComplete => 'Work day complete';
+
+  @override
+  String get scanning => 'Scanning…';
+
+  @override
+  String get tapToCheckIn => 'Tap to Check-In';
+
+  @override
+  String get faceId => 'Face ID';
+
+  @override
+  String get fingerprint => 'Fingerprint';
+
+  @override
+  String get biometric => 'Biometric';
+
+  @override
+  String get checkInWith => 'Check-In with';
+
+  @override
+  String get checkOutWith => 'Check-Out with';
+
+  @override
+  String get checkInShort => 'In';
+
+  @override
+  String get checkOutShort => 'Out';
+
+  @override
+  String get am => 'AM';
+
+  @override
+  String get pm => 'PM';
+
+  @override
+  String get days => 'Days';
+
+  @override
+  String get requestAbsence => 'Request Absence';
+
+  @override
+  String get sar => 'SAR';
+
+  @override
+  String get transferred => 'Transferred';
+
+  @override
+  String get insurance => 'Insurance';
+
+  @override
+  String get downloadPdf => 'Download PDF';
+
+  @override
+  String get mins => 'Mins';
+
+  @override
+  String get present => 'Present';
+
+  @override
+  String get viewMonthlyReport => 'View Monthly Report';
+
+  @override
+  String get pendingRequests => 'Pending Requests';
+
+  @override
+  String get approveAll => 'Approve All';
+
+  @override
+  String get softwareEngineer => 'Software Engineer';
+
+  @override
+  String get itDept => 'IT Department';
+
+  @override
+  String get joinDate => 'Join Date';
+
+  @override
+  String get jan => 'Jan';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get contract => 'Contract';
+
+  @override
+  String get salaryCertificate => 'Salary Certificate';
+
+  @override
+  String get recommendationLetter => 'Recommendation Letter';
+
+  @override
+  String get uploadDocument => 'Upload Document';
+
+  @override
+  String get loan => 'Loan';
+
+  @override
+  String get salaryLoanRequest => 'Salary Loan Request';
+
+  @override
+  String get officialEntityRequest => 'Official Entity Request';
+
+  @override
+  String get dataUpdate => 'Data Update';
+
+  @override
+  String get updatePersonalInfo => 'Update Personal Info';
+
+  @override
+  String get annual => 'Annual';
+
+  @override
+  String get sick => 'Sick';
+
+  @override
+  String get emergency => 'Emergency';
+
+  @override
+  String get leave => 'Leave';
+
+  @override
+  String get workFromHome => 'Work From Home';
+
+  @override
+  String get biometricReason => 'Verify your identity to proceed';
+
+  @override
+  String get checkInSuccess => 'Check-in recorded successfully';
+
+  @override
+  String get checkInSuccessful => 'Check-In Successful';
+
+  @override
+  String get welcomeDayMessage => 'Welcome! Have a productive day.';
+
+  @override
+  String get checkOutSuccess => 'Check-out recorded successfully';
+
+  @override
+  String get checkOutSuccessful => 'Check-Out Successful';
+
+  @override
+  String get greatWorkMessage => 'Great work today! See you tomorrow.';
+
+  @override
+  String get finance => 'Finance';
+
+  @override
+  String get genderRatioTitle => 'Men Ratio';
 }
