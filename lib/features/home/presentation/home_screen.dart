@@ -7,7 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../attendance/presentation/attendance_screen.dart';
 import '../../leave/presentation/leave_screen.dart';
 import '../../payroll/presentation/payslip_screen.dart';
-import '../../performance/presentation/performance_screen.dart';
+import '../../performance/presentation/performance_screen.dart' hide AppColors;
 import '../../profile/presentation/profile_screen.dart';
 import '../../settings/presentation/settings_screen.dart';
 import '../../team/presentation/my_team_screen.dart';
@@ -357,7 +357,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildAnimatedKpiRow(bool isDark) {
     final kpis = [
       _KpiData(
-        '${l10n.topTalent}\n${l10n.retained ?? "Retained"}',
+        '${l10n.topTalent}\n${l10n.retained}',
         75,
         '%',
         AppColors.primary,

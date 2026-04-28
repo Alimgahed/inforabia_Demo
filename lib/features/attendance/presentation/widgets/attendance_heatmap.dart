@@ -629,7 +629,6 @@ class _HistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isLast = false;
     final color = _statusColor(record.status);
     final bgColor = _statusBg(record.status, isDark);
     final label = _statusLabel(record.status);

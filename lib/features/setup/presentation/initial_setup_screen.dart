@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:provider/provider.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -17,7 +16,6 @@ class InitialSetupScreen extends StatelessWidget {
     final isDark = settings.isDarkMode;
 
     // Base padding rhythm
-    const double verticalPad = 20.0;
 
     return Scaffold(
       body: Container(

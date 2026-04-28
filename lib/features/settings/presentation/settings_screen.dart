@@ -15,7 +15,6 @@ class _C {
   static const success = AppColors.success;
   static const successLight = AppColors.successLight;
   static const warning = AppColors.warning;
-  static const warningLight = AppColors.warningLight;
   static const danger = AppColors.danger;
   static const dangerLight = AppColors.dangerLight;
   static const surface = AppColors.white;

@@ -69,11 +69,7 @@ class AppColors {
   );
 
   static const LinearGradient goldenGradient = LinearGradient(
-    colors: [
-      Color(0xFFE53E2E),
-      Color(0xFFFF5252),
-      Color(0xFFE53E2E),
-    ],
+    colors: [Color(0xFFE53E2E), Color(0xFFFF5252), Color(0xFFE53E2E)],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
@@ -88,4 +84,29 @@ class AppColors {
   static const Color danger = error;
   static const Color dangerLight = Color(0xFFFFEBEE);
   static const Color warningLight = Color(0xFFFFF8E1);
+
+  // UI Semantic Colors
+  static const Color scaffoldBackground = Color(0xFFF4F6FC);
+  static const Color surface = Colors.white;
+  static const Color border = Color(0xFFEEEEEE);
+  static const Color textPrimary = Color(0xFF212121);
+  static const Color textSecondary = Color(0xFF757575);
+  static const Color textHint = Color(0xFFBDBDBD);
+
+  // Common Shadows
+  static List<BoxShadow> get cardShadow => [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.05),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        ),
+      ];
+
+  static List<BoxShadow> get elevatedShadow => [
+        BoxShadow(
+          color: primary.withOpacity(0.25),
+          blurRadius: 16,
+          offset: const Offset(0, 6),
+        ),
+      ];
 }

@@ -10,7 +10,6 @@ class _C {
   // Brandff
   static const primary = AppColors.primary;
   static const primaryLight = AppColors.primaryLight;
-  static const primaryDark = AppColors.darkTeal;
   static const accent = AppColors.accent;
 
   // Surfaces
@@ -34,7 +33,6 @@ class _C {
 
   // Border
   static const border = AppColors.lightGrey;
-  static const borderLight = AppColors.lightGrey;
 
   // Bot bubble
   static const botBubble = AppColors.white;
@@ -530,17 +528,6 @@ class _ChatBotScreenState extends State<ChatBotScreen>
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _headerAction(IconData icon) {
-    return IconButton(
-      onPressed: () {},
-      icon: Icon(icon, color: Colors.white.withOpacity(0.85), size: 22),
-      style: IconButton.styleFrom(
-        backgroundColor: Colors.white.withOpacity(0.1),
-        padding: const EdgeInsets.all(8),
       ),
     );
   }
@@ -1399,7 +1386,7 @@ class _SmartCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-                    SizedBox(height: 10),
+          SizedBox(height: 10),
 
           _RequestOption(
             icon: '📅',
