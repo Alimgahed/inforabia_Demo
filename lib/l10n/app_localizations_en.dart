@@ -1182,4 +1182,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get genderRatioTitle => 'Men Ratio';
+
+  @override
+  String get onboardingTitle7 => 'Smart Workplace';
+
+  @override
+  String get onboardingSubtitle7 =>
+      'Experience a seamless digital workplace designed for the modern employee.';
 }

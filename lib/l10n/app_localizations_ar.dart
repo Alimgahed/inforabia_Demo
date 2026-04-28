@@ -1176,4 +1176,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get genderRatioTitle => 'نسبة الرجال';
+
+  @override
+  String get onboardingTitle7 => 'بيئة عمل ذكية';
+
+  @override
+  String get onboardingSubtitle7 =>
+      'استمتع ببيئة عمل رقمية سلسة مصممة للموظف العصري.';
 }

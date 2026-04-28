@@ -1399,6 +1399,8 @@ class _SmartCard extends StatelessWidget {
       ),
       child: Column(
         children: [
+                    SizedBox(height: 10),
+
           _RequestOption(
             icon: '📅',
             title: l10n.leave,

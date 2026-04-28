@@ -16,21 +16,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   static const List<String> _images = [
-    'assets/images/onboarding_hr.png',
-    'assets/images/onboarding_dashboard.png',
-    'assets/images/onboarding_security.png',
-    'assets/images/onboarding_worklist.png',
-    'assets/images/onboarding_finance.png',
-    'assets/images/onboarding_learning.png',
+    'assets/images/edited-photo.png',
+    'assets/images/edited-photo (2).png',
+    'assets/images/edited-photo (3).png',
+    'assets/images/edited-photo (6).png',
+
+    'assets/images/edited-photo (4).png',
+    'assets/images/edited-photo (5).png',
   ];
 
   static const List<Color> _thematicColors = [
-    AppColors.primary,     // Retail Services - Dark Green
-    AppColors.accent,      // Store Analytics - Green
-    AppColors.primaryLight,// Bilingual & Secure - Light Green
-    AppColors.info,        // Approvals & Tasks - Teal
-    AppColors.secondary,   // Rewards & Payroll - Panda Red
-    AppColors.success,     // Excellence & Growth - Green
+    AppColors.primary, // Retail Services - Dark Green
+    AppColors.accent, // Store Analytics - Green
+    AppColors.primary, // Bilingual & Secure - Light Green
+    AppColors.accent, // Store Analytics - Green
+    AppColors.primary, // Bilingual & Secure - Light Green
+    AppColors.accent, // Store Analytics - Green
   ];
 
   @override
@@ -39,12 +40,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final currentColor = _thematicColors[_currentPage];
 
     final List<Map<String, String>> onboardingData = [
-      {'title': l10n.onboardingTitle1, 'subtitle': l10n.onboardingSubtitle1},
-      {'title': l10n.onboardingTitle2, 'subtitle': l10n.onboardingSubtitle2},
-      {'title': l10n.onboardingTitle3, 'subtitle': l10n.onboardingSubtitle3},
-      {'title': l10n.onboardingTitle4, 'subtitle': l10n.onboardingSubtitle4},
-      {'title': l10n.onboardingTitle5, 'subtitle': l10n.onboardingSubtitle5},
       {'title': l10n.onboardingTitle6, 'subtitle': l10n.onboardingSubtitle6},
+      {'title': l10n.onboardingTitle2, 'subtitle': l10n.onboardingSubtitle2},
+      {'title': l10n.onboardingTitle5, 'subtitle': l10n.onboardingSubtitle5},
+      {'title': l10n.onboardingTitle4, 'subtitle': l10n.onboardingSubtitle4},
+      {'title': l10n.onboardingTitle3, 'subtitle': l10n.onboardingSubtitle3},
+      {'title': l10n.onboardingTitle1, 'subtitle': l10n.onboardingSubtitle1},
     ];
 
     return Scaffold(
@@ -63,7 +64,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               color: _thematicColors[index],
             ),
           ),
-
           // Top Skip Button
           if (_currentPage < onboardingData.length - 1)
             Positioned(
@@ -83,7 +83,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                       shadows: [
-                        Shadow(color: Colors.black54, blurRadius: 10, offset: Offset(0, 2)),
+                        Shadow(
+                          color: Colors.black54,
+                          blurRadius: 10,
+                          offset: Offset(0, 2),
+                        ),
                       ],
                     ),
                   ),
@@ -107,11 +111,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-                
+
                 FadeInUp(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 500),
-                    width: _currentPage == onboardingData.length - 1 ? double.infinity : 200,
+                    width: _currentPage == onboardingData.length - 1
+                        ? double.infinity
+                        : 200,
                     height: 56,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -132,11 +138,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           Navigator.pushReplacement(
                             context,
                             PageRouteBuilder(
-                              pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                return FadeTransition(opacity: animation, child: child);
-                              },
-                              transitionDuration: const Duration(milliseconds: 800),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const LoginScreen(),
+                              transitionsBuilder:
+                                  (
+                                    context,
+                                    animation,
+                                    secondaryAnimation,
+                                    child,
+                                  ) {
+                                    return FadeTransition(
+                                      opacity: animation,
+                                      child: child,
+                                    );
+                                  },
+                              transitionDuration: const Duration(
+                                milliseconds: 800,
+                              ),
                             ),
                           );
                         } else {
@@ -149,18 +168,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
                         shadowColor: Colors.transparent,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            _currentPage == onboardingData.length - 1 ? l10n.getStarted : l10n.next,
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                            _currentPage == onboardingData.length - 1
+                                ? l10n.getStarted
+                                : l10n.next,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
                           if (_currentPage < onboardingData.length - 1) ...[
                             const SizedBox(width: 8),
-                            const Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                            const Icon(
+                              Icons.arrow_forward_rounded,
+                              color: Colors.white,
+                            ),
                           ],
                         ],
                       ),
@@ -184,23 +214,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }) {
     return Stack(
       children: [
-        // Fullscreen Background with Zoom Animation
-        TweenAnimationBuilder<double>(
-          tween: Tween<double>(begin: 1.0, end: 1.1),
-          duration: const Duration(seconds: 15),
-          builder: (context, value, child) {
-            return Transform.scale(
-              scale: value,
-              child: Image.asset(
-                imagePath,
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            );
-          },
+        Image.asset(
+          imagePath,
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.contain,
         ),
-        
+
         // Gradient Overlays for Readability
         Container(
           decoration: BoxDecoration(
@@ -235,7 +255,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     letterSpacing: -0.5,
                     fontSize: 34,
                     shadows: [
-                      Shadow(color: Colors.black, blurRadius: 15, offset: Offset(0, 4)),
+                      Shadow(
+                        color: Colors.black,
+                        blurRadius: 15,
+                        offset: Offset(0, 4),
+                      ),
                     ],
                   ),
                 ),
@@ -247,12 +271,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   subtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: color.withOpacity(0.95), // Thematic color for description
+                    color: color.withOpacity(
+                      0.95,
+                    ), // Thematic color for description
                     height: 1.4,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     shadows: const [
-                      Shadow(color: Colors.black87, blurRadius: 12, offset: Offset(0, 2)),
+                      Shadow(
+                        color: Colors.black87,
+                        blurRadius: 12,
+                        offset: Offset(0, 2),
+                      ),
                     ],
                   ),
                 ),
@@ -276,7 +306,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         borderRadius: BorderRadius.circular(4),
         boxShadow: [
           if (_currentPage == index)
-            BoxShadow(color: color.withOpacity(0.6), blurRadius: 12, spreadRadius: 2),
+            BoxShadow(
+              color: color.withOpacity(0.6),
+              blurRadius: 12,
+              spreadRadius: 2,
+            ),
         ],
       ),
     );

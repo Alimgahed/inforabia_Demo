@@ -2395,6 +2395,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Men Ratio'**
   String get genderRatioTitle;
+
+  /// No description provided for @onboardingTitle7.
+  ///
+  /// In en, this message translates to:
+  /// **'Smart Workplace'**
+  String get onboardingTitle7;
+
+  /// No description provided for @onboardingSubtitle7.
+  ///
+  /// In en, this message translates to:
+  /// **'Experience a seamless digital workplace designed for the modern employee.'**
+  String get onboardingSubtitle7;
 }
 
 class _AppLocalizationsDelegate
