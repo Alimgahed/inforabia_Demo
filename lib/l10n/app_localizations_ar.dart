@@ -1183,4 +1183,28 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingSubtitle7 =>
       'استمتع ببيئة عمل رقمية سلسة مصممة للموظف العصري.';
+
+  @override
+  String get bonus => 'المكافأة';
+
+  @override
+  String get overtime => 'العمل الإضافي';
+
+  @override
+  String get gosi => 'التأمينات الاجتماعية (GOSI)';
+
+  @override
+  String get absenceDeduction => 'خصم الغياب';
+
+  @override
+  String get financialAnalysis => 'التحليل المالي';
+
+  @override
+  String get salaryTrend => 'تطور الراتب';
+
+  @override
+  String get rising => 'صاعد';
+
+  @override
+  String get falling => 'هابط';
 }

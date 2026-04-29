@@ -170,7 +170,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     _typingAnimController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
-    )..repeat();
+    ); // Don't repeat() here — only start when _isTyping
   }
 
   @override
@@ -394,6 +394,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
       _isTyping = true;
       _showQuickActions = false;
     });
+    _typingAnimController.repeat(); // Start animation when typing
     _controller.clear();
     _scrollToBottom();
 
@@ -401,6 +402,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
       if (!mounted) return;
       setState(() {
         _isTyping = false;
+        _typingAnimController.stop(); // Stop animation to save GPU
         _messages.add(
           ChatMessage(isUser: false, text: _getReply(type, l10n), type: type),
         );

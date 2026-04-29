@@ -1189,4 +1189,28 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingSubtitle7 =>
       'Experience a seamless digital workplace designed for the modern employee.';
+
+  @override
+  String get bonus => 'Bonus';
+
+  @override
+  String get overtime => 'Overtime';
+
+  @override
+  String get gosi => 'GOSI';
+
+  @override
+  String get absenceDeduction => 'Absence Deduction';
+
+  @override
+  String get financialAnalysis => 'Financial Analysis';
+
+  @override
+  String get salaryTrend => 'Salary Trend';
+
+  @override
+  String get rising => 'Rising';
+
+  @override
+  String get falling => 'Falling';
 }

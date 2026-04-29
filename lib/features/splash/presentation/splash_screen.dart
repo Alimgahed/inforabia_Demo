@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../core/theme/app_colors.dart';
-import 'package:provider/provider.dart';
-import '../../../core/providers/app_settings_provider.dart';
 import '../../setup/presentation/initial_setup_screen.dart';
-import '../../onboarding/presentation/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -31,6 +28,10 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _navigateToNext();
+    // Precache the logo so it's instantly available
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      precacheImage(const AssetImage('assets/images/panda.png'), context);
+    });
   }
 
   @override
@@ -40,15 +41,12 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _navigateToNext() async {
-    await Future.delayed(const Duration(seconds: 4));
+    await Future.delayed(const Duration(milliseconds: 2500));
     if (!mounted) return;
-    final settings = Provider.of<AppSettingsProvider>(context, listen: false);
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            settings.isFirstRun
-            ? const InitialSetupScreen()
-            : const OnboardingScreen(),
+            const InitialSetupScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(opacity: animation, child: child);
         },

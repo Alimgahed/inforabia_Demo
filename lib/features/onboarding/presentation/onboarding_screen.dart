@@ -1,6 +1,6 @@
+import 'package:Panda/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../auth/presentation/login_screen.dart';
 

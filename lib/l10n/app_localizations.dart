@@ -2407,6 +2407,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Experience a seamless digital workplace designed for the modern employee.'**
   String get onboardingSubtitle7;
+
+  /// No description provided for @bonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus'**
+  String get bonus;
+
+  /// No description provided for @overtime.
+  ///
+  /// In en, this message translates to:
+  /// **'Overtime'**
+  String get overtime;
+
+  /// No description provided for @gosi.
+  ///
+  /// In en, this message translates to:
+  /// **'GOSI'**
+  String get gosi;
+
+  /// No description provided for @absenceDeduction.
+  ///
+  /// In en, this message translates to:
+  /// **'Absence Deduction'**
+  String get absenceDeduction;
+
+  /// No description provided for @financialAnalysis.
+  ///
+  /// In en, this message translates to:
+  /// **'Financial Analysis'**
+  String get financialAnalysis;
+
+  /// No description provided for @salaryTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary Trend'**
+  String get salaryTrend;
+
+  /// No description provided for @rising.
+  ///
+  /// In en, this message translates to:
+  /// **'Rising'**
+  String get rising;
+
+  /// No description provided for @falling.
+  ///
+  /// In en, this message translates to:
+  /// **'Falling'**
+  String get falling;
 }
 
 class _AppLocalizationsDelegate

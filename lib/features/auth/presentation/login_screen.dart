@@ -1,6 +1,6 @@
+import 'package:Panda/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/providers/app_settings_provider.dart';
 import '../../../core/services/biometric_service.dart';
@@ -9,7 +9,6 @@ import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:inforabia/core/theme/app_colors.dart';
+import 'package:Panda/core/theme/app_colors.dart';
 
 // ─── Data Model ───────────────────────────────────────────────────────────────
 
@@ -119,7 +119,7 @@ class BestEmployeesSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Best Employees',
+                    'Employees of the month',
                     style: TextStyle(
                       fontFamily:
                           'Georgia', // or use google_fonts: PlayfairDisplay

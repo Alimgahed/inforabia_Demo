@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
+import 'package:Panda/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 
 class RegisterScreen extends StatefulWidget {

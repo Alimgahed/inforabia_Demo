@@ -1,8 +1,8 @@
 import 'dart:async';
+import 'package:Panda/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../attendance/presentation/attendance_screen.dart';
 import '../../leave/presentation/leave_screen.dart';
@@ -126,15 +126,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final primaryColor = isDark ? AppColors.accent : AppColors.primary;
 
-    final screens = [
-      _buildDashboard(context, l10n, isDark, primaryColor),
-      _buildServicesGrid(context, l10n, isDark, primaryColor),
-      const MyTeamScreen(),
-      const ProfileScreen(),
-    ];
-
     return Scaffold(
-      body: screens[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          _buildDashboard(context, l10n, isDark, primaryColor),
+          _buildServicesGrid(context, l10n, isDark, primaryColor),
+          const MyTeamScreen(),
+          const ProfileScreen(),
+        ],
+      ),
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
@@ -176,23 +177,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
             // ── Employee Banner ──
             FadeInUp(
-              delay: const Duration(milliseconds: 100),
+              delay: const Duration(milliseconds: 50),
               child: _buildEmployeeBanner(isDark, primaryColor),
             ),
             const SizedBox(height: 16),
             FadeInUp(
-              delay: const Duration(milliseconds: 800),
+              delay: const Duration(milliseconds: 100),
               child: _buildNewsSection(l10n, isDark, primaryColor),
             ),
             const SizedBox(height: 20),
             FadeInUp(
-              delay: const Duration(milliseconds: 280),
+              delay: const Duration(milliseconds: 100),
               child: BestEmployeesSection(isDark: isDark),
             ),
             const SizedBox(height: 20),
             // ── Quick Action Chips ──
             FadeInUp(
-              delay: const Duration(milliseconds: 200),
+              delay: const Duration(milliseconds: 100),
               child: SizedBox(
                 height: 90,
                 child: ListView(
@@ -232,6 +233,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
+                    _quickChip(
+                      Icons.dashboard,
+                      l10n.hrInsights,
+                      AppColors.chartBlue,
+                      isDark,
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const HRInsightsScreen(),
+                        ),
+                      ),
+                    ),
+
                     _quickChip(
                       Icons.trending_up_rounded,
                       l10n.performance,
@@ -276,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
             // ── Animated KPI Cards Row ──
             FadeInUp(
-              delay: const Duration(milliseconds: 250),
+              delay: const Duration(milliseconds: 150),
               child: _buildAnimatedKpiRow(isDark),
             ),
             const SizedBox(height: 24),
@@ -285,64 +299,72 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
             // ── Predicted Retention Line Chart ──
             FadeInUp(
-              delay: const Duration(milliseconds: 300),
-              child: _buildRetentionLineChart(l10n, isDark, primaryColor),
+              delay: const Duration(milliseconds: 150),
+              child: RepaintBoundary(
+                child: _buildRetentionLineChart(l10n, isDark, primaryColor),
+              ),
             ),
             const SizedBox(height: 16),
 
             // ── Attrition Risk Horizontal Bars ──
             FadeInUp(
-              delay: const Duration(milliseconds: 380),
-              child: _buildAttritionByBU(l10n, isDark),
+              delay: const Duration(milliseconds: 150),
+              child: RepaintBoundary(child: _buildAttritionByBU(l10n, isDark)),
             ),
             const SizedBox(height: 16),
 
             // ── Donut + Heat Map Row ──
             FadeInUp(
-              delay: const Duration(milliseconds: 440),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: _buildAttritionDonut(l10n, isDark)),
-                  const SizedBox(width: 12),
-                  Expanded(child: _buildTalentHeatMap(l10n, isDark)),
-                ],
+              delay: const Duration(milliseconds: 200),
+              child: RepaintBoundary(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _buildAttritionDonut(l10n, isDark)),
+                    const SizedBox(width: 12),
+                    Expanded(child: _buildTalentHeatMap(l10n, isDark)),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 16),
 
             // ── Tenure Headcount Bar Chart ──
             FadeInUp(
-              delay: const Duration(milliseconds: 500),
-              child: _buildTenureChart(l10n, isDark),
+              delay: const Duration(milliseconds: 200),
+              child: RepaintBoundary(child: _buildTenureChart(l10n, isDark)),
             ),
             const SizedBox(height: 16),
 
             // ── Gender Ratio Stacked Bar ──
             FadeInUp(
-              delay: const Duration(milliseconds: 560),
-              child: _buildGenderRatioChart(l10n, isDark, primaryColor),
+              delay: const Duration(milliseconds: 200),
+              child: RepaintBoundary(
+                child: _buildGenderRatioChart(l10n, isDark, primaryColor),
+              ),
             ),
             const SizedBox(height: 16),
 
             // ── Salary Summary ──
             FadeInUp(
-              delay: const Duration(milliseconds: 620),
+              delay: const Duration(milliseconds: 200),
               child: _buildSalarySummary(l10n, isDark),
             ),
             const SizedBox(height: 16),
 
             // ── Upcoming Events ──
             FadeInUp(
-              delay: const Duration(milliseconds: 680),
+              delay: const Duration(milliseconds: 200),
               child: _buildUpcomingEvents(l10n, isDark, primaryColor),
             ),
             const SizedBox(height: 16),
 
             // // ── Performance Snapshot (Quarterly bar) ──
             FadeInUp(
-              delay: const Duration(milliseconds: 740),
-              child: _buildPerformanceSnapshot(l10n, isDark),
+              delay: const Duration(milliseconds: 200),
+              child: RepaintBoundary(
+                child: _buildPerformanceSnapshot(l10n, isDark),
+              ),
             ),
             const SizedBox(height: 16),
 
@@ -1695,12 +1717,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(24),
                     child: Stack(
                       children: [
-                        // Background Image
+                        // Background Image — optimized with cacheWidth + fade-in
                         Image.network(
                           item['image'] as String,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
+                          cacheWidth: 600, // Decode at reduced resolution
+                          gaplessPlayback: true, // No white flash on rebuild
+                          frameBuilder:
+                              (context, child, frame, wasSynchronouslyLoaded) {
+                                if (wasSynchronouslyLoaded || frame != null) {
+                                  return child;
+                                }
+                                return AnimatedOpacity(
+                                  opacity: frame == null ? 0 : 1,
+                                  duration: const Duration(milliseconds: 300),
+                                  curve: Curves.easeOut,
+                                  child: child,
+                                );
+                              },
                           errorBuilder: (context, error, stackTrace) =>
                               Image.asset(
                                 item['fallback'] as String,
@@ -2359,6 +2395,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
+
                   section(l10n.attendance, Icons.fingerprint_rounded, teal, [
                     _SvcItem(
                       Icons.fingerprint_rounded,
@@ -2737,68 +2774,66 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       itemCount: items.length,
       itemBuilder: (context, i) {
         final s = items[i];
-        return FadeInUp(
-          delay: Duration(milliseconds: 50 * i),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: s.onTap,
-              borderRadius: BorderRadius.circular(16),
-              splashColor: s.color.withOpacity(0.15),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: s.color.withOpacity(isDark ? 0.15 : 0.08),
-                    width: 1,
+        // Removed per-item FadeInUp — saves N animation controllers per grid.
+        // The parent section() already has its own entrance animation.
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: s.onTap,
+            borderRadius: BorderRadius.circular(16),
+            splashColor: s.color.withOpacity(0.15),
+            child: Container(
+              decoration: BoxDecoration(
+                color: isDark ? AppColors.darkCard : Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: s.color.withOpacity(isDark ? 0.15 : 0.08),
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: s.color.withOpacity(isDark ? 0.08 : 0.06),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: s.color.withOpacity(isDark ? 0.08 : 0.06),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            s.color.withOpacity(0.15),
-                            s.color.withOpacity(0.05),
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                        borderRadius: BorderRadius.circular(14),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          s.color.withOpacity(0.15),
+                          s.color.withOpacity(0.05),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
-                      child: Icon(s.icon, color: s.color, size: 24),
+                      borderRadius: BorderRadius.circular(14),
                     ),
-                    const SizedBox(height: 8),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4),
-                      child: Text(
-                        s.label,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.w700,
-                          color: isDark
-                              ? AppColors.darkTextPrimary
-                              : AppColors.black,
-                        ),
+                    child: Icon(s.icon, color: s.color, size: 24),
+                  ),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Text(
+                      s.label,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.darkTextPrimary
+                            : AppColors.black,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -2877,7 +2912,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Enterprise HRM',
+                                'Human Resource Management',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -2886,7 +2921,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 ),
                               ),
                               Text(
-                                'ERP & HCM Portal',
+                                'HCM Portal',
                                 style: TextStyle(
                                   color: Colors.white.withOpacity(0.55),
                                   fontSize: 10,

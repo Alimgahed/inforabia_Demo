@@ -6,9 +6,11 @@ class AppSettingsProvider extends ChangeNotifier {
   static const String _localeKey = 'locale';
   static const String _isFirstRunKey = 'is_first_run';
 
-  ThemeMode _themeMode = ThemeMode.light;
-  Locale _locale = const Locale('en');
-  bool _isFirstRun = true;
+  final SharedPreferences _prefs;
+
+  ThemeMode _themeMode;
+  Locale _locale;
+  bool _isFirstRun;
 
   ThemeMode get themeMode => _themeMode;
   Locale get locale => _locale;
@@ -16,34 +18,26 @@ class AppSettingsProvider extends ChangeNotifier {
   bool get isArabic => _locale.languageCode == 'ar';
   bool get isFirstRun => _isFirstRun;
 
-  AppSettingsProvider() {
-    _loadSettings();
-  }
-
-  Future<void> _loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    final themeIndex = prefs.getInt(_themeModeKey) ?? 0;
-    final langCode = prefs.getString(_localeKey) ?? 'en';
-
-    _themeMode = themeIndex == 1 ? ThemeMode.dark : ThemeMode.light;
-    _locale = Locale(langCode);
-    _isFirstRun = prefs.getBool(_isFirstRunKey) ?? true;
-    notifyListeners();
-  }
+  /// Accept pre-warmed SharedPreferences — no async needed at startup.
+  AppSettingsProvider({required SharedPreferences prefs})
+      : _prefs = prefs,
+        _themeMode = (prefs.getInt(_themeModeKey) ?? 0) == 1
+            ? ThemeMode.dark
+            : ThemeMode.light,
+        _locale = Locale(prefs.getString(_localeKey) ?? 'en'),
+        _isFirstRun = prefs.getBool(_isFirstRunKey) ?? true;
 
   Future<void> toggleTheme() async {
     _themeMode = _themeMode == ThemeMode.light
         ? ThemeMode.dark
         : ThemeMode.light;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setInt(_themeModeKey, _themeMode == ThemeMode.dark ? 1 : 0);
+    await _prefs.setInt(_themeModeKey, _themeMode == ThemeMode.dark ? 1 : 0);
     notifyListeners();
   }
 
   Future<void> setLocale(Locale locale) async {
     _locale = locale;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_localeKey, locale.languageCode);
+    await _prefs.setString(_localeKey, locale.languageCode);
     notifyListeners();
   }
 
@@ -56,8 +50,7 @@ class AppSettingsProvider extends ChangeNotifier {
 
   Future<void> completeSetup() async {
     _isFirstRun = false;
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(_isFirstRunKey, false);
+    await _prefs.setBool(_isFirstRunKey, false);
     notifyListeners();
   }
 }

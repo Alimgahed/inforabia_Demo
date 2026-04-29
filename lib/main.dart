@@ -1,16 +1,18 @@
+import 'package:Panda/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'core/providers/app_settings_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'features/splash/presentation/splash_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Pre-warm SharedPreferences so settings are instantly available
+  final prefs = await SharedPreferences.getInstance();
   runApp(
     ChangeNotifierProvider(
-      create: (_) => AppSettingsProvider(),
+      create: (_) => AppSettingsProvider(prefs: prefs),
       child: const InforabiaApp(),
     ),
   );

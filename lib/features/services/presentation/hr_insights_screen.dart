@@ -33,12 +33,13 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
       appBar: AppBar(
         title: Text(
           l10n.hrInsights,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
         flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: AppColors.primaryGradient,
-          ),
+          decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
         ),
         foregroundColor: Colors.white,
         elevation: 0,
@@ -51,9 +52,24 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
             fontWeight: FontWeight.bold,
           ),
           tabs: [
-            Tab(text: l10n.dashboard),
-            Tab(text: l10n.managerView),
-            Tab(text: l10n.specialistDashboard),
+            Tab(
+              child: Text(
+                l10n.dashboard,
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            Tab(
+              child: Text(
+                l10n.managerView,
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            Tab(
+              child: Text(
+                l10n.specialistDashboard,
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),

@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import 'package:flutter/material.dart';
-import 'package:inforabia/core/theme/app_colors.dart';
+import 'package:Panda/core/theme/app_colors.dart';
 
 class KPI {
   final String id;
@@ -106,6 +106,13 @@ class Employee {
     required this.department,
     required this.avatarInitials,
   });
+}
+
+class Objective {
+  final String title;
+  final bool isCompleted;
+
+  const Objective({required this.title, this.isCompleted = false});
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -250,6 +257,24 @@ class DummyData {
     absent: 3,
     late: 3,
   );
+
+  static const List<Objective> objectives = [
+    Objective(
+      title: 'Exceed 10 million SAR in gross revenue by the end of 2026',
+    ),
+    Objective(
+      title:
+          'Achieve a net profit margin of at least 15% across all product lines this fiscal year',
+    ),
+    Objective(
+      title:
+          'Reduce overall operational expenses by 8% without compromising product quality or headcount',
+    ),
+    Objective(
+      title:
+          'Maintain a minimum of 2 million SAR in operating cash flow reserves at all times',
+    ),
+  ];
 }
 
 class PerformanceScreen extends StatelessWidget {
@@ -282,6 +307,61 @@ class PerformanceScreen extends StatelessWidget {
     );
   }
 
+  // ─── Static Data ──────────────────────────────────────────────────────────
+
+  static final List<_FlowStep> _steps = [
+    _FlowStep('1', 'KPI Setup', Icons.flag_outlined, AppColors.secondary),
+    _FlowStep('2', 'Goals', Icons.track_changes_outlined, AppColors.primary),
+    _FlowStep('3', 'Employee\nInput', Icons.edit_outlined, AppColors.info),
+    _FlowStep(
+      '4',
+      'Manager\nReview',
+      Icons.rate_review_outlined,
+      AppColors.success,
+    ),
+  ];
+
+  static List<_MenuItem> _getMenuItems(BuildContext context) => [
+    _MenuItem(
+      'KPI & Goals Setup',
+      'Manage KPIs and create goals',
+      Icons.flag_rounded,
+      AppColors.secondary,
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const KpiGoalsScreen()),
+      ),
+    ),
+    _MenuItem(
+      'Employee Input',
+      'Set progress & comments',
+      Icons.person_outlined,
+      AppColors.info,
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => EmployeeInputScreen()),
+      ),
+    ),
+    _MenuItem(
+      'Manager Review',
+      'Complete full performance review',
+      Icons.rate_review_rounded,
+      AppColors.primary,
+      () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => ManagerReviewScreen()),
+      ),
+      highlight: true,
+    ),
+    _MenuItem(
+      'Reports',
+      'View performance history',
+      Icons.bar_chart_rounded,
+      AppColors.success,
+      () {},
+    ),
+  ];
+
   SliverAppBar _buildAppBar(BuildContext context) {
     return SliverAppBar(
       expandedHeight: 120,
@@ -289,7 +369,7 @@ class PerformanceScreen extends StatelessWidget {
       backgroundColor: AppColors.primary,
       flexibleSpace: FlexibleSpaceBar(
         title: const Text(
-          'Performance Hub',
+          'Performance',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -338,83 +418,6 @@ class PerformanceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWelcomeCard(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: AppColors.primaryGradient,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: AppColors.elevatedShadow,
-      ),
-      child: Row(
-        children: [
-          // Avatar
-          Container(
-            width: 56,
-            height: 56,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.25),
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: Colors.white.withOpacity(0.5),
-                width: 2,
-              ),
-            ),
-            child: const Center(
-              child: Text(
-                'AR',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Ahmed Al-Rashid',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Senior Flutter Developer · Engineering',
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.85),
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: const Text(
-                    '📅  Q1 2024  ·  Review Period',
-                    style: TextStyle(color: Colors.white, fontSize: 11),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildSectionTitle(String title) {
     return Text(
       title,
@@ -427,18 +430,6 @@ class PerformanceScreen extends StatelessWidget {
   }
 
   Widget _buildFlowCard(BuildContext context) {
-    final steps = [
-      _FlowStep('1', 'KPI Setup', Icons.flag_outlined, AppColors.secondary),
-      _FlowStep('2', 'Goals', Icons.track_changes_outlined, AppColors.primary),
-      _FlowStep('3', 'Employee\nInput', Icons.edit_outlined, AppColors.info),
-      _FlowStep(
-        '4',
-        'Manager\nReview',
-        Icons.rate_review_outlined,
-        AppColors.success,
-      ),
-    ];
-
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -447,7 +438,7 @@ class PerformanceScreen extends StatelessWidget {
         boxShadow: AppColors.cardShadow,
       ),
       child: Row(
-        children: steps.asMap().entries.map((entry) {
+        children: _steps.asMap().entries.map((entry) {
           final i = entry.key;
           final s = entry.value;
           return Expanded(
@@ -478,7 +469,7 @@ class PerformanceScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (i < steps.length - 1)
+                if (i < _steps.length - 1)
                   Icon(
                     Icons.arrow_forward_ios,
                     size: 10,
@@ -493,46 +484,7 @@ class PerformanceScreen extends StatelessWidget {
   }
 
   Widget _buildMenuGrid(BuildContext context) {
-    final items = [
-      _MenuItem(
-        'KPI & Goals Setup',
-        'Manage KPIs and create goals',
-        Icons.flag_rounded,
-        AppColors.secondary,
-        () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => const KpiGoalsScreen()),
-        ),
-      ),
-      _MenuItem(
-        'Employee Input',
-        'Set progress & comments',
-        Icons.person_outlined,
-        AppColors.info,
-        () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => EmployeeInputScreen()),
-        ),
-      ),
-      _MenuItem(
-        'Manager Review',
-        'Complete full performance review',
-        Icons.rate_review_rounded,
-        AppColors.primary,
-        () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ManagerReviewScreen()),
-        ),
-        highlight: true,
-      ),
-      _MenuItem(
-        'Reports',
-        'View performance history',
-        Icons.bar_chart_rounded,
-        AppColors.success,
-        () {},
-      ),
-    ];
+    final items = _getMenuItems(context);
 
     return GridView.count(
       shrinkWrap: true,
@@ -604,53 +556,6 @@ class PerformanceScreen extends StatelessWidget {
                   maxLines: 2,
                 ),
               ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatsRow() {
-    return Row(
-      children: [
-        _buildStatCard('5', 'Goals\nAssigned', AppColors.primary),
-        const SizedBox(width: 12),
-        _buildStatCard('93%', 'Attendance\nRate', AppColors.success),
-        const SizedBox(width: 12),
-        _buildStatCard('4.8', 'Last Review\nScore', AppColors.warning),
-      ],
-    );
-  }
-
-  Widget _buildStatCard(String value, String label, Color color) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(14),
-          boxShadow: AppColors.cardShadow,
-        ),
-        child: Column(
-          children: [
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
-                color: color,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 10,
-                color: AppColors.textSecondary,
-                height: 1.3,
-              ),
             ),
           ],
         ),
@@ -1078,18 +983,7 @@ class _KpiGoalsScreenState extends State<KpiGoalsScreen>
                   maxLines: 2,
                 ),
                 const SizedBox(height: 12),
-                DropdownButtonFormField<String>(
-                  value: selectedKpiId,
-                  decoration: const InputDecoration(labelText: 'KPI'),
-                  items: _kpis
-                      .map(
-                        (k) =>
-                            DropdownMenuItem(value: k.id, child: Text(k.name)),
-                      )
-                      .toList(),
-                  onChanged: (v) => setS(() => selectedKpiId = v!),
-                ),
-                const SizedBox(height: 12),
+
                 Row(
                   children: [
                     Text(
@@ -1204,7 +1098,7 @@ class _EmployeeInputScreenState extends State<EmployeeInputScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _buildOverallProgressCard(),
+          RepaintBoundary(child: _buildOverallProgressCard()),
           const SizedBox(height: 16),
           ...widget.goals.asMap().entries.map(
             (entry) => _buildGoalCard(entry.key, entry.value),
@@ -1515,10 +1409,11 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
   final AttendanceData _attendance = DummyData.attendance;
 
   // ── Section collapse state ────────────────────────────────────────────────
-  bool _goalsExpanded = true;
-  bool _hrExpanded = true;
-  bool _attendanceExpanded = true;
-  bool _finalExpanded = true;
+  bool _goalsExpanded = false;
+  bool _hrExpanded = false;
+  bool _attendanceExpanded = false;
+  bool _finalExpanded = false;
+  bool _objectivesExpanded = true;
 
   // ── Manager comment controllers ───────────────────────────────────────────
   late List<TextEditingController> _goalCommentControllers;
@@ -1564,8 +1459,13 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
 
   double get _attendanceScore => _attendance.score;
 
+  double get _objectivesScore => 92.5; // High performance demo score
+
   double get _finalScore =>
-      (_goalsScore * 0.6) + (_hrScore * 0.2) + (_attendanceScore * 0.2);
+      (_objectivesScore * 0.2) + // Company Objectives: 20%
+      (_goalsScore * 0.6) + // Goals Assessment: 60%
+      (_hrScore * 0.1) + // HR 360: 10%
+      (_attendanceScore * 0.1); // Attendance: 10%
 
   String get _finalStatus {
     if (_finalScore >= 80) return 'Excellent';
@@ -1625,8 +1525,31 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          _buildScoreOverview(),
+          RepaintBoundary(child: _buildScoreOverview()),
           const SizedBox(height: 16),
+
+          // ── Objectives Section ──────────────────────────────────────────
+          _buildSectionHeader(
+            'Company Objectives',
+            '20% weight',
+            Icons.ads_click,
+            AppColors.info,
+            _objectivesExpanded,
+            () => setState(() => _objectivesExpanded = !_objectivesExpanded),
+            '${_objectivesScore.toStringAsFixed(1)}%',
+          ),
+          RepaintBoundary(
+            child: AnimatedCrossFade(
+              firstChild: _buildObjectivesSection(),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: _objectivesExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
+          ),
+
+          const SizedBox(height: 8),
 
           // ── Goals Section ─────────────────────────────────────────────
           _buildSectionHeader(
@@ -1638,13 +1561,15 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
             () => setState(() => _goalsExpanded = !_goalsExpanded),
             '${_goalsScore.toStringAsFixed(1)}%',
           ),
-          AnimatedCrossFade(
-            firstChild: _buildGoalsSection(),
-            secondChild: const SizedBox.shrink(),
-            crossFadeState: _goalsExpanded
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: const Duration(milliseconds: 300),
+          RepaintBoundary(
+            child: AnimatedCrossFade(
+              firstChild: _buildGoalsSection(),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: _goalsExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
           ),
 
           const SizedBox(height: 8),
@@ -1652,20 +1577,22 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
           // ── HR 360 Section ────────────────────────────────────────────
           _buildSectionHeader(
             'HR 360° Evaluation',
-            '20% weight',
+            '10% weight',
             Icons.people_alt_rounded,
             AppColors.secondary,
             _hrExpanded,
             () => setState(() => _hrExpanded = !_hrExpanded),
             '${_hrScore.toStringAsFixed(1)}%',
           ),
-          AnimatedCrossFade(
-            firstChild: _buildHRSection(),
-            secondChild: const SizedBox.shrink(),
-            crossFadeState: _hrExpanded
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: const Duration(milliseconds: 300),
+          RepaintBoundary(
+            child: AnimatedCrossFade(
+              firstChild: _buildHRSection(),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: _hrExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
           ),
 
           const SizedBox(height: 8),
@@ -1673,20 +1600,22 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
           // ── Attendance Section ────────────────────────────────────────
           _buildSectionHeader(
             'Attendance',
-            '20% weight',
+            '10% weight',
             Icons.calendar_month_rounded,
             AppColors.success,
             _attendanceExpanded,
             () => setState(() => _attendanceExpanded = !_attendanceExpanded),
             '${_attendanceScore.toStringAsFixed(0)}%',
           ),
-          AnimatedCrossFade(
-            firstChild: _buildAttendanceSection(),
-            secondChild: const SizedBox.shrink(),
-            crossFadeState: _attendanceExpanded
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: const Duration(milliseconds: 300),
+          RepaintBoundary(
+            child: AnimatedCrossFade(
+              firstChild: _buildAttendanceSection(),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: _attendanceExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
           ),
 
           const SizedBox(height: 8),
@@ -1701,13 +1630,15 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
             () => setState(() => _finalExpanded = !_finalExpanded),
             _finalStatus,
           ),
-          AnimatedCrossFade(
-            firstChild: _buildFinalSection(),
-            secondChild: const SizedBox.shrink(),
-            crossFadeState: _finalExpanded
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: const Duration(milliseconds: 300),
+          RepaintBoundary(
+            child: AnimatedCrossFade(
+              firstChild: _buildFinalSection(),
+              secondChild: const SizedBox.shrink(),
+              crossFadeState: _finalExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
           ),
 
           const SizedBox(height: 40),
@@ -1718,182 +1649,201 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
 
   // ─── Employee Header ───────────────────────────────────────────────────────
 
-  Widget _buildEmployeeHeader() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: AppColors.cardShadow,
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: const BoxDecoration(
-              gradient: AppColors.primaryGradient,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(
-                _employee.avatarInitials,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  _employee.name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  _employee.jobTitle,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    _tag(
-                      Icons.business_outlined,
-                      _employee.department,
-                      AppColors.primary,
-                    ),
-                    const SizedBox(width: 6),
-                    _tag(
-                      Icons.calendar_today_outlined,
-                      'Q1 2024',
-                      AppColors.info,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.primaryLight,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Icon(
-              Icons.person_outlined,
-              color: AppColors.primary,
-              size: 20,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _tag(IconData icon, String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 10, color: color),
-          const SizedBox(width: 3),
-          Text(label, style: TextStyle(fontSize: 10, color: color)),
-        ],
-      ),
-    );
-  }
-
   // ─── Score Overview ────────────────────────────────────────────────────────
 
   Widget _buildScoreOverview() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      height: 170,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
         gradient: LinearGradient(
-          colors: [_finalStatusColor.withOpacity(0.9), _finalStatusColor],
+          colors: [
+            _finalStatusColor,
+            _finalStatusColor.withBlue(255).withOpacity(0.8),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: _finalStatusColor.withOpacity(0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
-      child: Row(
+      clipBehavior: Clip.antiAlias,
+      child: Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Final Score',
-                style: TextStyle(color: Colors.white70, fontSize: 12),
+          // Decorative Background elements
+          Positioned(
+            top: -40,
+            right: -40,
+            child: Container(
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.1),
               ),
-              const SizedBox(height: 4),
-              Text(
-                _finalScore.toStringAsFixed(1),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 48,
-                  fontWeight: FontWeight.w900,
-                  height: 1,
-                ),
+            ),
+          ),
+          Positioned(
+            bottom: -20,
+            left: -20,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withOpacity(0.05),
               ),
-              const SizedBox(height: 4),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  _finalStatus,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
+            ),
+          ),
+          // Content
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                // Left Side: Main Score
+                Expanded(
+                  flex: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'FINAL SCORE',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 10,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _finalScore.toStringAsFixed(1),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 52,
+                          fontWeight: FontWeight.w900,
+                          height: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.3),
+                          ),
+                        ),
+                        child: Text(
+                          _finalStatus,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              children: [
-                _scoreBar('Goals (60%)', _goalsScore, Colors.white),
-                const SizedBox(height: 8),
-                _scoreBar('HR 360° (20%)', _hrScore, Colors.white),
-                const SizedBox(height: 8),
-                _scoreBar('Attendance (20%)', _attendanceScore, Colors.white),
+                const VerticalDivider(
+                  color: Colors.white24,
+                  width: 32,
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                ),
+                // Right Side: Weights
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _optimizedScoreBar(
+                        'Company Objectives (20%)',
+                        _objectivesScore,
+                      ),
+                      const SizedBox(height: 10),
+                      _optimizedScoreBar('Goals Assessment (60%)', _goalsScore),
+                      const SizedBox(height: 10),
+                      _optimizedScoreBar('HR 360° Evaluation (10%)', _hrScore),
+                      const SizedBox(height: 10),
+                      _optimizedScoreBar(
+                        'Attendance Record (10%)',
+                        _attendanceScore,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _optimizedScoreBar(String label, double value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 9,
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              '${value.toInt()}%',
+              style: const TextStyle(
+                fontSize: 9,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Container(
+          height: 4,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(2),
+          ),
+          child: FractionallySizedBox(
+            alignment: Alignment.centerLeft,
+            widthFactor: (value / 100).clamp(0.0, 1.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(2),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.3),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -2012,6 +1962,58 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // ─── Objectives Section ───────────────────────────────────────────────────
+
+  Widget _buildObjectivesSection() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: AppColors.cardShadow,
+      ),
+      child: Column(
+        children: DummyData.objectives.asMap().entries.map((e) {
+          final obj = e.value;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 2),
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: AppColors.info.withOpacity(0.12),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.check_circle_outline,
+                    color: AppColors.info,
+                    size: 14,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    obj.title,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      height: 1.4,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     );
   }
@@ -2638,149 +2640,207 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
   Widget _buildFinalSection() {
     return Column(
       children: [
-        // Big score card
+        // Premium Score Card
         Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.only(bottom: 16),
+          padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(24),
             boxShadow: AppColors.cardShadow,
+            border: Border.all(color: AppColors.border.withOpacity(0.5)),
           ),
           child: Column(
             children: [
-              // Formula breakdown
-              _formulaRow('Goals (×0.6)', _goalsScore * 0.6, AppColors.primary),
-              const SizedBox(height: 6),
-              _formulaRow(
-                'HR 360° (×0.2)',
-                _hrScore * 0.2,
-                AppColors.secondary,
-              ),
-              const SizedBox(height: 6),
-              _formulaRow(
-                'Attendance (×0.2)',
-                _attendanceScore * 0.2,
-                AppColors.success,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
-                child: Divider(color: AppColors.border),
-              ),
+              // Formula Breakdown Header
               Row(
                 children: [
-                  const Text(
-                    'Final Score',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  Icon(
+                    Icons.analytics_outlined,
+                    size: 18,
+                    color: AppColors.textSecondary,
                   ),
-                  const Spacer(),
-                  Text(
-                    _finalScore.toStringAsFixed(1),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Calculation Breakdown',
                     style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 32,
-                      color: _finalStatusColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppColors.textPrimary,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
-                  color: _finalStatusColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Text(
-                    _finalStatus,
-                    style: TextStyle(
-                      color: _finalStatusColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+              const SizedBox(height: 16),
+              // Formula Rows
+              _formulaRow(
+                'Company Objectives (×0.2)',
+                _objectivesScore * 0.2,
+                AppColors.info,
+              ),
+              const SizedBox(height: 10),
+              _formulaRow(
+                'Goals Assessment (×0.6)',
+                _goalsScore * 0.6,
+                AppColors.primary,
+              ),
+              const SizedBox(height: 10),
+              _formulaRow(
+                'HR 360° Evaluation (×0.1)',
+                _hrScore * 0.1,
+                AppColors.secondary,
+              ),
+              const SizedBox(height: 10),
+              _formulaRow(
+                'Attendance Record (×0.1)',
+                _attendanceScore * 0.1,
+                AppColors.success,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Divider(height: 1),
+              ),
+              // Result Summary
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Total Performance Result',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        _finalStatus,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 22,
+                          color: _finalStatusColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: AppColors.primaryGradient,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withOpacity(0.3),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      _finalScore.toStringAsFixed(1),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 28,
+                        color: Colors.white,
+                        height: 1,
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
         ),
 
-        // Manager final comment
+        // Manager Final Comment Card
         Container(
-          margin: const EdgeInsets.only(bottom: 12),
-          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(20),
             boxShadow: AppColors.cardShadow,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Final Comment',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.comment_bank_outlined,
+                    size: 18,
+                    color: AppColors.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  const Text(
+                    'Final Evaluation Summary',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 14),
               TextField(
                 controller: _finalCommentController,
-                style: const TextStyle(fontSize: 13),
+                style: const TextStyle(fontSize: 14, height: 1.5),
                 decoration: InputDecoration(
-                  hintText:
-                      'Write your overall evaluation and recommendations for the employee...',
-                  hintStyle: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.textHint,
+                  hintText: 'Provide overall feedback and next steps...',
+                  hintStyle: TextStyle(
+                    fontSize: 13,
+                    color: AppColors.textHint.withOpacity(0.7),
                   ),
                   filled: true,
-                  fillColor: AppColors.background,
-                  contentPadding: const EdgeInsets.all(12),
+                  fillColor: AppColors.background.withOpacity(0.5),
+                  contentPadding: const EdgeInsets.all(16),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.border),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.border),
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide.none,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                     borderSide: const BorderSide(
                       color: AppColors.primary,
                       width: 1.5,
                     ),
                   ),
                 ),
-                maxLines: 4,
+                maxLines: 5,
               ),
             ],
           ),
         ),
 
-        // Submit button
+        // Submission Control
         SizedBox(
           width: double.infinity,
+          height: 60,
           child: ElevatedButton.icon(
             onPressed: _submitReview,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(18),
               ),
-              elevation: 0,
+              elevation: 4,
+              shadowColor: AppColors.primary.withOpacity(0.4),
             ),
-            icon: const Icon(Icons.done_all_rounded),
+            icon: const Icon(Icons.verified_user_rounded, size: 22),
             label: const Text(
-              'Submit Performance Review',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              'COMPLETE PERFORMANCE REVIEW',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 14,
+                letterSpacing: 0.8,
+              ),
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 24),
       ],
     );
   }

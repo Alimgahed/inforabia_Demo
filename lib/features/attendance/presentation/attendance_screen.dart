@@ -28,12 +28,12 @@
 // ─────────────────────────────────────────────────────────────
 import 'dart:async';
 import 'dart:math';
+import 'package:Panda/core/theme/app_colors.dart';
+import 'package:Panda/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inforabia/core/theme/app_colors.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:flutter/services.dart';
-import 'package:inforabia/l10n/app_localizations.dart';
 
 // ─── App Colors ───────────────────────────────────────────────
 
@@ -160,7 +160,8 @@ class AttendanceController extends GetxController {
   Future<bool> _authenticate(String reason) async {
     try {
       scanState.value = 'scanning';
-      feedbackMsg.value = ''; // Will be set by UI or localized elsewhere if needed
+      feedbackMsg.value =
+          ''; // Will be set by UI or localized elsewhere if needed
       feedbackType.value = '';
 
       final bool didAuthenticate = await _auth.authenticate(
@@ -179,7 +180,8 @@ class AttendanceController extends GetxController {
         feedbackMsg.value = 'No biometrics enrolled';
       } else if (e.code == LocalAuthExceptionCode.temporaryLockout ||
           e.code == LocalAuthExceptionCode.biometricLockout) {
-        feedbackMsg.value = 'Too many attempts. Try later'; // Will be handled by UI l10n if needed
+        feedbackMsg.value =
+            'Too many attempts. Try later'; // Will be handled by UI l10n if needed
       } else {
         feedbackMsg.value = 'Authentication cancelled';
       }
@@ -194,9 +196,7 @@ class AttendanceController extends GetxController {
     if (isLoading.value) return;
     isLoading.value = true;
 
-    final bool success = await _authenticate(
-      l10n.biometricReason,
-    );
+    final bool success = await _authenticate(l10n.biometricReason);
 
     if (success) {
       attendance = DemoAttendance(loginTime: DateTime.now());
@@ -225,9 +225,7 @@ class AttendanceController extends GetxController {
     if (isLoading.value) return;
     isLoading.value = true;
 
-    final bool success = await _authenticate(
-      l10n.biometricReason,
-    );
+    final bool success = await _authenticate(l10n.biometricReason);
 
     if (success) {
       attendance?.logoutTime = DateTime.now();
