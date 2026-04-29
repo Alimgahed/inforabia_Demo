@@ -29,6 +29,7 @@ class TeamMember {
   final int attendance; // % this month
   final List<double> weeklyPerf; // 5 weeks
   final String gender; // 'Male' | 'Female'
+  final String avatarAsset;
 
   const TeamMember({
     required this.name,
@@ -53,6 +54,7 @@ class TeamMember {
     required this.attendance,
     required this.weeklyPerf,
     required this.gender,
+    required this.avatarAsset,
   });
 }
 
@@ -60,20 +62,20 @@ class TeamMember {
 
 const _teamMembers = [
   TeamMember(
-    name: 'Sara Al-Qurashi',
-    jobTitle: 'Lead Developer',
-    department: 'Engineering',
+    name: 'Sara Al-Otaibi',
+    jobTitle: 'Store Manager',
+    department: 'Store Operations',
     employeeId: 'EMP-2022-0210',
-    email: 'sara.q@inforabia.com',
+    email: 'sara.o@panda.com.sa',
     phone: '+966 50 123 4567',
     joiningDate: '15 Mar 2022',
     status: 'Active',
-    location: 'Riyadh HQ',
+    location: 'Riyadh Branch',
     performance: 94,
     tasksCompleted: 42,
     tasksPending: 3,
-    accentColor: Color(0xFF5B86E5),
-    icon: Icons.code_rounded,
+    accentColor: AppColors.primary, // Panda Green
+    icon: Icons.storefront_rounded,
     salary: 18500,
     manager: 'Ahmed Al-Rashid',
     nationality: 'Saudi',
@@ -82,61 +84,64 @@ const _teamMembers = [
     attendance: 98,
     weeklyPerf: [88, 91, 95, 93, 94],
     gender: 'Female',
+    avatarAsset: 'assets/images/team/sara.png',
   ),
   TeamMember(
-    name: 'Omar Khalid',
-    jobTitle: 'UX Designer',
-    department: 'Product',
+    name: 'Omar Al-Fouzan',
+    jobTitle: 'Customer Service Lead',
+    department: 'Customer Service',
     employeeId: 'EMP-2023-0415',
-    email: 'omar.k@inforabia.com',
+    email: 'omar.f@panda.com.sa',
     phone: '+966 55 987 6543',
     joiningDate: '01 Jun 2023',
-    status: 'Remote',
-    location: 'Jeddah',
+    status: 'Active',
+    location: 'Jeddah Branch',
     performance: 87,
     tasksCompleted: 34,
     tasksPending: 5,
     accentColor: Color(0xFF36D1BB),
-    icon: Icons.design_services_rounded,
+    icon: Icons.support_agent_rounded,
     salary: 14000,
-    manager: 'Ahmed Al-Rashid',
+    manager: 'Sara Al-Otaibi',
     nationality: 'Saudi',
     contract: 'Full-Time',
     leaveBalance: 14,
     attendance: 90,
     weeklyPerf: [80, 84, 87, 85, 87],
     gender: 'Male',
+    avatarAsset: 'assets/images/team/omar.png',
   ),
   TeamMember(
-    name: 'Lina Mostafa',
-    jobTitle: 'Business Analyst',
-    department: 'Solutions',
+    name: 'Noura Al-Dosari',
+    jobTitle: 'Fresh Produce Supervisor',
+    department: 'Fresh Food',
     employeeId: 'EMP-2021-0095',
-    email: 'lina.m@inforabia.com',
+    email: 'noura.d@panda.com.sa',
     phone: '+966 53 555 1122',
     joiningDate: '10 Jan 2021',
     status: 'On Leave',
-    location: 'Riyadh HQ',
+    location: 'Riyadh Branch',
     performance: 78,
     tasksCompleted: 28,
     tasksPending: 8,
-    accentColor: Color(0xFFF7971E),
-    icon: Icons.analytics_rounded,
+    accentColor: AppColors.secondary, // Panda Red
+    icon: Icons.eco_rounded,
     salary: 13500,
-    manager: 'Ahmed Al-Rashid',
-    nationality: 'Egyptian',
+    manager: 'Sara Al-Otaibi',
+    nationality: 'Saudi',
     contract: 'Full-Time',
     leaveBalance: 7,
     attendance: 72,
     weeklyPerf: [82, 76, 75, 79, 78],
     gender: 'Female',
+    avatarAsset: 'assets/images/team/noura.png',
   ),
   TeamMember(
     name: 'Faisal Al-Harbi',
-    jobTitle: 'DevOps Engineer',
-    department: 'Engineering',
+    jobTitle: 'Inventory Manager',
+    department: 'Supply Chain',
     employeeId: 'EMP-2022-0341',
-    email: 'faisal.h@inforabia.com',
+    email: 'faisal.h@panda.com.sa',
     phone: '+966 56 234 8890',
     joiningDate: '20 Sep 2022',
     status: 'Active',
@@ -144,8 +149,8 @@ const _teamMembers = [
     performance: 91,
     tasksCompleted: 38,
     tasksPending: 2,
-    accentColor: Color(0xFFEB3349),
-    icon: Icons.cloud_rounded,
+    accentColor: Color(0xFF1E5799),
+    icon: Icons.inventory_2_rounded,
     salary: 16000,
     manager: 'Ahmed Al-Rashid',
     nationality: 'Saudi',
@@ -154,54 +159,57 @@ const _teamMembers = [
     attendance: 96,
     weeklyPerf: [85, 88, 90, 92, 91],
     gender: 'Male',
+    avatarAsset: 'assets/images/team/faisal.png',
   ),
   TeamMember(
-    name: 'Noura Saleh',
-    jobTitle: 'QA Engineer',
-    department: 'Engineering',
+    name: 'Reem Al-Shammari',
+    jobTitle: 'Senior Cashier',
+    department: 'Checkout',
     employeeId: 'EMP-2023-0620',
-    email: 'noura.s@inforabia.com',
+    email: 'reem.s@panda.com.sa',
     phone: '+966 59 778 3341',
     joiningDate: '01 Feb 2023',
     status: 'Active',
-    location: 'Remote – Dammam',
+    location: 'Dammam Branch',
     performance: 83,
     tasksCompleted: 30,
     tasksPending: 6,
-    accentColor: Color(0xFF8E44AD),
-    icon: Icons.bug_report_rounded,
+    accentColor: Color(0xFFF7971E),
+    icon: Icons.point_of_sale_rounded,
     salary: 12500,
-    manager: 'Ahmed Al-Rashid',
+    manager: 'Sara Al-Otaibi',
     nationality: 'Saudi',
     contract: 'Part-Time',
     leaveBalance: 12,
     attendance: 88,
     weeklyPerf: [78, 80, 82, 84, 83],
     gender: 'Female',
+    avatarAsset: 'assets/images/team/reem.png',
   ),
   TeamMember(
-    name: 'Yassir Benali',
-    jobTitle: 'Project Manager',
-    department: 'PMO',
+    name: 'Yasser Al-Qahtani',
+    jobTitle: 'Bakery Supervisor',
+    department: 'Bakery',
     employeeId: 'EMP-2020-0012',
-    email: 'yassir.b@inforabia.com',
+    email: 'yasser.q@panda.com.sa',
     phone: '+966 50 441 9900',
     joiningDate: '05 Mar 2020',
     status: 'Active',
-    location: 'Riyadh HQ',
+    location: 'Riyadh Branch',
     performance: 96,
     tasksCompleted: 55,
     tasksPending: 1,
-    accentColor: Color(0xFF1E5799),
-    icon: Icons.assignment_rounded,
+    accentColor: AppColors.primary, // Panda Green
+    icon: Icons.bakery_dining_rounded,
     salary: 22000,
     manager: 'Ahmed Al-Rashid',
-    nationality: 'Moroccan',
+    nationality: 'Saudi',
     contract: 'Full-Time',
     leaveBalance: 23,
     attendance: 99,
     weeklyPerf: [92, 94, 95, 97, 96],
     gender: 'Male',
+    avatarAsset: 'assets/images/team/yasser.png',
   ),
 ];
 
@@ -231,6 +239,14 @@ class _MyTeamScreenState extends State<MyTeamScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    for (var m in _teamMembers) {
+      precacheImage(AssetImage(m.avatarAsset), context);
+    }
   }
 
   @override
@@ -325,13 +341,7 @@ class _MyTeamScreenState extends State<MyTeamScreen>
 
   Widget _buildHeaderContent(AppLocalizations l10n, bool isDark) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFF1E3A5F), AppColors.primary],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-      ),
+      decoration: const BoxDecoration(gradient: AppColors.primaryGradient),
       padding: const EdgeInsets.fromLTRB(20, 52, 20, 56),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -356,7 +366,7 @@ class _MyTeamScreenState extends State<MyTeamScreen>
                 FadeInLeft(
                   delay: const Duration(milliseconds: 150),
                   child: Text(
-                    '${l10n.solutionsConsultancy} • ${_teamMembers.length} ${l10n.members}',
+                    'Panda Hyper Market • ${_teamMembers.length} ${l10n.members}',
                     style: const TextStyle(color: Colors.white70, fontSize: 13),
                   ),
                 ),
@@ -370,7 +380,7 @@ class _MyTeamScreenState extends State<MyTeamScreen>
                 _miniStat(
                   '${_teamMembers.where((m) => m.status == 'Active').length}',
                   l10n.active,
-                  AppColors.success,
+                  AppColors.chartBlue,
                 ),
                 const SizedBox(height: 6),
                 _miniStat(
@@ -1210,127 +1220,166 @@ class _MemberCard extends StatelessWidget {
         child: Column(
           children: [
             // ─ Header row ─
-            Padding(
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                children: [
-                  // Avatar
-                  Stack(
-                    alignment: Alignment.bottomRight,
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: Row(
                     children: [
-                      Container(
-                        width: 52,
-                        height: 52,
-                        decoration: BoxDecoration(
-                          color: member.accentColor.withOpacity(0.15),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          member.icon,
-                          color: member.accentColor,
-                          size: 28,
-                        ),
-                      ),
-                      Container(
-                        width: 14,
-                        height: 14,
-                        decoration: BoxDecoration(
-                          color: _statusColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: isDark ? AppColors.darkCard : Colors.white,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 12),
-                  // Name + title
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          member.name,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w800,
-                            fontSize: 15,
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          member.jobTitle,
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: isDark ? Colors.white54 : Colors.grey,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 2,
+                      // Avatar
+                      Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          Container(
+                            width: 52,
+                            height: 52,
+                            decoration: BoxDecoration(
+                              color: member.accentColor.withOpacity(0.15),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: member.accentColor.withOpacity(0.3),
+                                width: 1,
                               ),
-                              decoration: BoxDecoration(
-                                color: _statusColor.withOpacity(0.12),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                _getLocalizedStatus(member.status),
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: _statusColor,
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                member.avatarAsset,
+                                fit: BoxFit.cover,
+                                frameBuilder: (context, child, frame, wasSync) {
+                                  if (wasSync) return child;
+                                  return AnimatedOpacity(
+                                    opacity: frame == null ? 0 : 1,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeIn,
+                                    child: child,
+                                  );
+                                },
+                                errorBuilder: (_, __, ___) => Icon(
+                                  member.icon,
+                                  color: member.accentColor,
+                                  size: 28,
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 6),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 2,
+                          ),
+                          Container(
+                            width: 14,
+                            height: 14,
+                            decoration: BoxDecoration(
+                              color: _statusColor,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: isDark
+                                    ? AppColors.darkCard
+                                    : Colors.white,
+                                width: 2,
                               ),
-                              decoration: BoxDecoration(
-                                color: AppColors.primary.withOpacity(0.08),
-                                borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(width: 12),
+                      // Name + title
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              member.name,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15,
                               ),
-                              child: Text(
-                                member.department,
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              member.jobTitle,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: isDark ? Colors.white54 : Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: _statusColor.withOpacity(0.12),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    _getLocalizedStatus(member.status),
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: _statusColor,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(width: 6),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary.withOpacity(0.08),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    member.department,
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  // Performance score + expand icon
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      _PerfRing(
-                        perf: member.performance,
-                        color: member.accentColor,
                       ),
-                      const SizedBox(height: 4),
-                      Icon(
-                        isExpanded
-                            ? Icons.keyboard_arrow_up_rounded
-                            : Icons.keyboard_arrow_down_rounded,
-                        size: 18,
-                        color: isDark ? Colors.white38 : Colors.grey,
+                      // Performance score + expand icon
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          _PerfRing(
+                            perf: member.performance,
+                            color: member.accentColor,
+                          ),
+                          const SizedBox(height: 4),
+                          Icon(
+                            isExpanded
+                                ? Icons.keyboard_arrow_up_rounded
+                                : Icons.keyboard_arrow_down_rounded,
+                            size: 18,
+                            color: isDark ? Colors.white38 : Colors.grey,
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+                // Unread Indicator Logic (Pending tasks alert)
+                if (member.tasksPending > 0 && !isExpanded)
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: const BoxDecoration(
+                        color: Colors.redAccent,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+              ],
             ),
 
             // ─ Expanded Details ─
@@ -1343,6 +1392,9 @@ class _MemberCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(14, 12, 14, 16),
                 child: Column(
                   children: [
+                    // Smart Navigation (Quick Actions)
+                    _buildQuickActions(isDark),
+                    const SizedBox(height: 14),
                     // Quick metric row
                     _buildMetricRow(),
                     const SizedBox(height: 14),
@@ -1358,6 +1410,42 @@ class _MemberCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildQuickActions(bool isDark) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _quickActionBtn(Icons.call_rounded, 'Call', isDark),
+        _quickActionBtn(Icons.email_rounded, 'Email', isDark),
+        _quickActionBtn(Icons.chat_bubble_rounded, 'Message', isDark),
+        _quickActionBtn(Icons.assignment_ind_rounded, 'Profile', isDark),
+      ],
+    );
+  }
+
+  Widget _quickActionBtn(IconData icon, String label, bool isDark) {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: member.accentColor.withOpacity(0.1),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: member.accentColor, size: 18),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 10,
+            color: isDark ? Colors.white70 : Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     );
   }
 
@@ -1382,11 +1470,57 @@ class _MemberCard extends StatelessWidget {
           Icons.calendar_month_rounded,
           AppColors.primary,
         ),
-        _Metric(
-          'Leave Bal.',
-          '${member.leaveBalance}d',
-          Icons.beach_access_rounded,
-          const Color(0xFF36D1BB),
+        // Leave card with progress indicator
+        Expanded(
+          child: Column(
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      value: member.leaveBalance / 30, // Assuming 30 total
+                      strokeWidth: 2,
+                      backgroundColor: const Color(0xFF36D1BB).withOpacity(0.2),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Color(0xFF36D1BB),
+                      ),
+                    ),
+                  ),
+                  const Icon(
+                    Icons.beach_access_rounded,
+                    color: Color(0xFF36D1BB),
+                    size: 14,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${member.leaveBalance}d',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: Color(0xFF36D1BB),
+                ),
+              ),
+              Builder(
+                builder: (context) {
+                  return Text(
+                    'Leave Bal.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 9,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white38
+                          : Colors.grey,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -1510,14 +1644,41 @@ class _MemberCard extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Text(
-                      f.value,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: isDark ? Colors.white : Colors.black87,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            f.value,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: isDark ? Colors.white : Colors.black87,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (f.label == 'Salary') ...[
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.success.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Text(
+                              '+5%',
+                              style: TextStyle(
+                                color: AppColors.success,
+                                fontSize: 9,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                 ],

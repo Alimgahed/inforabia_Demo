@@ -1,4 +1,5 @@
 import 'package:Panda/core/theme/app_colors.dart';
+import 'package:Panda/core/constants/app_features.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:animate_do/animate_do.dart';
@@ -139,7 +140,8 @@ final Map<String, List<int>> pendingDays = {
 
 // ── Main Screen ───────────────────────────────────────────────────────────────
 class LeaveScreen extends StatefulWidget {
-  const LeaveScreen({super.key});
+  final FeatureArguments? args;
+  const LeaveScreen({super.key, this.args});
 
   @override
   State<LeaveScreen> createState() => _LeaveScreenState();
@@ -152,7 +154,11 @@ class _LeaveScreenState extends State<LeaveScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(
+      length: 3, 
+      vsync: this,
+      initialIndex: widget.args?.initialSection ?? 0,
+    );
   }
 
   @override

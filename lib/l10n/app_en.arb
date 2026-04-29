@@ -89,7 +89,7 @@
   "teamByGrade": "Team by Grade",
   "headcount": "Headcount",
   "documents": "Documents",
-  "documentLibrary": "Document Library",
+  "documentOfRecord": "Document of Record",
   "worklist": "Worklist",
   "approvals": "Approvals",
   "requests": "Requests",
@@ -418,5 +418,9 @@
   "financialAnalysis": "Financial Analysis",
   "salaryTrend": "Salary Trend",
   "rising": "Rising",
-  "falling": "Falling"
+  "falling": "Falling",
+  "leaveAndAttendance": "Leave & Attendance",
+  "salaryAndFinance": "Salary & Finance",
+  "personalAndEmployment": "Personal & Employment",
+  "performanceAndGrowth": "Performance & Growth"
 }

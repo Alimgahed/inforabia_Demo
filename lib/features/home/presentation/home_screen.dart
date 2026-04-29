@@ -6,17 +6,16 @@ import 'package:animate_do/animate_do.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../attendance/presentation/attendance_screen.dart';
 import '../../leave/presentation/leave_screen.dart';
-import '../../payroll/presentation/payslip_screen.dart';
+import '../../payroll/presentation/salary_screen.dart';
 import '../../performance/presentation/performance_screen.dart' hide AppColors;
+import '../../../core/constants/app_features.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../settings/presentation/settings_screen.dart';
 import '../../team/presentation/my_team_screen.dart';
 import '../../services/presentation/requests_screen.dart';
-import '../../services/presentation/payroll_screen.dart' as payroll_service;
 import '../../services/presentation/hr_insights_screen.dart';
 import '../../services/presentation/documents_screen.dart';
 import '../../services/presentation/procurement_screen.dart';
-import '../../services/presentation/finance_screen.dart';
 import '../../services/presentation/worklist_screen.dart';
 import '../../services/presentation/news_offers_screen.dart';
 import '../../services/presentation/service_detail_screen.dart';
@@ -228,8 +227,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       isDark,
                       () => Navigator.push(
                         context,
+                        MaterialPageRoute(builder: (_) => const SalaryScreen()),
+                      ),
+                    ),
+
+                    _quickChip(
+                      Icons.description_rounded,
+                      l10n.requests,
+                      AppColors.chartPurple,
+                      isDark,
+                      () => Navigator.push(
+                        context,
                         MaterialPageRoute(
-                          builder: (_) => const PayslipScreen(),
+                          builder: (_) => const RequestsScreen(),
+                        ),
+                      ),
+                    ),
+                    _quickChip(
+                      Icons.checklist_rounded,
+                      l10n.worklist,
+                      AppColors.chartOrange,
+                      isDark,
+                      () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const WorklistScreen(),
                         ),
                       ),
                     ),
@@ -255,30 +277,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         context,
                         MaterialPageRoute(
                           builder: (_) => const PerformanceScreen(),
-                        ),
-                      ),
-                    ),
-                    _quickChip(
-                      Icons.description_rounded,
-                      l10n.requests,
-                      AppColors.chartPurple,
-                      isDark,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const RequestsScreen(),
-                        ),
-                      ),
-                    ),
-                    _quickChip(
-                      Icons.checklist_rounded,
-                      l10n.worklist,
-                      AppColors.chartOrange,
-                      isDark,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const WorklistScreen(),
                         ),
                       ),
                     ),
@@ -2254,8 +2252,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: Column(
                 children: [
                   section(
-                    l10n.standardHRServices,
-                    Icons.people_alt_rounded,
+                    l10n.leaveAndAttendance,
+                    Icons.event_available_rounded,
                     teal,
                     [
                       _SvcItem(
@@ -2269,148 +2267,162 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
+
                       _SvcItem(
-                        Icons.edit_note_rounded,
-                        l10n.basicDataUpdate,
-                        deepTeal,
-                        () => _openDetail(
-                          context,
-                          l10n.basicDataUpdate,
-                          Icons.edit_note_rounded,
-                          deepTeal,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.phone_android_rounded,
-                        l10n.phoneData,
-                        cyan,
-                        () => _openDetail(
-                          context,
-                          l10n.phoneData,
-                          Icons.phone_android_rounded,
-                          cyan,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.location_on_rounded,
-                        l10n.addressData,
+                        Icons.fingerprint_rounded,
+                        l10n.attendance,
                         teal,
-                        () => _openDetail(
+                        () => Navigator.push(
                           context,
-                          l10n.addressData,
-                          Icons.location_on_rounded,
-                          teal,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.school_rounded,
-                        l10n.educationalQualifications,
-                        gold,
-                        () => _openDetail(
-                          context,
-                          l10n.educationalQualifications,
-                          Icons.school_rounded,
-                          gold,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.exit_to_app_rounded,
-                        l10n.terminationOfServices,
-                        deepTeal,
-                        () => _openDetail(
-                          context,
-                          l10n.terminationOfServices,
-                          Icons.exit_to_app_rounded,
-                          deepTeal,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.family_restroom_rounded,
-                        l10n.familyAndReferences,
-                        cyan,
-                        () => _openDetail(
-                          context,
-                          l10n.familyAndReferences,
-                          Icons.family_restroom_rounded,
-                          cyan,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.swap_horiz_rounded,
-                        l10n.leaveDelegationRules,
-                        gold,
-                        () => _openDetail(
-                          context,
-                          l10n.leaveDelegationRules,
-                          Icons.swap_horiz_rounded,
-                          gold,
+                          MaterialPageRoute(
+                            builder: (_) => const AttendanceScreen(),
+                          ),
                         ),
                       ),
                     ],
                   ),
                   section(
-                    l10n.extendedServices,
-                    Icons.extension_rounded,
+                    l10n.salaryAndFinance,
+                    Icons.account_balance_wallet_rounded,
                     gold,
                     [
                       _SvcItem(
-                        Icons.description_rounded,
-                        l10n.requests,
-                        teal,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const RequestsScreen(),
-                          ),
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.badge_rounded,
-                        l10n.employmentInfo,
+                        Icons.receipt_long_rounded,
+                        l10n.payslip,
                         gold,
-                        () => _openDetail(
-                          context,
-                          l10n.employmentInfo,
-                          Icons.badge_rounded,
-                          gold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  section(
-                    l10n.specialistDashboard,
-                    Icons.dashboard_customize_rounded,
-                    cyan,
-                    [
-                      _SvcItem(
-                        Icons.insights_rounded,
-                        l10n.hrInsights,
-                        cyan,
                         () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const HRInsightsScreen(),
+                            builder: (_) => const SalaryScreen(),
+                          ),
+                        ),
+                      ),
+                      _SvcItem(
+                        Icons.swap_vert_rounded,
+                        l10n.salaryChanges,
+                        deepTeal,
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SalaryScreen(
+                              args: FeatureArguments(
+                                feature: AppFeature.salary,
+                                initialSection: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      _SvcItem(
+                        Icons.description_rounded,
+                        l10n.invoices,
+                        deepTeal,
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SalaryScreen(
+                              args: FeatureArguments(
+                                feature: AppFeature.salary,
+                                initialSection: 2,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-
-                  section(l10n.attendance, Icons.fingerprint_rounded, teal, [
+                  section(l10n.selfServices, Icons.assignment_rounded, cyan, [
                     _SvcItem(
-                      Icons.fingerprint_rounded,
-                      l10n.attendance,
+                      Icons.badge_rounded,
+                      l10n.employmentInfo,
+                      cyan,
+                      () => _openDetail(
+                        context,
+                        l10n.employmentInfo,
+                        Icons.badge_rounded,
+                        cyan,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.edit_note_rounded,
+                      l10n.basicDataUpdate,
+                      deepTeal,
+                      () => _openDetail(
+                        context,
+                        l10n.basicDataUpdate,
+                        Icons.edit_note_rounded,
+                        deepTeal,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.school_rounded,
+                      l10n.educationalQualifications,
+                      gold,
+                      () => _openDetail(
+                        context,
+                        l10n.educationalQualifications,
+                        Icons.school_rounded,
+                        gold,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.description_rounded,
+                      l10n.requests,
                       teal,
                       () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const AttendanceScreen(),
+                          builder: (_) => const RequestsScreen(),
                         ),
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.phone_android_rounded,
+                      l10n.phoneData,
+                      cyan,
+                      () => _openDetail(
+                        context,
+                        l10n.phoneData,
+                        Icons.phone_android_rounded,
+                        cyan,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.location_on_rounded,
+                      l10n.addressData,
+                      teal,
+                      () => _openDetail(
+                        context,
+                        l10n.addressData,
+                        Icons.location_on_rounded,
+                        teal,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.exit_to_app_rounded,
+                      l10n.terminationOfServices,
+                      deepTeal,
+                      () => _openDetail(
+                        context,
+                        l10n.terminationOfServices,
+                        Icons.exit_to_app_rounded,
+                        deepTeal,
+                      ),
+                    ),
+                    _SvcItem(
+                      Icons.family_restroom_rounded,
+                      l10n.familyAndReferences,
+                      cyan,
+                      () => _openDetail(
+                        context,
+                        l10n.familyAndReferences,
+                        Icons.family_restroom_rounded,
+                        cyan,
                       ),
                     ),
                   ]),
                   section(
-                    l10n.performanceEvaluation,
+                    l10n.performanceAndGrowth,
                     Icons.trending_up_rounded,
                     gold,
                     [
@@ -2426,42 +2438,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       _SvcItem(
-                        Icons.feedback_rounded,
-                        l10n.continuousFeedback,
-                        teal,
+                        Icons.insights_rounded,
+                        l10n.hrInsights,
+                        cyan,
                         () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const PerformanceScreen(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  section(
-                    l10n.financialNotifications,
-                    Icons.account_balance_rounded,
-                    deepTeal,
-                    [
-                      _SvcItem(
-                        Icons.receipt_long_rounded,
-                        l10n.invoices,
-                        deepTeal,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const FinanceScreen(),
+                            builder: (_) => const HRInsightsScreen(),
                           ),
                         ),
                       ),
                       _SvcItem(
-                        Icons.book_rounded,
-                        l10n.consolidatedEntries,
+                        Icons.campaign_rounded,
+                        l10n.news,
                         teal,
                         () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const FinanceScreen(),
+                            builder: (_) => const NewsOffersScreen(),
                           ),
                         ),
                       ),
@@ -2502,85 +2496,24 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ]),
-                  section(l10n.dashboard, Icons.bar_chart_rounded, teal, [
-                    _SvcItem(
-                      Icons.event_busy_rounded,
-                      l10n.absencePlans,
-                      teal,
-                      () => _openDetail(
-                        context,
-                        l10n.absencePlans,
-                        Icons.event_busy_rounded,
-                        teal,
-                      ),
-                    ),
-                    _SvcItem(
-                      Icons.receipt_rounded,
-                      l10n.payslip,
-                      gold,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const payroll_service.PayrollScreen(),
+                  section(
+                    l10n.documentOfRecord,
+                    Icons.folder_shared_rounded,
+                    gold,
+                    [
+                      _SvcItem(
+                        Icons.folder_open_rounded,
+                        l10n.documents,
+                        gold,
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const DocumentsScreen(),
+                          ),
                         ),
                       ),
-                    ),
-                    _SvcItem(
-                      Icons.swap_vert_rounded,
-                      l10n.salaryChanges,
-                      deepTeal,
-                      () => _openDetail(
-                        context,
-                        l10n.salaryChanges,
-                        Icons.swap_vert_rounded,
-                        deepTeal,
-                      ),
-                    ),
-                    _SvcItem(
-                      Icons.assignment_rounded,
-                      l10n.selfServices,
-                      cyan,
-                      () => _openDetail(
-                        context,
-                        l10n.selfServices,
-                        Icons.assignment_rounded,
-                        cyan,
-                      ),
-                    ),
-                    _SvcItem(
-                      Icons.campaign_rounded,
-                      l10n.news,
-                      teal,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const NewsOffersScreen(),
-                        ),
-                      ),
-                    ),
-                    _SvcItem(
-                      Icons.local_offer_rounded,
-                      l10n.offers,
-                      gold,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const NewsOffersScreen(),
-                        ),
-                      ),
-                    ),
-                    _SvcItem(
-                      Icons.school_rounded,
-                      l10n.training,
-                      cyan,
-                      () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const DocumentsScreen(),
-                        ),
-                      ),
-                    ),
-                  ]),
+                    ],
+                  ),
                   section(
                     l10n.managerView,
                     Icons.supervisor_account_rounded,
@@ -2598,28 +2531,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       _SvcItem(
-                        Icons.wc_rounded,
-                        l10n.teamByGender,
-                        gold,
-                        () => _openDetail(
-                          context,
-                          l10n.teamByGender,
-                          Icons.wc_rounded,
-                          gold,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.military_tech_rounded,
-                        l10n.teamByGrade,
-                        cyan,
-                        () => _openDetail(
-                          context,
-                          l10n.teamByGrade,
-                          Icons.military_tech_rounded,
-                          cyan,
-                        ),
-                      ),
-                      _SvcItem(
                         Icons.bar_chart_rounded,
                         l10n.headcount,
                         deepTeal,
@@ -2628,46 +2539,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           l10n.headcount,
                           Icons.bar_chart_rounded,
                           deepTeal,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.attach_money_rounded,
-                        l10n.teamSalaryByDept,
-                        gold,
-                        () => _openDetail(
-                          context,
-                          l10n.teamSalaryByDept,
-                          Icons.attach_money_rounded,
-                          gold,
-                        ),
-                      ),
-                      _SvcItem(
-                        Icons.sync_alt_rounded,
-                        l10n.hiresAndTerminations,
-                        teal,
-                        () => _openDetail(
-                          context,
-                          l10n.hiresAndTerminations,
-                          Icons.sync_alt_rounded,
-                          teal,
-                        ),
-                      ),
-                    ],
-                  ),
-                  section(
-                    l10n.documentLibrary,
-                    Icons.folder_shared_rounded,
-                    gold,
-                    [
-                      _SvcItem(
-                        Icons.folder_open_rounded,
-                        l10n.documents,
-                        gold,
-                        () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const DocumentsScreen(),
-                          ),
                         ),
                       ),
                     ],
@@ -3004,7 +2875,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     // stat pills
                     Row(
                       children: [
-                        _statPill('42', 'Total Services', false),
+                        _statPill('23', 'Total Services', false),
                         const SizedBox(width: 8),
                         _statPill('3', 'New Alerts', true),
                         const SizedBox(width: 8),

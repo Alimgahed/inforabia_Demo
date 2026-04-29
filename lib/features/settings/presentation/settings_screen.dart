@@ -66,9 +66,9 @@ class SettingsScreen extends StatelessWidget {
               color: Colors.white,
               onPressed: () => Navigator.pop(context),
             ),
-            title: const Text(
-              'الإعدادات',
-              style: TextStyle(
+            title: Text(
+              l10n.settings,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 17,
                 fontWeight: FontWeight.w700,
@@ -97,15 +97,6 @@ class SettingsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // ── Profile Card ──
-                  _ProfileCard(
-                    isDark: isDark,
-                    surface: surface,
-                    border: border,
-                    textPrimary: textPrimary,
-                    textSecondary: textSecondary,
-                  ),
-
-                  const SizedBox(height: 24),
 
                   // ── AI Assistant Banner ──
                   _AiBanner(
@@ -122,7 +113,12 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // ── Appearance ──
-                  _SectionLabel(label: 'المظهر والعرض', isDark: isDark),
+                  _SectionLabel(
+                    label: settings.isArabic
+                        ? 'المظهر والعرض'
+                        : 'Appearance & Display',
+                    isDark: isDark,
+                  ),
                   const SizedBox(height: 10),
                   _SettingsGroup(
                     isDark: isDark,
@@ -133,7 +129,9 @@ class SettingsScreen extends StatelessWidget {
                         icon: Icons.dark_mode_rounded,
                         iconBg: AppColors.info,
                         title: l10n.darkMode,
-                        subtitle: 'تفعيل الوضع الليلي',
+                        subtitle: settings.isArabic
+                            ? 'تفعيل الوضع الليلي'
+                            : 'Enable Dark Mode',
                         value: settings.isDarkMode,
                         onChanged: (_) => settings.toggleTheme(),
                         isDark: isDark,
@@ -163,10 +161,10 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.text_fields_rounded,
                         iconBg: AppColors.chartPurple,
-                        title: 'حجم الخط',
-                        subtitle: 'متوسط',
+                        title: settings.isArabic ? 'حجم الخط' : 'Font Size',
+                        subtitle: settings.isArabic ? 'متوسط' : 'Medium',
                         trailing: _Badge(
-                          label: 'متوسط',
+                          label: settings.isArabic ? 'متوسط' : 'Medium',
                           color: _C.primary,
                           bg: _C.primaryLight,
                         ),
@@ -183,7 +181,7 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // ── Notifications ──
-                  _SectionLabel(label: 'الإشعارات', isDark: isDark),
+                  _SectionLabel(label: l10n.notifications, isDark: isDark),
                   const SizedBox(height: 10),
                   _SettingsGroup(
                     isDark: isDark,
@@ -193,8 +191,12 @@ class SettingsScreen extends StatelessWidget {
                       _SwitchTile(
                         icon: Icons.notifications_active_rounded,
                         iconBg: _C.warning,
-                        title: 'إشعارات التطبيق',
-                        subtitle: 'استلام جميع الإشعارات',
+                        title: settings.isArabic
+                            ? 'إشعارات التطبيق'
+                            : 'App Notifications',
+                        subtitle: settings.isArabic
+                            ? 'استلام جميع الإشعارات'
+                            : 'Receive all notifications',
                         value: true,
                         onChanged: (_) {},
                         isDark: isDark,
@@ -207,8 +209,12 @@ class SettingsScreen extends StatelessWidget {
                       _SwitchTile(
                         icon: Icons.task_alt_rounded,
                         iconBg: _C.success,
-                        title: 'إشعارات الموافقات',
-                        subtitle: 'عند وصول طلبات جديدة',
+                        title: settings.isArabic
+                            ? 'إشعارات الموافقات'
+                            : 'Approval Notifications',
+                        subtitle: settings.isArabic
+                            ? 'عند وصول طلبات جديدة'
+                            : 'When new requests arrive',
                         value: true,
                         onChanged: (_) {},
                         isDark: isDark,
@@ -221,8 +227,12 @@ class SettingsScreen extends StatelessWidget {
                       _SwitchTile(
                         icon: Icons.email_rounded,
                         iconBg: _C.primary,
-                        title: 'إشعارات البريد الإلكتروني',
-                        subtitle: 'ملخص يومي عبر البريد',
+                        title: settings.isArabic
+                            ? 'إشعارات البريد الإلكتروني'
+                            : 'Email Notifications',
+                        subtitle: settings.isArabic
+                            ? 'ملخص يومي عبر البريد'
+                            : 'Daily summary via email',
                         value: false,
                         onChanged: (_) {},
                         isDark: isDark,
@@ -237,7 +247,12 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // ── Security ──
-                  _SectionLabel(label: 'الأمان والخصوصية', isDark: isDark),
+                  _SectionLabel(
+                    label: settings.isArabic
+                        ? 'الأمان والخصوصية'
+                        : 'Security & Privacy',
+                    isDark: isDark,
+                  ),
                   const SizedBox(height: 10),
                   _SettingsGroup(
                     isDark: isDark,
@@ -247,10 +262,14 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.fingerprint_rounded,
                         iconBg: AppColors.success,
-                        title: 'بصمة الإصبع / Face ID',
-                        subtitle: 'تسجيل دخول سريع وآمن',
+                        title: settings.isArabic
+                            ? 'بصمة الإصبع / Face ID'
+                            : 'Fingerprint / Face ID',
+                        subtitle: settings.isArabic
+                            ? 'تسجيل دخول سريع وآمن'
+                            : 'Fast & secure login',
                         trailing: _Badge(
-                          label: 'مفعّل',
+                          label: settings.isArabic ? 'مفعّل' : 'Enabled',
                           color: _C.success,
                           bg: _C.successLight,
                         ),
@@ -265,8 +284,12 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.lock_reset_rounded,
                         iconBg: _C.warning,
-                        title: 'تغيير كلمة المرور',
-                        subtitle: 'آخر تغيير منذ 30 يوماً',
+                        title: settings.isArabic
+                            ? 'تغيير كلمة المرور'
+                            : 'Change Password',
+                        subtitle: settings.isArabic
+                            ? 'آخر تغيير منذ 30 يوماً'
+                            : 'Last changed 30 days ago',
                         isDark: isDark,
                         textPrimary: textPrimary,
                         textSecondary: textSecondary,
@@ -278,8 +301,12 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.shield_rounded,
                         iconBg: AppColors.info,
-                        title: 'سياسة الخصوصية',
-                        subtitle: 'اقرأ سياسة البيانات',
+                        title: settings.isArabic
+                            ? 'سياسة الخصوصية'
+                            : 'Privacy Policy',
+                        subtitle: settings.isArabic
+                            ? 'اقرأ سياسة البيانات'
+                            : 'Read data policy',
                         isDark: isDark,
                         textPrimary: textPrimary,
                         textSecondary: textSecondary,
@@ -293,7 +320,12 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // ── About / Support ──
-                  _SectionLabel(label: 'حول التطبيق والدعم', isDark: isDark),
+                  _SectionLabel(
+                    label: settings.isArabic
+                        ? 'حول التطبيق والدعم'
+                        : 'About App & Support',
+                    isDark: isDark,
+                  ),
                   const SizedBox(height: 10),
                   _SettingsGroup(
                     isDark: isDark,
@@ -316,10 +348,14 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.headset_mic_rounded,
                         iconBg: _C.success,
-                        title: 'الدعم الفني',
-                        subtitle: 'تواصل مع فريق الدعم',
+                        title: settings.isArabic
+                            ? 'الدعم الفني'
+                            : 'Technical Support',
+                        subtitle: settings.isArabic
+                            ? 'تواصل مع فريق الدعم'
+                            : 'Contact support team',
                         trailing: _Badge(
-                          label: 'متاح',
+                          label: settings.isArabic ? 'متاح' : 'Available',
                           color: _C.success,
                           bg: _C.successLight,
                         ),
@@ -334,8 +370,10 @@ class SettingsScreen extends StatelessWidget {
                       _TapTile(
                         icon: Icons.star_rate_rounded,
                         iconBg: _C.warning,
-                        title: 'قيّم التطبيق',
-                        subtitle: 'شاركنا رأيك في المتجر',
+                        title: settings.isArabic ? 'قيّم التطبيق' : 'Rate App',
+                        subtitle: settings.isArabic
+                            ? 'شاركنا رأيك في المتجر'
+                            : 'Share your review on the store',
                         isDark: isDark,
                         textPrimary: textPrimary,
                         textSecondary: textSecondary,
@@ -378,7 +416,7 @@ class SettingsScreen extends StatelessWidget {
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                'Powered by Oracle HCM Fusion',
+                                'Powered by Inforabia',
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: textSecondary,
@@ -390,7 +428,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          '© 2026 INFORABIA · ${l10n.allRightsReserved}',
+                          '© 2026 Panda · ${l10n.allRightsReserved}',
                           style: TextStyle(
                             fontSize: 11,
                             color: isDark ? _C.darkTextSecondary : _C.textMuted,
@@ -536,6 +574,7 @@ class _AiBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isArabic = Provider.of<AppSettingsProvider>(context).isArabic;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -581,7 +620,9 @@ class _AiBanner extends StatelessWidget {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'اسأل عن الإجازات، المرتب، الحضور...',
+                    isArabic
+                        ? 'اسأل عن الإجازات، المرتب، الحضور...'
+                        : 'Ask about leaves, salary, attendance...',
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.75),
                       fontSize: 12,
@@ -596,9 +637,9 @@ class _AiBanner extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
-                'افتح',
-                style: TextStyle(
+              child: Text(
+                isArabic ? 'افتح' : 'Open',
+                style: const TextStyle(
                   color: _C.primary,
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -651,21 +692,29 @@ class _LogoutButton extends StatelessWidget {
   }
 
   void _showLogoutDialog(BuildContext ctx) {
+    final isArabic = Provider.of<AppSettingsProvider>(
+      ctx,
+      listen: false,
+    ).isArabic;
     showDialog(
       context: ctx,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text(
-          'تأكيد تسجيل الخروج',
-          style: TextStyle(fontWeight: FontWeight.w700),
+        title: Text(
+          isArabic ? 'تأكيد تسجيل الخروج' : 'Confirm Logout',
+          style: const TextStyle(fontWeight: FontWeight.w700),
         ),
-        content: const Text('هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟'),
+        content: Text(
+          isArabic
+              ? 'هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟'
+              : 'Are you sure you want to log out of your account?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text(
-              'إلغاء',
-              style: TextStyle(color: _C.textSecondary),
+            child: Text(
+              isArabic ? 'إلغاء' : 'Cancel',
+              style: const TextStyle(color: _C.textSecondary),
             ),
           ),
           ElevatedButton(
@@ -680,7 +729,7 @@ class _LogoutButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Text('تسجيل الخروج'),
+            child: Text(isArabic ? 'تسجيل الخروج' : 'Logout'),
           ),
         ],
       ),

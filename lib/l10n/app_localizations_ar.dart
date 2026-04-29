@@ -279,7 +279,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get documents => 'الوثائق';
 
   @override
-  String get documentLibrary => 'مكتبة الوثائق';
+  String get documentOfRecord => 'وثائق السجل';
 
   @override
   String get worklist => 'قائمة العمل';
@@ -1207,4 +1207,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get falling => 'هابط';
+
+  @override
+  String get leaveAndAttendance => 'الإجازات والحضور';
+
+  @override
+  String get salaryAndFinance => 'الرواتب والمالية';
+
+  @override
+  String get personalAndEmployment => 'البيانات الشخصية والوظيفية';
+
+  @override
+  String get performanceAndGrowth => 'الأداء والتطوير';
 }

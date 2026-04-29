@@ -137,8 +137,10 @@ class _PayslipScreenState extends State<PayslipScreen> {
     final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final double previousNet = _salaryHistory[_salaryHistory.length - 2].netSalary;
-    final double changePercent = ((_current.netSalary - previousNet) / previousNet) * 100;
+    final double previousNet =
+        _salaryHistory[_salaryHistory.length - 2].netSalary;
+    final double changePercent =
+        ((_current.netSalary - previousNet) / previousNet) * 100;
 
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBackground : AppColors.background,
@@ -148,7 +150,10 @@ class _PayslipScreenState extends State<PayslipScreen> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: isDark ? Colors.white : AppColors.primary),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: isDark ? Colors.white : AppColors.primary,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -197,13 +202,30 @@ class _PayslipScreenState extends State<PayslipScreen> {
                 isExpanded: _earningsExpanded,
                 total: _current.totalEarnings,
                 totalColor: AppColors.success,
-                onToggle: () => setState(() => _earningsExpanded = !_earningsExpanded),
+                onToggle: () =>
+                    setState(() => _earningsExpanded = !_earningsExpanded),
                 items: [
-                  _LineItem(l10n.basicSalary, _current.basicSalary, AppColors.success),
-                  _LineItem(l10n.housingAllowance, _current.housingAllowance, AppColors.success),
-                  _LineItem(l10n.transportAllowance, _current.transportAllowance, AppColors.success),
+                  _LineItem(
+                    l10n.basicSalary,
+                    _current.basicSalary,
+                    AppColors.success,
+                  ),
+                  _LineItem(
+                    l10n.housingAllowance,
+                    _current.housingAllowance,
+                    AppColors.success,
+                  ),
+                  _LineItem(
+                    l10n.transportAllowance,
+                    _current.transportAllowance,
+                    AppColors.success,
+                  ),
                   _LineItem(l10n.bonus, _current.bonus, AppColors.success),
-                  _LineItem(l10n.overtime, _current.overtime, AppColors.success),
+                  _LineItem(
+                    l10n.overtime,
+                    _current.overtime,
+                    AppColors.success,
+                  ),
                 ],
               ),
             ),
@@ -222,10 +244,15 @@ class _PayslipScreenState extends State<PayslipScreen> {
                 isExpanded: _deductionsExpanded,
                 total: _current.totalDeductions,
                 totalColor: AppColors.error,
-                onToggle: () => setState(() => _deductionsExpanded = !_deductionsExpanded),
+                onToggle: () =>
+                    setState(() => _deductionsExpanded = !_deductionsExpanded),
                 items: [
                   _LineItem(l10n.gosi, _current.gosi, AppColors.error),
-                  _LineItem(l10n.absenceDeduction, _current.absenceDeduction, AppColors.error),
+                  _LineItem(
+                    l10n.absenceDeduction,
+                    _current.absenceDeduction,
+                    AppColors.error,
+                  ),
                 ],
               ),
             ),
@@ -246,9 +273,12 @@ class _PayslipScreenState extends State<PayslipScreen> {
     );
   }
 
-  Widget _buildNetSalaryHero(AppLocalizations l10n, double change, bool isDark) {
+  Widget _buildNetSalaryHero(
+    AppLocalizations l10n,
+    double change,
+    bool isDark,
+  ) {
     final isUp = change >= 0;
-    final changeColor = isUp ? AppColors.success : AppColors.error;
 
     return Container(
       margin: const EdgeInsets.all(20),
@@ -280,7 +310,10 @@ class _PayslipScreenState extends State<PayslipScreen> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
@@ -313,15 +346,21 @@ class _PayslipScreenState extends State<PayslipScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: (isUp ? Colors.greenAccent : Colors.redAccent).withOpacity(0.2),
+                  color: (isUp ? Colors.greenAccent : Colors.redAccent)
+                      .withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: (isUp ? Colors.greenAccent : Colors.redAccent).withOpacity(0.3)),
+                  border: Border.all(
+                    color: (isUp ? Colors.greenAccent : Colors.redAccent)
+                        .withOpacity(0.3),
+                  ),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      isUp ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded,
+                      isUp
+                          ? Icons.arrow_upward_rounded
+                          : Icons.arrow_downward_rounded,
                       color: isUp ? Colors.greenAccent : Colors.redAccent,
                       size: 14,
                     ),
@@ -359,7 +398,11 @@ class _PayslipScreenState extends State<PayslipScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.analytics_rounded, size: 18, color: AppColors.primary),
+                const Icon(
+                  Icons.analytics_rounded,
+                  size: 18,
+                  color: AppColors.primary,
+                ),
                 const SizedBox(width: 8),
                 Text(
                   l10n.salaryTrend,
@@ -386,9 +429,15 @@ class _PayslipScreenState extends State<PayslipScreen> {
                       ),
                     ),
                     titlesData: FlTitlesData(
-                      leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                      rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                      leftTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      rightTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
@@ -401,7 +450,9 @@ class _PayslipScreenState extends State<PayslipScreen> {
                                   _salaryHistory[index].month,
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: isDark ? Colors.white54 : AppColors.grey,
+                                    color: isDark
+                                        ? Colors.white54
+                                        : AppColors.grey,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -424,12 +475,13 @@ class _PayslipScreenState extends State<PayslipScreen> {
                         isStrokeCapRound: true,
                         dotData: FlDotData(
                           show: true,
-                          getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
-                            radius: 6,
-                            color: AppColors.primary,
-                            strokeWidth: 3,
-                            strokeColor: Colors.white,
-                          ),
+                          getDotPainter: (spot, percent, barData, index) =>
+                              FlDotCirclePainter(
+                                radius: 6,
+                                color: AppColors.primary,
+                                strokeWidth: 3,
+                                strokeColor: Colors.white,
+                              ),
                         ),
                         belowBarData: BarAreaData(
                           show: true,
@@ -484,7 +536,11 @@ class _HeroPill extends StatelessWidget {
           children: [
             Text(
               label,
-              style: const TextStyle(fontSize: 11, color: AppColors.textSecondary, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 11,
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 6),
             Text(
@@ -580,7 +636,9 @@ class _CollapsibleSection extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Icon(
-                      isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded,
+                      isExpanded
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
                       color: AppColors.grey,
                     ),
                   ],
@@ -594,33 +652,39 @@ class _CollapsibleSection extends StatelessWidget {
                   children: [
                     const Divider(),
                     const SizedBox(height: 12),
-                    ...items.map((item) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                item.label,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: isDark ? Colors.white70 : AppColors.textSecondary,
-                                ),
+                    ...items.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              item.label,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: isDark
+                                    ? Colors.white70
+                                    : AppColors.textSecondary,
                               ),
-                              Text(
-                                'SAR ${item.value.toInt()}',
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            ),
+                            Text(
+                              'SAR ${item.value.toInt()}',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                        )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               secondChild: const SizedBox.shrink(),
-              crossFadeState: isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
               duration: const Duration(milliseconds: 300),
             ),
           ],

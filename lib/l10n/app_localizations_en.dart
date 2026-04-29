@@ -279,7 +279,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get documents => 'Documents';
 
   @override
-  String get documentLibrary => 'Document Library';
+  String get documentOfRecord => 'Document of Record';
 
   @override
   String get worklist => 'Worklist';
@@ -1213,4 +1213,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get falling => 'Falling';
+
+  @override
+  String get leaveAndAttendance => 'Leave & Attendance';
+
+  @override
+  String get salaryAndFinance => 'Salary & Finance';
+
+  @override
+  String get personalAndEmployment => 'Personal & Employment';
+
+  @override
+  String get performanceAndGrowth => 'Performance & Growth';
 }

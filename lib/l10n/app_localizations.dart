@@ -632,11 +632,11 @@ abstract class AppLocalizations {
   /// **'Documents'**
   String get documents;
 
-  /// No description provided for @documentLibrary.
+  /// No description provided for @documentOfRecord.
   ///
   /// In en, this message translates to:
-  /// **'Document Library'**
-  String get documentLibrary;
+  /// **'Document of Record'**
+  String get documentOfRecord;
 
   /// No description provided for @worklist.
   ///
@@ -2455,6 +2455,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Falling'**
   String get falling;
+
+  /// No description provided for @leaveAndAttendance.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave & Attendance'**
+  String get leaveAndAttendance;
+
+  /// No description provided for @salaryAndFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'Salary & Finance'**
+  String get salaryAndFinance;
+
+  /// No description provided for @personalAndEmployment.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal & Employment'**
+  String get personalAndEmployment;
+
+  /// No description provided for @performanceAndGrowth.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance & Growth'**
+  String get performanceAndGrowth;
 }
 
 class _AppLocalizationsDelegate

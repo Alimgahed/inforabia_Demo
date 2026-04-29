@@ -1847,41 +1847,6 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
     );
   }
 
-  Widget _scoreBar(String label, double value, Color color) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              label,
-              style: TextStyle(fontSize: 10, color: color.withOpacity(0.85)),
-            ),
-            const Spacer(),
-            Text(
-              '${value.toStringAsFixed(0)}%',
-              style: TextStyle(
-                fontSize: 10,
-                color: color,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 3),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: LinearProgressIndicator(
-            value: value / 100,
-            backgroundColor: Colors.white.withOpacity(0.2),
-            valueColor: AlwaysStoppedAnimation<Color>(color),
-            minHeight: 5,
-          ),
-        ),
-      ],
-    );
-  }
-
   // ─── Section Header ────────────────────────────────────────────────────────
 
   Widget _buildSectionHeader(

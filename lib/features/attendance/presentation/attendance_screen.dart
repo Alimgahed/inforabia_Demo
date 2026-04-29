@@ -406,7 +406,7 @@ class AttendanceScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _HeaderCard(isDark: isDark),
+            // _HeaderCard(isDark: isDark),
             const SizedBox(height: 12),
             _TimeCard(isDark: isDark, controller: controller),
             const SizedBox(height: 12),

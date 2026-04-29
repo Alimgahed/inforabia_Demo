@@ -19,7 +19,7 @@ class BiometricService {
   Future<bool> authenticate() async {
     try {
       return await _auth.authenticate(
-        localizedReason: 'Please authenticate to log in to INFORABIA',
+        localizedReason: 'Please authenticate to log in to Panda',
         biometricOnly: true,
         persistAcrossBackgrounding: true,
       );

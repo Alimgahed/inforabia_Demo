@@ -76,6 +76,11 @@ class _ProfileScreenState extends State<ProfileScreen>
     _InfoItem(Icons.emergency_outlined, 'Emergency', 'Ali Al-Rashid'),
   ];
 
+  static final _medicalItems = [
+    _InfoItem(Icons.health_and_safety_outlined, 'Insurance Company Name', 'Tawuniya'),
+    _InfoItem(Icons.numbers_outlined, 'Medical Policy Number', 'POL-8274932'),
+  ];
+
   static final _educationItems = [
     _InfoItem(Icons.school_outlined, 'Master\'s', 'KFUPM — 2018'),
     _InfoItem(
@@ -157,6 +162,19 @@ class _ProfileScreenState extends State<ProfileScreen>
                     accentColor: AppColors.secondary,
                     iconBg: AppColors.secondary.withOpacity(0.10),
                     titleColor: const Color(0xFFBD7C31),
+                  ),
+                ),
+                const SizedBox(height: 12),
+
+                // Medical Information
+                FadeInUp(
+                  delay: const Duration(milliseconds: 550),
+                  child: _buildSectionCard(
+                    'Medical Information',
+                    _medicalItems,
+                    isDark,
+                    accentColor: const Color(0xFF36D1BB), // Medical Teal
+                    iconBg: const Color(0xFF36D1BB).withOpacity(0.10),
                   ),
                 ),
                 const SizedBox(height: 12),

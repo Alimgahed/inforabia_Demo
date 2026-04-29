@@ -89,7 +89,7 @@
   "teamByGrade": "الفريق حسب المرتبة",
   "headcount": "عدد الموظفين",
   "documents": "الوثائق",
-  "documentLibrary": "مكتبة الوثائق",
+  "documentOfRecord": "وثائق السجل",
   "worklist": "قائمة العمل",
   "approvals": "الاعتمادات",
   "requests": "الطلبات",
@@ -418,5 +418,9 @@
   "financialAnalysis": "التحليل المالي",
   "salaryTrend": "تطور الراتب",
   "rising": "صاعد",
-  "falling": "هابط"
+  "falling": "هابط",
+  "leaveAndAttendance": "الإجازات والحضور",
+  "salaryAndFinance": "الرواتب والمالية",
+  "personalAndEmployment": "البيانات الشخصية والوظيفية",
+  "performanceAndGrowth": "الأداء والتطوير"
 }
