@@ -28,9 +28,42 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _navigateToNext();
-    // Precache the logo so it's instantly available
+    // Precache ALL app images during splash to eliminate flicker everywhere
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      precacheImage(const AssetImage('assets/images/panda.png'), context);
+      final images = [
+        // Core branding
+        'assets/images/panda.png',
+        'assets/images/qrcode.jpeg',
+        // Main user avatar
+        'assets/images/pngtree-a-saudi-man-traditional-attire-middle-aged-wearing-white-thobe-and-png-image_16610073.webp',
+        // Team avatars
+        'assets/images/team/sara.png',
+        'assets/images/team/omar.png',
+        'assets/images/team/noura.png',
+        'assets/images/team/faisal.png',
+        'assets/images/team/reem.png',
+        'assets/images/team/yasser.png',
+        // Best employees
+        'assets/images/people/download (1).jpeg',
+        'assets/images/people/25b9c99d1a7f5bcc86d09ee85d82ee02.jpg',
+        'assets/images/people/images (1).jpeg',
+        'assets/images/people/download.jpeg',
+        // News section
+        'assets/images/news_workshop.png',
+        'assets/images/news_ramadan.png',
+        'assets/images/news_security.png',
+        'assets/images/news_bonus.png',
+        // Onboarding
+        'assets/images/edited-photo.png',
+        'assets/images/edited-photo (2).png',
+        'assets/images/edited-photo (3).png',
+        'assets/images/edited-photo (6).png',
+        'assets/images/edited-photo (4).png',
+        'assets/images/edited-photo (5).png',
+      ];
+      for (final path in images) {
+        precacheImage(AssetImage(path), context);
+      }
     });
   }
 

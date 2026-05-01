@@ -440,13 +440,13 @@ class _MyTeamScreenState extends State<MyTeamScreen>
           child: members.isEmpty
               ? Center(child: Text(l10n.noData))
               : ListView.builder(
+                  cacheExtent: 1000,
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
                   itemCount: members.length,
                   itemBuilder: (context, i) {
                     final member = members[i];
                     final isExpanded = _expandedIndex == i;
-                    return FadeInUp(
-                      duration: Duration(milliseconds: 400 + i * 80),
+                    return RepaintBoundary(
                       child: _MemberCard(
                         member: member,
                         isExpanded: isExpanded,
@@ -470,6 +470,7 @@ class _MyTeamScreenState extends State<MyTeamScreen>
       height: 52,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
+        cacheExtent: 1000,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         itemCount: filters.length,
         separatorBuilder: (_, _) => const SizedBox(width: 8),
@@ -577,14 +578,18 @@ class _MyTeamScreenState extends State<MyTeamScreen>
           // Department Breakdown Pie Chart
           FadeInUp(
             duration: const Duration(milliseconds: 600),
-            child: _buildDepartmentPie(isDark),
+            child: RepaintBoundary(
+              child: _buildDepartmentPie(isDark),
+            ),
           ),
           const SizedBox(height: 16),
 
           // Performance Bar Chart
           FadeInUp(
             duration: const Duration(milliseconds: 700),
-            child: _buildPerformanceBar(isDark),
+            child: RepaintBoundary(
+              child: _buildPerformanceBar(isDark),
+            ),
           ),
           const SizedBox(height: 16),
 
@@ -1245,6 +1250,8 @@ class _MemberCard extends StatelessWidget {
                               child: Image.asset(
                                 member.avatarAsset,
                                 fit: BoxFit.cover,
+                                cacheWidth: 104,
+                                cacheHeight: 104,
                                 frameBuilder: (context, child, frame, wasSync) {
                                   if (wasSync) return child;
                                   return AnimatedOpacity(

@@ -115,14 +115,18 @@ class _ProfileScreenState extends State<ProfileScreen>
                 // Salary chart
                 FadeInUp(
                   delay: const Duration(milliseconds: 100),
-                  child: _buildSalaryChartCard(isDark),
+                  child: RepaintBoundary(
+                    child: _buildSalaryChartCard(isDark),
+                  ),
                 ),
                 const SizedBox(height: 12),
 
                 // Payslip
                 FadeInUp(
                   delay: const Duration(milliseconds: 200),
-                  child: _buildPayslipCard(isDark),
+                  child: RepaintBoundary(
+                    child: _buildPayslipCard(isDark),
+                  ),
                 ),
                 const SizedBox(height: 12),
 
@@ -175,6 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     isDark,
                     accentColor: const Color(0xFF36D1BB), // Medical Teal
                     iconBg: const Color(0xFF36D1BB).withOpacity(0.10),
+                    childAspectRatio: 2.2,
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -541,6 +546,7 @@ class _ProfileScreenState extends State<ProfileScreen>
     required Color accentColor,
     required Color iconBg,
     Color? titleColor,
+    double childAspectRatio = 3.0,
   }) {
     return _Card(
       isDark: isDark,
@@ -559,11 +565,11 @@ class _ProfileScreenState extends State<ProfileScreen>
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
-              childAspectRatio: 3.0,
+              childAspectRatio: childAspectRatio,
             ),
             itemCount: items.length,
             itemBuilder: (_, i) {

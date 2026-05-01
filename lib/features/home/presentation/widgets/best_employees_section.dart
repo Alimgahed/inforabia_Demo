@@ -172,9 +172,11 @@ class BestEmployeesSection extends StatelessWidget {
               return FadeInRight(
                 delay: Duration(milliseconds: 80 * index),
                 duration: const Duration(milliseconds: 500),
-                child: _EmployeeCard(
-                  employee: _employees[index],
-                  isDark: isDark,
+                child: RepaintBoundary(
+                  child: _EmployeeCard(
+                    employee: _employees[index],
+                    isDark: isDark,
+                  ),
                 ),
               );
             },

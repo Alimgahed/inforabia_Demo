@@ -322,6 +322,7 @@ class _DocumentsScreenState extends State<DocumentsScreen>
   }
 
   Widget _buildDocsTab(bool isDark) => ListView.builder(
+      cacheExtent: 1000,
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
     itemCount: _docs.length,
     itemBuilder: (_, i) {
@@ -411,6 +412,7 @@ class _DocumentsScreenState extends State<DocumentsScreen>
   );
 
   Widget _buildTrainingTab(bool isDark) => ListView.builder(
+      cacheExtent: 1000,
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
     itemCount: _courses.length,
     itemBuilder: (_, i) {

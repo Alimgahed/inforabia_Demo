@@ -177,6 +177,7 @@ class _WorklistScreenState extends State<WorklistScreen>
     ];
 
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
       itemCount: tasks.length,
       itemBuilder: (ctx, i) {
@@ -312,6 +313,7 @@ class _WorklistScreenState extends State<WorklistScreen>
     ];
 
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.all(16),
       itemCount: history.length,
       itemBuilder: (ctx, i) {

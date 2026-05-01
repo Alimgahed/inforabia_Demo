@@ -94,12 +94,16 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
           const SizedBox(height: 16),
           FadeInUp(
             delay: const Duration(milliseconds: 200),
-            child: _attendancePieCard(l10n, isDark),
+            child: RepaintBoundary(
+              child: _attendancePieCard(l10n, isDark),
+            ),
           ),
           const SizedBox(height: 16),
           FadeInUp(
             delay: const Duration(milliseconds: 300),
-            child: _salaryHistoryCard(isDark),
+            child: RepaintBoundary(
+              child: _salaryHistoryCard(isDark),
+            ),
           ),
           const SizedBox(height: 16),
           FadeInUp(
@@ -445,11 +449,13 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          FadeInDown(child: _teamGenderChart(l10n, isDark)),
+          FadeInDown(child: RepaintBoundary(child: _teamGenderChart(l10n, isDark))),
           const SizedBox(height: 16),
           FadeInUp(
             delay: const Duration(milliseconds: 200),
-            child: _teamByGradeChart(l10n, isDark),
+            child: RepaintBoundary(
+              child: _teamByGradeChart(l10n, isDark),
+            ),
           ),
           const SizedBox(height: 16),
           FadeInUp(
@@ -459,7 +465,9 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
           const SizedBox(height: 16),
           FadeInUp(
             delay: const Duration(milliseconds: 400),
-            child: _hiresTerminationsChart(l10n, isDark),
+            child: RepaintBoundary(
+              child: _hiresTerminationsChart(l10n, isDark),
+            ),
           ),
           const SizedBox(height: 16),
           FadeInUp(
@@ -813,115 +821,117 @@ class _HRInsightsScreenState extends State<HRInsightsScreen>
       child: Column(
         children: [
           FadeInDown(
-            child: _card(
-              isDark,
-              l10n.departmentalPerformance,
-              child: SizedBox(
-                height: 180,
-                child: BarChart(
-                  BarChartData(
-                    maxY: 100,
-                    barGroups: [
-                      BarChartGroupData(
-                        x: 0,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 88,
-                            color: AppColors.primary,
-                            width: 20,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(4),
+            child: RepaintBoundary(
+              child: _card(
+                isDark,
+                l10n.departmentalPerformance,
+                child: SizedBox(
+                  height: 180,
+                  child: BarChart(
+                    BarChartData(
+                      maxY: 100,
+                      barGroups: [
+                        BarChartGroupData(
+                          x: 0,
+                          barRods: [
+                            BarChartRodData(
+                              toY: 88,
+                              color: AppColors.primary,
+                              width: 20,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 1,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 75,
-                            color: AppColors.secondary,
-                            width: 20,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(4),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 1,
+                          barRods: [
+                            BarChartRodData(
+                              toY: 75,
+                              color: AppColors.secondary,
+                              width: 20,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 2,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 92,
-                            color: AppColors.success,
-                            width: 20,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(4),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 2,
+                          barRods: [
+                            BarChartRodData(
+                              toY: 92,
+                              color: AppColors.success,
+                              width: 20,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 3,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 68,
-                            color: AppColors.warning,
-                            width: 20,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(4),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 3,
+                          barRods: [
+                            BarChartRodData(
+                              toY: 68,
+                              color: AppColors.warning,
+                              width: 20,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 4,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 84,
-                            color: AppColors.chartTeal,
-                            width: 20,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(4),
+                          ],
+                        ),
+                        BarChartGroupData(
+                          x: 4,
+                          barRods: [
+                            BarChartRodData(
+                              toY: 84,
+                              color: AppColors.chartTeal,
+                              width: 20,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(4),
+                              ),
                             ),
+                          ],
+                        ),
+                      ],
+                      titlesData: FlTitlesData(
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (v, _) {
+                              const labels = [
+                                'Sales',
+                                'IT',
+                                'HR',
+                                'Ops',
+                                'Finance',
+                              ];
+                              if (v.toInt() >= labels.length) {
+                                return const SizedBox.shrink();
+                              }
+                              return Text(
+                                labels[v.toInt()],
+                                style: const TextStyle(fontSize: 9),
+                              );
+                            },
                           ),
-                        ],
-                      ),
-                    ],
-                    titlesData: FlTitlesData(
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          getTitlesWidget: (v, _) {
-                            const labels = [
-                              'Sales',
-                              'IT',
-                              'HR',
-                              'Ops',
-                              'Finance',
-                            ];
-                            if (v.toInt() >= labels.length) {
-                              return const SizedBox.shrink();
-                            }
-                            return Text(
-                              labels[v.toInt()],
-                              style: const TextStyle(fontSize: 9),
-                            );
-                          },
+                        ),
+                        leftTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        topTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                        rightTitles: const AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
                         ),
                       ),
-                      leftTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      topTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      rightTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
+                      borderData: FlBorderData(show: false),
+                      gridData: const FlGridData(show: false),
                     ),
-                    borderData: FlBorderData(show: false),
-                    gridData: const FlGridData(show: false),
                   ),
                 ),
               ),

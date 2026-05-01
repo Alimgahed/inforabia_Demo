@@ -438,6 +438,7 @@ class _OverviewTab extends StatelessWidget {
           FadeInUp(
             duration: const Duration(milliseconds: 400),
             child: ListView.separated(
+      cacheExtent: 1000,
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
@@ -460,11 +461,13 @@ class _OverviewTab extends StatelessWidget {
           // Donut chart
           FadeInUp(
             delay: const Duration(milliseconds: 200),
-            child: _DonutChartCard(
-              isDark: isDark,
-              cardColor: cardColor,
-              txtPrimary: txtPrimary,
-              txtSecondary: txtSecondary,
+            child: RepaintBoundary(
+              child: _DonutChartCard(
+                isDark: isDark,
+                cardColor: cardColor,
+                txtPrimary: txtPrimary,
+                txtSecondary: txtSecondary,
+              ),
             ),
           ),
 
@@ -473,10 +476,12 @@ class _OverviewTab extends StatelessWidget {
           // Bar chart
           FadeInUp(
             delay: const Duration(milliseconds: 350),
-            child: _BarChartCard(
-              isDark: isDark,
-              cardColor: cardColor,
-              txtSecondary: txtSecondary,
+            child: RepaintBoundary(
+              child: _BarChartCard(
+                isDark: isDark,
+                cardColor: cardColor,
+                txtSecondary: txtSecondary,
+              ),
             ),
           ),
 
@@ -1302,6 +1307,7 @@ class _HistoryTabState extends State<_HistoryTab> {
                   ),
                 )
               : ListView.separated(
+      cacheExtent: 1000,
                   padding: const EdgeInsets.fromLTRB(14, 0, 14, 30),
                   itemCount: _filtered.length,
                   separatorBuilder: (_, __) => const SizedBox(height: 9),

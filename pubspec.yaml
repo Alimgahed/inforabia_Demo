@@ -55,6 +55,7 @@ dependencies:
 
   # State Management
   provider: ^6.1.2
+  flutter_bloc: ^8.1.5
 
   # Services & Utils
   local_auth: ^3.0.1

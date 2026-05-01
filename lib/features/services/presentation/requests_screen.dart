@@ -369,6 +369,7 @@ class _RequestsScreenState extends State<RequestsScreen>
         SizedBox(
           height: 52,
           child: ListView.builder(
+      cacheExtent: 1000,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             itemCount: _filters.length,
@@ -419,6 +420,7 @@ class _RequestsScreenState extends State<RequestsScreen>
         ),
         Expanded(
           child: ListView.builder(
+      cacheExtent: 1000,
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 100),
             itemCount: _filteredRequests.length,
             itemBuilder: (context, i) {
@@ -605,6 +607,7 @@ class _RequestsScreenState extends State<RequestsScreen>
 
   Widget _buildApprovalsTab(AppLocalizations l10n, bool isDark) {
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
       itemCount: _approvals.length,
       itemBuilder: (context, i) {

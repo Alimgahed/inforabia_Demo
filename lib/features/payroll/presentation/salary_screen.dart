@@ -387,6 +387,7 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
     ];
 
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.all(20),
       itemCount: invoices.length,
       itemBuilder: (context, i) {

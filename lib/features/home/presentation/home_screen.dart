@@ -7,7 +7,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../attendance/presentation/attendance_screen.dart';
 import '../../leave/presentation/leave_screen.dart';
 import '../../payroll/presentation/salary_screen.dart';
-import '../../performance/presentation/performance_screen.dart' hide AppColors;
+import '../../performance/presentation/performance_screen.dart';
 import '../../../core/constants/app_features.dart';
 import '../../profile/presentation/profile_screen.dart';
 import '../../settings/presentation/settings_screen.dart';
@@ -197,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 height: 90,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
+                  cacheExtent: 1000,
                   children: [
                     _quickChip(
                       Icons.fingerprint_rounded,
@@ -409,85 +410,90 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       height: 125,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
+        cacheExtent: 1000,
         itemCount: kpis.length,
         separatorBuilder: (_, _) => const SizedBox(width: 10),
         itemBuilder: (_, i) {
           final k = kpis[i];
-          return AnimatedBuilder(
-            animation: _kpiAnimation,
-            builder: (_, _) {
-              final val = (k.target * _kpiAnimation.value).round();
-              return Container(
-                width: 140,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.darkCard : Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border(bottom: BorderSide(color: k.color, width: 3)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: k.color.withOpacity(0.1),
-                      blurRadius: 10,
-                      offset: const Offset(0, 4),
+          return RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: _kpiAnimation,
+              builder: (_, _) {
+                final val = (k.target * _kpiAnimation.value).round();
+                return Container(
+                  width: 140,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.darkCard : Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border(
+                      bottom: BorderSide(color: k.color, width: 3),
                     ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: k.color.withOpacity(0.12),
-                            borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: k.color.withOpacity(0.1),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              color: k.color.withOpacity(0.12),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Icon(k.icon, color: k.color, size: 14),
                           ),
-                          child: Icon(k.icon, color: k.color, size: 14),
-                        ),
-                        const Spacer(),
-                        Container(
-                          width: 28,
-                          height: 3,
-                          decoration: BoxDecoration(
-                            color: k.color.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                          child: FractionallySizedBox(
-                            widthFactor: _kpiAnimation.value,
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: k.color,
-                                borderRadius: BorderRadius.circular(2),
+                          const Spacer(),
+                          Container(
+                            width: 28,
+                            height: 3,
+                            decoration: BoxDecoration(
+                              color: k.color.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                            child: FractionallySizedBox(
+                              widthFactor: _kpiAnimation.value,
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: k.color,
+                                  borderRadius: BorderRadius.circular(2),
+                                ),
                               ),
                             ),
                           ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        '$val${k.suffix}',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w900,
+                          color: k.color,
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '$val${k.suffix}',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w900,
-                        color: k.color,
                       ),
-                    ),
-                    Text(
-                      k.label,
-                      style: TextStyle(
-                        fontSize: 9,
-                        color: isDark
-                            ? AppColors.darkTextSecondary
-                            : AppColors.grey,
+                      Text(
+                        k.label,
+                        style: TextStyle(
+                          fontSize: 9,
+                          color: isDark
+                              ? AppColors.darkTextSecondary
+                              : AppColors.grey,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            },
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
@@ -1715,7 +1721,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(24),
                     child: Stack(
                       children: [
-                        // Background Image — optimized with cacheWidth + fade-in
+                        // Background Image — optimized with cacheWidth + offline support
                         Image.network(
                           item['image'] as String,
                           width: double.infinity,
@@ -1723,25 +1729,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           fit: BoxFit.cover,
                           cacheWidth: 600, // Decode at reduced resolution
                           gaplessPlayback: true, // No white flash on rebuild
-                          frameBuilder:
-                              (context, child, frame, wasSynchronouslyLoaded) {
-                                if (wasSynchronouslyLoaded || frame != null) {
-                                  return child;
-                                }
-                                return AnimatedOpacity(
-                                  opacity: frame == null ? 0 : 1,
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeOut,
-                                  child: child,
-                                );
-                              },
-                          errorBuilder: (context, error, stackTrace) =>
-                              Image.asset(
-                                item['fallback'] as String,
-                                width: double.infinity,
-                                height: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
                         ),
                         // Gradient Overlay
                         Container(
@@ -3086,100 +3073,103 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 Expanded(
                   child: ListView.separated(
                     controller: scrollController,
+                    cacheExtent: 1000,
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
                     itemCount: items.length,
                     separatorBuilder: (_, _) => const SizedBox(height: 6),
                     itemBuilder: (context, i) {
                       final item = items[i];
                       final isUnread = !(item['read'] as bool);
-                      return Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: isUnread
-                              ? (item['color'] as Color).withOpacity(
-                                  isDark ? 0.08 : 0.05,
-                                )
-                              : (isDark ? AppColors.darkCard : Colors.white),
-                          borderRadius: BorderRadius.circular(12),
-                          border: isUnread
-                              ? Border(
-                                  left: BorderSide(
-                                    color: item['color'] as Color,
-                                    width: 3,
-                                  ),
-                                )
-                              : null,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(
-                                isDark ? 0.1 : 0.03,
-                              ),
-                              blurRadius: 6,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: (item['color'] as Color).withOpacity(
-                                  0.12,
+                      return RepaintBoundary(
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: isUnread
+                                ? (item['color'] as Color).withOpacity(
+                                    isDark ? 0.08 : 0.05,
+                                  )
+                                : (isDark ? AppColors.darkCard : Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                            border: isUnread
+                                ? Border(
+                                    left: BorderSide(
+                                      color: item['color'] as Color,
+                                      width: 3,
+                                    ),
+                                  )
+                                : null,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(
+                                  isDark ? 0.1 : 0.03,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
                               ),
-                              child: Icon(
-                                item['icon'] as IconData,
-                                color: item['color'] as Color,
-                                size: 18,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    item['title'] as String,
-                                    style: TextStyle(
-                                      fontWeight: isUnread
-                                          ? FontWeight.w700
-                                          : FontWeight.w500,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Text(
-                                    item['desc'] as String,
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      color: isDark
-                                          ? AppColors.darkTextSecondary
-                                          : AppColors.grey,
-                                    ),
-                                  ),
-                                  Text(
-                                    item['time'] as String,
-                                    style: TextStyle(
-                                      fontSize: 9,
-                                      color: isDark
-                                          ? Colors.white38
-                                          : Colors.grey.shade400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            if (isUnread)
+                            ],
+                          ),
+                          child: Row(
+                            children: [
                               Container(
-                                width: 7,
-                                height: 7,
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
+                                  color: (item['color'] as Color).withOpacity(
+                                    0.12,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Icon(
+                                  item['icon'] as IconData,
                                   color: item['color'] as Color,
-                                  shape: BoxShape.circle,
+                                  size: 18,
                                 ),
                               ),
-                          ],
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item['title'] as String,
+                                      style: TextStyle(
+                                        fontWeight: isUnread
+                                            ? FontWeight.w700
+                                            : FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                    Text(
+                                      item['desc'] as String,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: isDark
+                                            ? AppColors.darkTextSecondary
+                                            : AppColors.grey,
+                                      ),
+                                    ),
+                                    Text(
+                                      item['time'] as String,
+                                      style: TextStyle(
+                                        fontSize: 9,
+                                        color: isDark
+                                            ? Colors.white38
+                                            : Colors.grey.shade400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              if (isUnread)
+                                Container(
+                                  width: 7,
+                                  height: 7,
+                                  decoration: BoxDecoration(
+                                    color: item['color'] as Color,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -3241,6 +3231,8 @@ Widget _buildProfileAvatar(String imagePath, Color primaryColor) {
           fit: BoxFit.cover,
           width: 48, // Double the radius
           height: 48,
+          cacheWidth: 96,
+          cacheHeight: 96,
           // Error handling is essential for professional apps
           errorBuilder: (context, error, stackTrace) =>
               Icon(Icons.person_rounded, color: primaryColor, size: 24),

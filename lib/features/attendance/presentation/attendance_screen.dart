@@ -410,13 +410,19 @@ class AttendanceScreen extends StatelessWidget {
             const SizedBox(height: 12),
             _TimeCard(isDark: isDark, controller: controller),
             const SizedBox(height: 12),
-            _ProgressCard(isDark: isDark, controller: controller),
+            RepaintBoundary(
+              child: _ProgressCard(isDark: isDark, controller: controller),
+            ),
             const SizedBox(height: 20),
-            _BiometricSection(isDark: isDark, controller: controller),
+            RepaintBoundary(
+              child: _BiometricSection(isDark: isDark, controller: controller),
+            ),
             const SizedBox(height: 20),
             _StatsRow(isDark: isDark),
             const SizedBox(height: 20),
-            _CalendarSection(isDark: isDark, controller: controller),
+            RepaintBoundary(
+              child: _CalendarSection(isDark: isDark, controller: controller),
+            ),
             const SizedBox(height: 20),
             _HistorySection(isDark: isDark),
             const SizedBox(height: 40),

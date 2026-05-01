@@ -437,16 +437,21 @@ class _ChatBotScreenState extends State<ChatBotScreen>
               child: ListView.builder(
                 controller: _scrollController,
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                cacheExtent: 1000,
                 itemCount:
                     _messages.length +
                     (_isTyping ? 1 : 0) +
                     (_showQuickActions ? 1 : 0),
                 itemBuilder: (context, i) {
-                  if (i < _messages.length)
-                    return _buildMessageItem(_messages[i]);
-                  if (_showQuickActions && i == _messages.length)
-                    return _buildQuickActionsGrid(l10n);
-                  return _buildTypingBubble();
+                  Widget child;
+                  if (i < _messages.length) {
+                    child = _buildMessageItem(_messages[i]);
+                  } else if (_showQuickActions && i == _messages.length) {
+                    child = _buildQuickActionsGrid(l10n);
+                  } else {
+                    child = _buildTypingBubble();
+                  }
+                  return RepaintBoundary(child: child);
                 },
               ),
             ),
@@ -545,7 +550,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
             : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          if (!msg.isUser) ...[_botAvatar(), const SizedBox(width: 8)],
+          if (!msg.isUser) ...[const _BotAvatar(), const SizedBox(width: 8)],
           Flexible(
             child: Column(
               crossAxisAlignment: msg.isUser
@@ -564,7 +569,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
               ],
             ),
           ),
-          if (msg.isUser) ...[const SizedBox(width: 8), _userAvatar()],
+          if (msg.isUser) ...[const SizedBox(width: 8), const _UserAvatar()],
         ],
       ),
     );
@@ -601,34 +606,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     );
   }
 
-  Widget _botAvatar() {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: const BoxDecoration(
-        color: _C.primary,
-        shape: BoxShape.circle,
-      ),
-      child: const Icon(
-        Icons.support_agent_rounded,
-        color: Colors.white,
-        size: 18,
-      ),
-    );
-  }
 
-  Widget _userAvatar() {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        gradient: AppColors.primaryGradient,
-        shape: BoxShape.circle,
-        border: Border.all(color: _C.border, width: 1.5),
-      ),
-      child: const Icon(Icons.person_rounded, color: Colors.white, size: 18),
-    );
-  }
 
   // ─── TYPING INDICATOR ───────────────────────────────────────────────────
 
@@ -638,7 +616,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          _botAvatar(),
+          const _BotAvatar(),
           const SizedBox(width: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -658,7 +636,8 @@ class _ChatBotScreenState extends State<ChatBotScreen>
                 ),
               ],
             ),
-            child: AnimatedBuilder(
+            child: RepaintBoundary(
+              child: AnimatedBuilder(
               animation: _typingAnimController,
               builder: (context, _) {
                 return Row(
@@ -683,6 +662,7 @@ class _ChatBotScreenState extends State<ChatBotScreen>
                   }),
                 );
               },
+              ),
             ),
           ),
         ],
@@ -1994,6 +1974,45 @@ class _RequestOption extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _BotAvatar extends StatelessWidget {
+  const _BotAvatar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: const BoxDecoration(
+        color: _C.primary,
+        shape: BoxShape.circle,
+      ),
+      child: const Icon(
+        Icons.support_agent_rounded,
+        color: Colors.white,
+        size: 18,
+      ),
+    );
+  }
+}
+
+class _UserAvatar extends StatelessWidget {
+  const _UserAvatar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        gradient: AppColors.primaryGradient,
+        shape: BoxShape.circle,
+        border: Border.all(color: _C.border, width: 1.5),
+      ),
+      child: const Icon(Icons.person_rounded, color: Colors.white, size: 18),
     );
   }
 }

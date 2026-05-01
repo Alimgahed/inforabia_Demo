@@ -88,6 +88,7 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
       },
     ];
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.all(16),
       itemCount: news.length,
       itemBuilder: (context, i) {
@@ -205,6 +206,7 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
       },
     ];
     return ListView.builder(
+      cacheExtent: 1000,
       padding: const EdgeInsets.all(16),
       itemCount: offers.length,
       itemBuilder: (context, i) {

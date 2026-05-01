@@ -673,6 +673,7 @@ class _KpiGoalsScreenState extends State<KpiGoalsScreen>
         _buildWeightSummary(totalWeight, AppColors.secondary),
         Expanded(
           child: ListView.builder(
+            cacheExtent: 1000,
             padding: const EdgeInsets.all(16),
             itemCount: _kpis.length,
             itemBuilder: (ctx, i) => _buildKPICard(_kpis[i], i),
@@ -787,6 +788,7 @@ class _KpiGoalsScreenState extends State<KpiGoalsScreen>
         _buildWeightSummary(totalWeight, AppColors.primary),
         Expanded(
           child: ListView.builder(
+            cacheExtent: 1000,
             padding: const EdgeInsets.all(16),
             itemCount: _goals.length,
             itemBuilder: (ctx, i) => _buildGoalCard(_goals[i], i),
@@ -1096,6 +1098,7 @@ class _EmployeeInputScreenState extends State<EmployeeInputScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: ListView(
+        cacheExtent: 1000,
         padding: const EdgeInsets.all(16),
         children: [
           RepaintBoundary(child: _buildOverallProgressCard()),
@@ -1523,6 +1526,7 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
         ],
       ),
       body: ListView(
+        cacheExtent: 1000,
         padding: const EdgeInsets.all(16),
         children: [
           RepaintBoundary(child: _buildScoreOverview()),

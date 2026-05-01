@@ -318,6 +318,7 @@ class _ProcurementScreenState extends State<ProcurementScreen>
   }
 
   Widget _buildPRsTab(bool isDark) => ListView.builder(
+      cacheExtent: 1000,
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
     itemCount: _prs.length,
     itemBuilder: (_, i) {
@@ -475,6 +476,7 @@ class _ProcurementScreenState extends State<ProcurementScreen>
   );
 
   Widget _buildCertsTab(bool isDark) => ListView.builder(
+      cacheExtent: 1000,
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
     itemCount: _certs.length,
     itemBuilder: (_, i) {
@@ -628,6 +630,7 @@ class _ProcurementScreenState extends State<ProcurementScreen>
   );
 
   Widget _buildTransfersTab(bool isDark) => ListView.builder(
+      cacheExtent: 1000,
     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
     itemCount: _transfers.length,
     itemBuilder: (_, i) {
