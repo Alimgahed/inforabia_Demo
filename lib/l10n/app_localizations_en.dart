@@ -9,24 +9,24 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'INFORABIIA';
+  String get appName => 'TAMER';
 
   @override
   String get employeeSwitch => 'Employee Switch';
 
   @override
-  String get onboardingTitle1 => 'Panda Retail Services';
+  String get onboardingTitle1 => 'Tamer Group Services';
 
   @override
   String get onboardingSubtitle1 =>
-      'Access all your retail employee self-services, leave requests, and digital ID in one place.';
+      'Access all your healthcare and consumer self-services, leave requests, and digital ID in one place.';
 
   @override
-  String get onboardingTitle2 => 'Smart Store Analytics';
+  String get onboardingTitle2 => 'Smart Business Analytics';
 
   @override
   String get onboardingSubtitle2 =>
-      'Stay updated with store performance, attendance metrics, and regional benchmarks.';
+      'Stay updated with company performance, attendance metrics, and regional benchmarks.';
 
   @override
   String get onboardingTitle3 => 'Bilingual & Secure';
@@ -677,10 +677,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get warehouse => 'Warehouse';
 
   @override
-  String get welcomeToInforabia => 'Welcome to Inforabia';
+  String get welcomeToInforabia => 'Welcome to TAMER';
 
   @override
-  String get welcomeToPanda => 'Welcome to Panda';
+  String get welcomeToPanda => 'Welcome to Tamer';
 
   @override
   String get chooseLanguage => 'Choose Your Language';
@@ -714,21 +714,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingSubtitle4 =>
-      'Swiftly manage store requests and task approvals directly from your mobile device.';
+      'Swiftly manage corporate requests and task approvals directly from your mobile device.';
 
   @override
-  String get onboardingTitle5 => 'Panda Rewards & Payroll';
+  String get onboardingTitle5 => 'Tamer Rewards & Payroll';
 
   @override
   String get onboardingSubtitle5 =>
-      'View your payslips and redeem exclusive Panda colleague benefits and AlFursan miles.';
+      'View your payslips and redeem exclusive Tamer colleague benefits.';
 
   @override
   String get onboardingTitle6 => 'Excellence & Growth';
 
   @override
   String get onboardingSubtitle6 =>
-      'Join the Panda Academy to sharpen your retail skills and advance your career path.';
+      'Join the Tamer Academy to sharpen your skills and advance your career path.';
 
   @override
   String get history => 'History';
@@ -924,25 +924,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get annualLeaveStart => 'Annual Leave Start';
 
   @override
-  String get newsTitle1 => 'Panda Signs MoU with Arsan';
+  String get newsTitle1 => 'Tamer Logistics';
 
   @override
   String get newsDesc1 =>
-      'Collaborating on parking management across the Kingdom markets';
+      'Leading Third Party Strategic Logistics Service provider in the region.';
 
   @override
-  String get newsTitle2 => 'RLC Global Forum 2026';
+  String get newsTitle2 => 'LIFERA, SANOFI and ARABIO Sign MOU';
 
   @override
   String get newsDesc2 =>
-      'CEO Dr. Bander Hamooh on rebuilding resilient growth';
+      'Collaboration for vaccine manufacturing and supply in Saudi Arabia.';
 
   @override
-  String get newsTitle3 => 'Energy Efficiency with Tarshid';
+  String get newsTitle3 => 'Healthy Partnerships';
 
   @override
   String get newsDesc3 =>
-      'Reducing emissions and saving energy across all stores';
+      'Healthcare excellence through close partnerships with multinationals.';
+
+  @override
+  String get newsTitle4 => 'Business Innovation';
+
+  @override
+  String get newsDesc4 =>
+      'Driving cultural and strategic change in Saudi Arabia\'s pharmaceutical sector.';
 
   @override
   String get trackManageRequests => 'Track, submit & manage your requests';

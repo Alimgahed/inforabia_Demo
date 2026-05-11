@@ -1398,7 +1398,7 @@ class _EmployeeInputScreenState extends State<EmployeeInputScreen> {
 // ─────────────────────────────────────────────────────────────────────────────
 
 class ManagerReviewScreen extends StatefulWidget {
-  ManagerReviewScreen({super.key});
+  const ManagerReviewScreen({super.key});
 
   @override
   State<ManagerReviewScreen> createState() => _ManagerReviewScreenState();
@@ -1436,8 +1436,12 @@ class _ManagerReviewScreenState extends State<ManagerReviewScreen> {
 
   @override
   void dispose() {
-    for (final c in _goalCommentControllers) c.dispose();
-    for (final c in _hrCommentControllers) c.dispose();
+    for (final c in _goalCommentControllers) {
+      c.dispose();
+    }
+    for (final c in _hrCommentControllers) {
+      c.dispose();
+    }
     _finalCommentController.dispose();
     super.dispose();
   }

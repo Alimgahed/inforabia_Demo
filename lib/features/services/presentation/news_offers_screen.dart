@@ -55,36 +55,40 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
   Widget _buildNewsTab(bool isDark) {
     final news = [
       {
-        'title': 'Panda Signs MoU with Arsan',
-        'desc': 'Collaborating on parking management across the Kingdom markets to enhance customer journey.',
-        'date': '04 Feb 2026',
-        'icon': Icons.local_parking_rounded,
+        'title': 'Tamer Logistics',
+        'desc': 'Leading Third Party Strategic Logistics Service provider in the region.',
+        'image': 'https://tamergroup.com/application/files/8016/9373/4831/8faaabec64446350e7de43a6aa0d79af.jpg',
+        'date': 'Oct 2023',
+        'icon': Icons.local_shipping_rounded,
         'color': AppColors.info,
-        'tag': 'Operations',
+        'tag': 'Logistics',
       },
       {
-        'title': 'RLC Global Forum 2026',
-        'desc': 'CEO Dr. Bander Hamooh on rebuilding resilient growth in a pressured market.',
-        'date': '03 Feb 2026',
-        'icon': Icons.campaign_rounded,
+        'title': 'LIFERA, SANOFI & ARABIO Sign MOU',
+        'desc': 'Collaboration for vaccine manufacturing and supply in Saudi Arabia.',
+        'image': 'https://tamergroup.com/application/files/7616/8864/6944/New_Project_14.jpg',
+        'date': 'Jul 2023',
+        'icon': Icons.handshake_rounded,
         'color': AppColors.warning,
         'tag': 'Leadership',
       },
       {
-        'title': 'Energy Efficiency with Tarshid',
-        'desc': 'Implementing energy-saving initiatives and reducing emissions across all Panda facilities.',
-        'date': '01 Feb 2026',
-        'icon': Icons.eco_rounded,
+        'title': 'Healthy Partnerships',
+        'desc': 'Healthcare excellence through close partnerships with multinationals.',
+        'image': 'https://tamergroup.com/application/files/4916/8839/8048/New_Project_3.png',
+        'date': 'Jun 2023',
+        'icon': Icons.health_and_safety_rounded,
         'color': AppColors.primary,
-        'tag': 'Sustainability',
+        'tag': 'Healthcare',
       },
       {
-        'title': 'AlFursan Miles Exchange',
-        'desc': 'Redeem your AlFursan miles for shopping rewards at any Panda store across the Kingdom.',
-        'date': '28 Jan 2026',
-        'icon': Icons.airplanemode_active_rounded,
+        'title': 'Business Innovation',
+        'desc': 'Driving cultural and strategic change in Saudi Arabia\'s pharmaceutical sector.',
+        'image': 'https://tamergroup.com/application/files/8916/8839/3524/tamerG_img_1b.jpg',
+        'date': 'May 2023',
+        'icon': Icons.lightbulb_rounded,
         'color': AppColors.success,
-        'tag': 'Rewards',
+        'tag': 'Innovation',
       },
     ];
     return ListView.builder(
@@ -109,66 +113,86 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: (n['color'] as Color).withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        n['icon'] as IconData,
-                        color: n['color'] as Color,
-                        size: 20,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        n['image'] as String,
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, __, ___) => Container(
+                          width: 80,
+                          height: 80,
+                          color: (n['color'] as Color).withOpacity(0.1),
+                          child: Icon(
+                            n['icon'] as IconData,
+                            color: n['color'] as Color,
+                          ),
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Expanded(
-                      child: Text(
-                        n['title'] as String,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 6,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        color: (n['color'] as Color).withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        n['tag'] as String,
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold,
-                          color: n['color'] as Color,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  n['title'] as String,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: (n['color'] as Color).withOpacity(0.12),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Text(
+                                  n['tag'] as String,
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.bold,
+                                    color: n['color'] as Color,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            n['desc'] as String,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: isDark ? AppColors.darkTextPrimary : Colors.black87,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            n['date'] as String,
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: isDark
+                                  ? AppColors.darkTextSecondary
+                                  : AppColors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  n['desc'] as String,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: isDark ? AppColors.darkTextPrimary : Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  n['date'] as String,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: isDark
-                        ? AppColors.darkTextSecondary
-                        : AppColors.grey,
-                  ),
                 ),
               ],
             ),
@@ -182,17 +206,17 @@ class _NewsOffersScreenState extends State<NewsOffersScreen>
     final offers = [
       {
         'title': '15% Colleague Discount',
-        'vendor': 'Panda Retail Company',
+        'vendor': 'Tamer Group',
         'valid': 'Ongoing',
-        'desc': 'Exclusive 15% discount for all Panda colleagues on your monthly grocery shopping.',
+        'desc': 'Exclusive 15% discount for all Tamer colleagues on your healthcare and wellness purchases.',
         'icon': Icons.shopping_bag_rounded,
         'color': AppColors.success,
       },
       {
         'title': '2X AlFursan Miles',
-        'vendor': 'AlFursan x Panda',
+        'vendor': 'AlFursan x Tamer',
         'valid': 'Until 31 Mar 2026',
-        'desc': 'Earn double AlFursan miles on all weekend purchases at any Panda Hypermarket.',
+        'desc': 'Earn double AlFursan miles on all wellness products at any Tamer pharmacy.',
         'icon': Icons.star_rounded,
         'color': AppColors.secondary,
       },

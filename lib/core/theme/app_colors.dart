@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // Brand Colors
-  static const Color primary = Color(0xFF1B432C); // Panda Green
-  static const Color secondary = Color(0xFFE53E2E); // Panda Red
-  static const Color accent = Color(0xFF388E3C); // Success Green
-  static const Color darkTeal = Color(0xFF0D2116); // Deep Forest Green
+  static const Color primary = Color(0xFF007A3E); // Tamer Green
+  static const Color secondary = Color(0xFF000000); // Tamer Black
+  static const Color accent = Color(0xFF00C853); // Bright Green
+  static const Color darkTeal = Color(0xFF004D26); // Deep Tamer Green
 
   // Light Mode
-  static const Color background = Color(0xFFF8F9FA);
+  static const Color background = Color(0xFFF5F5F5);
   static const Color white = Colors.white;
-  static const Color black = Color(0xFF212121);
-  static const Color grey = Color(0xFF9E9E9E);
+  static const Color black = Color(0xFF000000);
+  static const Color grey = Color(0xFF757575);
   static const Color lightGrey = Color(0xFFEEEEEE);
   static const Color shadowColor = Color(0x1A000000);
   static const Color cardLight = Colors.white;
@@ -40,19 +40,19 @@ class AppColors {
 
   // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [primary, Color(0xFF2E7D32)],
+    colors: [primary, Color(0xFF004D26)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient accentGradient = LinearGradient(
-    colors: [secondary, primary],
+    colors: [black, primary],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
 
   static const LinearGradient darkGradient = LinearGradient(
-    colors: [Color(0xFF0D2116), Color(0xFF1B432C)],
+    colors: [Color(0xFF002412), Color(0xFF007A3E)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -63,13 +63,13 @@ class AppColors {
   );
 
   static const LinearGradient tealGradient = LinearGradient(
-    colors: [Color(0xFF1B432C), Color(0xFF4C7D5E)],
+    colors: [primary, Color(0xFF00C853)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient goldenGradient = LinearGradient(
-    colors: [Color(0xFFE53E2E), Color(0xFFFF5252), Color(0xFFE53E2E)],
+    colors: [primary, Color(0xFF00C853), primary],
     begin: Alignment.centerLeft,
     end: Alignment.centerRight,
   );
@@ -95,18 +95,18 @@ class AppColors {
 
   // Common Shadows
   static List<BoxShadow> get cardShadow => [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.05),
-          blurRadius: 10,
-          offset: const Offset(0, 4),
-        ),
-      ];
+    BoxShadow(
+      color: Colors.black.withOpacity(0.05),
+      blurRadius: 10,
+      offset: const Offset(0, 4),
+    ),
+  ];
 
   static List<BoxShadow> get elevatedShadow => [
-        BoxShadow(
-          color: primary.withOpacity(0.25),
-          blurRadius: 16,
-          offset: const Offset(0, 6),
-        ),
-      ];
+    BoxShadow(
+      color: primary.withOpacity(0.25),
+      blurRadius: 16,
+      offset: const Offset(0, 6),
+    ),
+  ];
 }

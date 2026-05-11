@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'INFORABIIA'**
+  /// **'TAMER'**
   String get appName;
 
   /// No description provided for @employeeSwitch.
@@ -113,25 +113,25 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle1.
   ///
   /// In en, this message translates to:
-  /// **'Panda Retail Services'**
+  /// **'Tamer Group Services'**
   String get onboardingTitle1;
 
   /// No description provided for @onboardingSubtitle1.
   ///
   /// In en, this message translates to:
-  /// **'Access all your retail employee self-services, leave requests, and digital ID in one place.'**
+  /// **'Access all your healthcare and consumer self-services, leave requests, and digital ID in one place.'**
   String get onboardingSubtitle1;
 
   /// No description provided for @onboardingTitle2.
   ///
   /// In en, this message translates to:
-  /// **'Smart Store Analytics'**
+  /// **'Smart Business Analytics'**
   String get onboardingTitle2;
 
   /// No description provided for @onboardingSubtitle2.
   ///
   /// In en, this message translates to:
-  /// **'Stay updated with store performance, attendance metrics, and regional benchmarks.'**
+  /// **'Stay updated with company performance, attendance metrics, and regional benchmarks.'**
   String get onboardingSubtitle2;
 
   /// No description provided for @onboardingTitle3.
@@ -1427,13 +1427,13 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeToInforabia.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Inforabia'**
+  /// **'Welcome to TAMER'**
   String get welcomeToInforabia;
 
   /// No description provided for @welcomeToPanda.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Panda'**
+  /// **'Welcome to Tamer'**
   String get welcomeToPanda;
 
   /// No description provided for @chooseLanguage.
@@ -1499,19 +1499,19 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingSubtitle4.
   ///
   /// In en, this message translates to:
-  /// **'Swiftly manage store requests and task approvals directly from your mobile device.'**
+  /// **'Swiftly manage corporate requests and task approvals directly from your mobile device.'**
   String get onboardingSubtitle4;
 
   /// No description provided for @onboardingTitle5.
   ///
   /// In en, this message translates to:
-  /// **'Panda Rewards & Payroll'**
+  /// **'Tamer Rewards & Payroll'**
   String get onboardingTitle5;
 
   /// No description provided for @onboardingSubtitle5.
   ///
   /// In en, this message translates to:
-  /// **'View your payslips and redeem exclusive Panda colleague benefits and AlFursan miles.'**
+  /// **'View your payslips and redeem exclusive Tamer colleague benefits.'**
   String get onboardingSubtitle5;
 
   /// No description provided for @onboardingTitle6.
@@ -1523,7 +1523,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingSubtitle6.
   ///
   /// In en, this message translates to:
-  /// **'Join the Panda Academy to sharpen your retail skills and advance your career path.'**
+  /// **'Join the Tamer Academy to sharpen your skills and advance your career path.'**
   String get onboardingSubtitle6;
 
   /// No description provided for @history.
@@ -1901,38 +1901,50 @@ abstract class AppLocalizations {
   /// No description provided for @newsTitle1.
   ///
   /// In en, this message translates to:
-  /// **'Panda Signs MoU with Arsan'**
+  /// **'Tamer Logistics'**
   String get newsTitle1;
 
   /// No description provided for @newsDesc1.
   ///
   /// In en, this message translates to:
-  /// **'Collaborating on parking management across the Kingdom markets'**
+  /// **'Leading Third Party Strategic Logistics Service provider in the region.'**
   String get newsDesc1;
 
   /// No description provided for @newsTitle2.
   ///
   /// In en, this message translates to:
-  /// **'RLC Global Forum 2026'**
+  /// **'LIFERA, SANOFI and ARABIO Sign MOU'**
   String get newsTitle2;
 
   /// No description provided for @newsDesc2.
   ///
   /// In en, this message translates to:
-  /// **'CEO Dr. Bander Hamooh on rebuilding resilient growth'**
+  /// **'Collaboration for vaccine manufacturing and supply in Saudi Arabia.'**
   String get newsDesc2;
 
   /// No description provided for @newsTitle3.
   ///
   /// In en, this message translates to:
-  /// **'Energy Efficiency with Tarshid'**
+  /// **'Healthy Partnerships'**
   String get newsTitle3;
 
   /// No description provided for @newsDesc3.
   ///
   /// In en, this message translates to:
-  /// **'Reducing emissions and saving energy across all stores'**
+  /// **'Healthcare excellence through close partnerships with multinationals.'**
   String get newsDesc3;
+
+  /// No description provided for @newsTitle4.
+  ///
+  /// In en, this message translates to:
+  /// **'Business Innovation'**
+  String get newsTitle4;
+
+  /// No description provided for @newsDesc4.
+  ///
+  /// In en, this message translates to:
+  /// **'Driving cultural and strategic change in Saudi Arabia\'s pharmaceutical sector.'**
+  String get newsDesc4;
 
   /// No description provided for @trackManageRequests.
   ///

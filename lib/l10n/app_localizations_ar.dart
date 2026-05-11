@@ -9,24 +9,24 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appName => 'إنفورابيا';
+  String get appName => 'تامر';
 
   @override
   String get employeeSwitch => 'بوابة الموظف';
 
   @override
-  String get onboardingTitle1 => 'خدمات بندة للتجزئة';
+  String get onboardingTitle1 => 'خدمات مجموعة تامر';
 
   @override
   String get onboardingSubtitle1 =>
-      'الوصول إلى جميع الخدمات الذاتية لموظفي التجزئة، وطلبات الإجازة، والهوية الرقمية في مكان واحد.';
+      'الوصول إلى جميع الخدمات الذاتية، وطلبات الإجازة، والهوية الرقمية في مكان واحد.';
 
   @override
-  String get onboardingTitle2 => 'تحليلات المتجر الذكية';
+  String get onboardingTitle2 => 'تحليلات الأعمال الذكية';
 
   @override
   String get onboardingSubtitle2 =>
-      'ابق على اطلاع بأداء المتجر، ومقاييس الحضور، والمعايير الإقليمية.';
+      'ابق على اطلاع بأداء الشركة، ومقاييس الحضور، والمعايير الإقليمية.';
 
   @override
   String get onboardingTitle3 => 'ثنائي اللغة وآمن';
@@ -677,10 +677,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get warehouse => 'المستودعات';
 
   @override
-  String get welcomeToInforabia => 'مرحباً بك في إنفورابيا';
+  String get welcomeToInforabia => 'مرحباً بك في تامر';
 
   @override
-  String get welcomeToPanda => 'مرحباً بك في بندة';
+  String get welcomeToPanda => 'مرحباً بك في تامر';
 
   @override
   String get chooseLanguage => 'اختر لغتك المفضلة';
@@ -714,21 +714,21 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onboardingSubtitle4 =>
-      'إدارة طلبات المتجر والموافقات على المهام بسرعة مباشرة من جهازك المحمول.';
+      'إدارة طلبات الشركة والموافقات على المهام بسرعة مباشرة من جهازك المحمول.';
 
   @override
-  String get onboardingTitle5 => 'مكافآت بندة والرواتب';
+  String get onboardingTitle5 => 'مكافآت تامر والرواتب';
 
   @override
   String get onboardingSubtitle5 =>
-      'عرض كشوف الرواتب واستبدال مزايا زملاء بندة الحصرية وأميال الفرسان.';
+      'عرض كشوف الرواتب واستبدال مزايا زملاء تامر الحصرية.';
 
   @override
   String get onboardingTitle6 => 'التميز والنمو';
 
   @override
   String get onboardingSubtitle6 =>
-      'انضم إلى أكاديمية بندة لصقل مهاراتك في مجال التجزئة والتقدم في مسارك المهني.';
+      'انضم إلى أكاديمية تامر لصقل مهاراتك والتقدم في مسارك المهني.';
 
   @override
   String get history => 'السجل';
@@ -920,23 +920,32 @@ class AppLocalizationsAr extends AppLocalizations {
   String get annualLeaveStart => 'بداية الإجازة السنوية';
 
   @override
-  String get newsTitle1 => 'بندة توقع مذكرة تفاهم مع أرسان';
+  String get newsTitle1 => 'تامر للخدمات اللوجستية';
 
   @override
-  String get newsDesc1 => 'التعاون في إدارة مواقف السيارات في أسواق المملكة';
+  String get newsDesc1 =>
+      'مزود رائد للخدمات اللوجستية الاستراتيجية في المنطقة.';
 
   @override
-  String get newsTitle2 => 'منتدى RLC العالمي 2026';
+  String get newsTitle2 => 'ليفيرا وسانوفي وأرابيو يوقعون مذكرة تفاهم';
 
   @override
   String get newsDesc2 =>
-      'الرئيس التنفيذي د. بندر حموه حول إعادة بناء النمو المرن';
+      'تعاون لتصنيع اللقاحات وتوريدها في المملكة العربية السعودية.';
 
   @override
-  String get newsTitle3 => 'كفاءة الطاقة مع ترشيد';
+  String get newsTitle3 => 'شراكات صحية';
 
   @override
-  String get newsDesc3 => 'تقليل الانبعاثات وتوفير الطاقة في جميع المتاجر';
+  String get newsDesc3 =>
+      'تميز الرعاية الصحية من خلال شراكات وثيقة مع شركات عالمية.';
+
+  @override
+  String get newsTitle4 => 'ابتكار الأعمال';
+
+  @override
+  String get newsDesc4 =>
+      'قيادة التغيير الثقافي والاستراتيجي في قطاع الأدوية في السعودية.';
 
   @override
   String get trackManageRequests => 'تتبع وتقديم وإدارة طلباتك';

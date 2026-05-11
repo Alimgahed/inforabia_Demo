@@ -691,7 +691,7 @@ class _ProgressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${AppLocalizations.of(context)!.workProgress}',
+                AppLocalizations.of(context)!.workProgress,
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -1068,7 +1068,7 @@ class _ScanningRingState extends State<_ScanningRing>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _anim,
-      builder: (_, __) => CustomPaint(
+      builder: (_, _) => CustomPaint(
         painter: _SpinningRingPainter(
           progress: _anim.value,
           color: widget.color,

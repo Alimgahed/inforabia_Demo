@@ -392,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         Icons.people_rounded,
       ),
       _KpiData(
-        '${l10n.annualizedRetention.replaceAll(" ", "\n")}',
+        l10n.annualizedRetention.replaceAll(" ", "\n"),
         74,
         '%',
         AppColors.secondary,
@@ -1611,8 +1611,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         'title': l10n.newsTitle1,
         'desc': l10n.newsDesc1,
         'image':
-            'https://corp-website-strapi.panda.sa/uploads/medium_DSC_4195_01_d1e7b31585.jpg',
-        'tag': l10n.operations,
+            'https://tamergroup.com/application/files/8016/9373/4831/8faaabec64446350e7de43a6aa0d79af.jpg',
+        'tag': 'Logistics',
         'color': AppColors.info,
         'fallback': 'assets/images/news_workshop.png',
       },
@@ -1620,7 +1620,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         'title': l10n.newsTitle2,
         'desc': l10n.newsDesc2,
         'image':
-            'https://corp-website-strapi.panda.sa/uploads/medium_PHOTO_2026_02_03_18_37_07_dbb3aa2b1a.jpg',
+            'https://tamergroup.com/application/files/7616/8864/6944/New_Project_14.jpg',
         'tag': 'Leadership',
         'color': AppColors.warning,
         'fallback': 'assets/images/news_ramadan.png',
@@ -1629,17 +1629,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         'title': l10n.newsTitle3,
         'desc': l10n.newsDesc3,
         'image':
-            'https://corp-website-strapi.panda.sa/uploads/medium_P2_63e19a52b2.png',
-        'tag': 'Sustainability',
+            'https://tamergroup.com/application/files/4916/8839/8048/New_Project_3.png',
+        'tag': 'Healthcare',
         'color': AppColors.primary,
         'fallback': 'assets/images/news_security.png',
       },
       {
-        'title': 'AlFursan Miles Exchange',
-        'desc': 'Redeem AlFursan miles for shopping rewards at Panda',
+        'title': l10n.newsTitle4,
+        'desc': l10n.newsDesc4,
         'image':
-            'https://corp-website-strapi.panda.sa/uploads/medium_1_d92d3297d3.jpg',
-        'tag': 'Rewards',
+            'https://tamergroup.com/application/files/8916/8839/3524/tamerG_img_1b.jpg',
+        'tag': 'Innovation',
         'color': AppColors.success,
         'fallback': 'assets/images/news_bonus.png',
       },
@@ -2046,7 +2046,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Retail Operations - Panda Market',
+                  'Operations - Tamer Group',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 12,
@@ -2704,7 +2704,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF1B432C), Color(0xFF0D2116), Color(0xFF07120B)],
+          colors: [AppColors.primary, AppColors.darkTeal, Color(0xFF002412)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

@@ -208,8 +208,12 @@ class _ChatBotScreenState extends State<ChatBotScreen>
       a.length + 1,
       (i) => List.generate(b.length + 1, (j) => 0),
     );
-    for (int i = 0; i <= a.length; i++) dp[i][0] = i;
-    for (int j = 0; j <= b.length; j++) dp[0][j] = j;
+    for (int i = 0; i <= a.length; i++) {
+      dp[i][0] = i;
+    }
+    for (int j = 0; j <= b.length; j++) {
+      dp[0][j] = j;
+    }
     for (int i = 1; i <= a.length; i++) {
       for (int j = 1; j <= b.length; j++) {
         dp[i][j] = a[i - 1] == b[j - 1]
@@ -334,8 +338,9 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     // ── Arabic direct substring check (no fuzzy needed for Arabic) ──────
     if (arLeave.any((k) => lower.contains(k))) return MessageType.leave;
     if (arSalary.any((k) => lower.contains(k))) return MessageType.payslip;
-    if (arAttendance.any((k) => lower.contains(k)))
+    if (arAttendance.any((k) => lower.contains(k))) {
       return MessageType.attendance;
+    }
     if (arApproval.any((k) => lower.contains(k))) return MessageType.approvals;
     if (arProfile.any((k) => lower.contains(k))) return MessageType.profile;
     if (arDocuments.any((k) => lower.contains(k))) return MessageType.documents;
@@ -343,18 +348,24 @@ class _ChatBotScreenState extends State<ChatBotScreen>
 
     // ── Fuzzy English + localization matching ───────────────────────────
     if (_anyMatch(words, [...enLeave, ...locLeave])) return MessageType.leave;
-    if (_anyMatch(words, [...enSalary, ...locSalary]))
+    if (_anyMatch(words, [...enSalary, ...locSalary])) {
       return MessageType.payslip;
-    if (_anyMatch(words, [...enAttendance, ...locAttendance]))
+    }
+    if (_anyMatch(words, [...enAttendance, ...locAttendance])) {
       return MessageType.attendance;
-    if (_anyMatch(words, [...enApproval, ...locApproval]))
+    }
+    if (_anyMatch(words, [...enApproval, ...locApproval])) {
       return MessageType.approvals;
-    if (_anyMatch(words, [...enProfile, ...locData]))
+    }
+    if (_anyMatch(words, [...enProfile, ...locData])) {
       return MessageType.profile;
-    if (_anyMatch(words, [...enDocuments, ...locDocument]))
+    }
+    if (_anyMatch(words, [...enDocuments, ...locDocument])) {
       return MessageType.documents;
-    if (_anyMatch(words, [...enRequest, ...locRequest]))
+    }
+    if (_anyMatch(words, [...enRequest, ...locRequest])) {
       return MessageType.request;
+    }
 
     return MessageType.text;
   }
@@ -606,8 +617,6 @@ class _ChatBotScreenState extends State<ChatBotScreen>
     );
   }
 
-
-
   // ─── TYPING INDICATOR ───────────────────────────────────────────────────
 
   Widget _buildTypingBubble() {
@@ -638,30 +647,32 @@ class _ChatBotScreenState extends State<ChatBotScreen>
             ),
             child: RepaintBoundary(
               child: AnimatedBuilder(
-              animation: _typingAnimController,
-              builder: (context, _) {
-                return Row(
-                  children: List.generate(3, (i) {
-                    final delay = i / 3;
-                    final t = (_typingAnimController.value + delay) % 1.0;
-                    final scale = 0.6 + 0.4 * sin(t * pi);
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2),
-                      child: Transform.scale(
-                        scale: scale,
-                        child: Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: _C.textMuted.withOpacity(0.6 + 0.4 * scale),
-                            shape: BoxShape.circle,
+                animation: _typingAnimController,
+                builder: (context, _) {
+                  return Row(
+                    children: List.generate(3, (i) {
+                      final delay = i / 3;
+                      final t = (_typingAnimController.value + delay) % 1.0;
+                      final scale = 0.6 + 0.4 * sin(t * pi);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
+                        child: Transform.scale(
+                          scale: scale,
+                          child: Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: _C.textMuted.withOpacity(
+                                0.6 + 0.4 * scale,
+                              ),
+                              shape: BoxShape.circle,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
-                );
-              },
+                      );
+                    }),
+                  );
+                },
               ),
             ),
           ),

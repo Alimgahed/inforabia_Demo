@@ -578,18 +578,14 @@ class _MyTeamScreenState extends State<MyTeamScreen>
           // Department Breakdown Pie Chart
           FadeInUp(
             duration: const Duration(milliseconds: 600),
-            child: RepaintBoundary(
-              child: _buildDepartmentPie(isDark),
-            ),
+            child: RepaintBoundary(child: _buildDepartmentPie(isDark)),
           ),
           const SizedBox(height: 16),
 
           // Performance Bar Chart
           FadeInUp(
             duration: const Duration(milliseconds: 700),
-            child: RepaintBoundary(
-              child: _buildPerformanceBar(isDark),
-            ),
+            child: RepaintBoundary(child: _buildPerformanceBar(isDark)),
           ),
           const SizedBox(height: 16),
 
@@ -1261,7 +1257,7 @@ class _MemberCard extends StatelessWidget {
                                     child: child,
                                   );
                                 },
-                                errorBuilder: (_, __, ___) => Icon(
+                                errorBuilder: (_, _, _) => Icon(
                                   member.icon,
                                   color: member.accentColor,
                                   size: 28,

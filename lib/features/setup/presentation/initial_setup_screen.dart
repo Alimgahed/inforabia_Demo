@@ -192,8 +192,8 @@ class InitialSetupScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 6.0),
           child: Image.asset(
-            'assets/images/panda.png',
-            height: 60,
+            'assets/images/WhatsApp Image 2026-05-10 at 4.58.42 PM.png',
+            height: 80,
             // You can also adjust for dark mode if you have a separate asset
             // colorBlendMode: isDark ? BlendMode.srcIn : BlendMode.srcOver,
           ),

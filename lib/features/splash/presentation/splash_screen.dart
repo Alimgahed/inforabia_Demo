@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final images = [
         // Core branding
-        'assets/images/panda.png',
+        'assets/images/WhatsApp Image 2026-05-10 at 4.58.42 PM.png',
         'assets/images/qrcode.jpeg',
         // Main user avatar
         'assets/images/pngtree-a-saudi-man-traditional-attire-middle-aged-wearing-white-thobe-and-png-image_16610073.webp',
@@ -153,7 +153,7 @@ class _SplashScreenState extends State<SplashScreen>
                     child: ScaleTransition(
                       scale: _pulseAnimation,
                       child: Image.asset(
-                        'assets/images/panda.png',
+                        'assets/images/WhatsApp Image 2026-05-10 at 4.58.42 PM.png',
                         height: 200,
                         width: 200,
                       ),
@@ -172,7 +172,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
                       child: Text(
-                        'Panda',
+                        'TAMER',
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.w900,
@@ -203,7 +203,7 @@ class _SplashScreenState extends State<SplashScreen>
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
                       child: Text(
-                        'Panda Hypermarket',
+                        'TAMER GROUP',
                         style: TextStyle(
                           fontSize: 12,
                           letterSpacing: 5,

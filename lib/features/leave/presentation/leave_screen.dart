@@ -59,7 +59,7 @@ final List<LeaveBalance> saudiLeaveBalances = [
     total: 21,
     color: AppColors.primary,
     bgColor: Color(0xFFE8F5E9),
-    textColor: Color(0xFF1B432C),
+    textColor: AppColors.primary,
   ),
   const LeaveBalance(
     label: 'Sick',
@@ -76,9 +76,9 @@ final List<LeaveBalance> saudiLeaveBalances = [
     arabicLabel: 'إجازة الحج',
     used: 15,
     total: 15,
-    color: Color(0xFF7B1FA2),
+    color: AppColors.primary,
     bgColor: Color(0xFFF3E5F5),
-    textColor: Color(0xFF6A1B9A),
+    textColor: AppColors.primary,
   ),
 ];
 
@@ -155,7 +155,7 @@ class _LeaveScreenState extends State<LeaveScreen>
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: 3, 
+      length: 3,
       vsync: this,
       initialIndex: widget.args?.initialSection ?? 0,
     );
@@ -438,12 +438,12 @@ class _OverviewTab extends StatelessWidget {
           FadeInUp(
             duration: const Duration(milliseconds: 400),
             child: ListView.separated(
-      cacheExtent: 1000,
+              cacheExtent: 1000,
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: saudiLeaveBalances.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              separatorBuilder: (_, _) => const SizedBox(height: 10),
               itemBuilder: (_, i) => _BalanceCard(
                 balance: saudiLeaveBalances[i],
                 isDark: isDark,
@@ -1307,10 +1307,10 @@ class _HistoryTabState extends State<_HistoryTab> {
                   ),
                 )
               : ListView.separated(
-      cacheExtent: 1000,
+                  cacheExtent: 1000,
                   padding: const EdgeInsets.fromLTRB(14, 0, 14, 30),
                   itemCount: _filtered.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 9),
+                  separatorBuilder: (_, _) => const SizedBox(height: 9),
                   itemBuilder: (_, i) => FadeInUp(
                     delay: Duration(milliseconds: i * 60),
                     child: _HistoryItemCard(
@@ -1512,7 +1512,7 @@ void _showLeaveRequestSheet(
             _SheetLabel('Absence Type', isDark),
             const SizedBox(height: 6),
             DropdownButtonFormField<String>(
-              value: selectedType,
+              initialValue: selectedType,
               isExpanded: true,
               decoration: _inputDeco('', isDark),
               items: leaveTypes

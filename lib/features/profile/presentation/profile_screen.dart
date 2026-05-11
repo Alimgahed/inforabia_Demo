@@ -77,7 +77,11 @@ class _ProfileScreenState extends State<ProfileScreen>
   ];
 
   static final _medicalItems = [
-    _InfoItem(Icons.health_and_safety_outlined, 'Insurance Company Name', 'Tawuniya'),
+    _InfoItem(
+      Icons.health_and_safety_outlined,
+      'Insurance Company Name',
+      'Tawuniya',
+    ),
     _InfoItem(Icons.numbers_outlined, 'Medical Policy Number', 'POL-8274932'),
   ];
 
@@ -115,18 +119,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                 // Salary chart
                 FadeInUp(
                   delay: const Duration(milliseconds: 100),
-                  child: RepaintBoundary(
-                    child: _buildSalaryChartCard(isDark),
-                  ),
+                  child: RepaintBoundary(child: _buildSalaryChartCard(isDark)),
                 ),
                 const SizedBox(height: 12),
 
                 // Payslip
                 FadeInUp(
                   delay: const Duration(milliseconds: 200),
-                  child: RepaintBoundary(
-                    child: _buildPayslipCard(isDark),
-                  ),
+                  child: RepaintBoundary(child: _buildPayslipCard(isDark)),
                 ),
                 const SizedBox(height: 12),
 
@@ -707,7 +707,7 @@ class _CardHeader extends StatelessWidget {
             ),
           ),
         ),
-        if (trailing != null) trailing!,
+        ?trailing,
       ],
     );
   }
@@ -768,7 +768,7 @@ class ProfileHeader extends StatelessWidget {
     const experience = '3 yrs';
     const joinDate = '2021';
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 300, // 🔥 مهم عشان الصورة تبان
       child: Stack(

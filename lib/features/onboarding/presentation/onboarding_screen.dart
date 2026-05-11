@@ -16,22 +16,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _currentPage = 0;
 
   static const List<String> _images = [
-    'assets/images/edited-photo.png',
-    'assets/images/edited-photo (2).png',
-    'assets/images/edited-photo (3).png',
-    'assets/images/edited-photo (6).png',
-
-    'assets/images/edited-photo (4).png',
-    'assets/images/edited-photo (5).png',
+    'assets/images/onboarding_1.png',
+    'assets/images/onboarding_2.png',
+    'assets/images/onboarding_3.png',
+    'assets/images/onboarding_4.png',
+    'assets/images/onboarding_5.png',
+    'assets/images/onboarding_6.png',
   ];
 
   static const List<Color> _thematicColors = [
-    AppColors.primary, // Retail Services - Dark Green
-    AppColors.accent, // Store Analytics - Green
-    AppColors.primary, // Bilingual & Secure - Light Green
-    AppColors.accent, // Store Analytics - Green
-    AppColors.primary, // Bilingual & Secure - Light Green
-    AppColors.accent, // Store Analytics - Green
+    AppColors.primary, // Tamer Green
+    AppColors.secondary, // Tamer Black
+    AppColors.accent, // Bright Green
+    AppColors.darkTeal, // Deep Green
+    AppColors.primary, // Tamer Green
+    AppColors.accent, // Bright Green
   ];
 
   @override
@@ -218,7 +217,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           imagePath,
           width: double.infinity,
           height: double.infinity,
-          fit: BoxFit.contain,
+          fit: BoxFit.cover,
         ),
 
         // Gradient Overlays for Readability

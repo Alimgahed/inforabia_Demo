@@ -54,7 +54,8 @@ class SalaryScreen extends StatefulWidget {
   State<SalaryScreen> createState() => _SalaryScreenState();
 }
 
-class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderStateMixin {
+class _SalaryScreenState extends State<SalaryScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   bool _earningsExpanded = true;
   bool _deductionsExpanded = true;
@@ -66,7 +67,7 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: 3, 
+      length: 3,
       vsync: this,
       initialIndex: widget.args?.initialSection ?? 0,
     );
@@ -160,7 +161,10 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new, color: isDark ? Colors.white : AppColors.primary),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: isDark ? Colors.white : AppColors.primary,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         bottom: TabBar(
@@ -190,8 +194,10 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
   // ── PAYSLIP TAB ────────────────────────────────────────────────────────────
 
   Widget _buildPayslipTab(AppLocalizations l10n, bool isDark) {
-    final double previousNet = _salaryHistory[_salaryHistory.length - 2].netSalary;
-    final double changePercent = ((_current.netSalary - previousNet) / previousNet) * 100;
+    final double previousNet =
+        _salaryHistory[_salaryHistory.length - 2].netSalary;
+    final double changePercent =
+        ((_current.netSalary - previousNet) / previousNet) * 100;
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
@@ -233,11 +239,24 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
               isExpanded: _earningsExpanded,
               total: _current.totalEarnings,
               totalColor: AppColors.success,
-              onToggle: () => setState(() => _earningsExpanded = !_earningsExpanded),
+              onToggle: () =>
+                  setState(() => _earningsExpanded = !_earningsExpanded),
               items: [
-                _LineItem(l10n.basicSalary, _current.basicSalary, AppColors.success),
-                _LineItem(l10n.housingAllowance, _current.housingAllowance, AppColors.success),
-                _LineItem(l10n.transportAllowance, _current.transportAllowance, AppColors.success),
+                _LineItem(
+                  l10n.basicSalary,
+                  _current.basicSalary,
+                  AppColors.success,
+                ),
+                _LineItem(
+                  l10n.housingAllowance,
+                  _current.housingAllowance,
+                  AppColors.success,
+                ),
+                _LineItem(
+                  l10n.transportAllowance,
+                  _current.transportAllowance,
+                  AppColors.success,
+                ),
                 _LineItem(l10n.bonus, _current.bonus, AppColors.success),
                 _LineItem(l10n.overtime, _current.overtime, AppColors.success),
               ],
@@ -255,10 +274,15 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
               isExpanded: _deductionsExpanded,
               total: _current.totalDeductions,
               totalColor: AppColors.error,
-              onToggle: () => setState(() => _deductionsExpanded = !_deductionsExpanded),
+              onToggle: () =>
+                  setState(() => _deductionsExpanded = !_deductionsExpanded),
               items: [
                 _LineItem(l10n.gosi, _current.gosi, AppColors.error),
-                _LineItem(l10n.absenceDeduction, _current.absenceDeduction, AppColors.error),
+                _LineItem(
+                  l10n.absenceDeduction,
+                  _current.absenceDeduction,
+                  AppColors.error,
+                ),
               ],
             ),
           ),
@@ -290,11 +314,18 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.analytics_rounded, size: 18, color: AppColors.primary),
+                      const Icon(
+                        Icons.analytics_rounded,
+                        size: 18,
+                        color: AppColors.primary,
+                      ),
                       const SizedBox(width: 8),
                       Text(
                         l10n.salaryTrend,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -305,22 +336,31 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
                         LineChartData(
                           gridData: const FlGridData(show: false),
                           titlesData: FlTitlesData(
-                            leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                            leftTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            topTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            rightTitles: const AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
                             bottomTitles: AxisTitles(
                               sideTitles: SideTitles(
                                 showTitles: true,
                                 getTitlesWidget: (value, meta) {
                                   int index = value.toInt();
-                                  if (index >= 0 && index < _salaryHistory.length) {
+                                  if (index >= 0 &&
+                                      index < _salaryHistory.length) {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 8),
                                       child: Text(
                                         _salaryHistory[index].month,
                                         style: TextStyle(
                                           fontSize: 10,
-                                          color: isDark ? Colors.white54 : AppColors.grey,
+                                          color: isDark
+                                              ? Colors.white54
+                                              : AppColors.grey,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -334,23 +374,37 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
                           borderData: FlBorderData(show: false),
                           lineBarsData: [
                             LineChartBarData(
-                              spots: _salaryHistory.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.netSalary)).toList(),
+                              spots: _salaryHistory
+                                  .asMap()
+                                  .entries
+                                  .map(
+                                    (e) => FlSpot(
+                                      e.key.toDouble(),
+                                      e.value.netSalary,
+                                    ),
+                                  )
+                                  .toList(),
                               isCurved: true,
                               color: AppColors.primary,
                               barWidth: 4,
                               dotData: FlDotData(
                                 show: true,
-                                getDotPainter: (spot, percent, barData, index) => FlDotCirclePainter(
-                                  radius: 4,
-                                  color: AppColors.primary,
-                                  strokeWidth: 2,
-                                  strokeColor: Colors.white,
-                                ),
+                                getDotPainter:
+                                    (spot, percent, barData, index) =>
+                                        FlDotCirclePainter(
+                                          radius: 4,
+                                          color: AppColors.primary,
+                                          strokeWidth: 2,
+                                          strokeColor: Colors.white,
+                                        ),
                               ),
                               belowBarData: BarAreaData(
                                 show: true,
                                 gradient: LinearGradient(
-                                  colors: [AppColors.primary.withOpacity(0.2), AppColors.primary.withOpacity(0.0)],
+                                  colors: [
+                                    AppColors.primary.withOpacity(0.2),
+                                    AppColors.primary.withOpacity(0.0),
+                                  ],
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
                                 ),
@@ -366,11 +420,32 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
             ),
           ),
           const SizedBox(height: 24),
-          Text(l10n.salaryChanges, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(
+            l10n.salaryChanges,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
           const SizedBox(height: 16),
-          _salaryChangeItem(l10n.promotion + ': Senior Tech Lead', 'Apr 2024', '+SAR 2,250', isDark, true),
-          _salaryChangeItem(l10n.annualIncrement, 'Jan 2023', '+SAR 1,800', isDark, true),
-          _salaryChangeItem('Job Start', 'Jun 2022', 'SAR 10,000', isDark, false),
+          _salaryChangeItem(
+            '${l10n.promotion}: Senior Tech Lead',
+            'Apr 2024',
+            '+SAR 2,250',
+            isDark,
+            true,
+          ),
+          _salaryChangeItem(
+            l10n.annualIncrement,
+            'Jan 2023',
+            '+SAR 1,800',
+            isDark,
+            true,
+          ),
+          _salaryChangeItem(
+            'Job Start',
+            'Jun 2022',
+            'SAR 10,000',
+            isDark,
+            false,
+          ),
         ],
       ),
     );
@@ -380,10 +455,30 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
 
   Widget _buildFinanceTab(AppLocalizations l10n, bool isDark) {
     final invoices = [
-      {'title': 'Cloud Hosting Fees', 'date': '15 Apr', 'amount': 'SAR 4,500', 'status': 'Pending'},
-      {'title': 'MacBook Pro M3 Pro', 'date': '10 Apr', 'amount': 'SAR 12,800', 'status': 'Approved'},
-      {'title': 'AWS Infrastructure', 'date': '02 Apr', 'amount': 'SAR 3,200', 'status': 'Approved'},
-      {'title': 'Office Supplies', 'date': '28 Mar', 'amount': 'SAR 850', 'status': 'Paid'},
+      {
+        'title': 'Cloud Hosting Fees',
+        'date': '15 Apr',
+        'amount': 'SAR 4,500',
+        'status': 'Pending',
+      },
+      {
+        'title': 'MacBook Pro M3 Pro',
+        'date': '10 Apr',
+        'amount': 'SAR 12,800',
+        'status': 'Approved',
+      },
+      {
+        'title': 'AWS Infrastructure',
+        'date': '02 Apr',
+        'amount': 'SAR 3,200',
+        'status': 'Approved',
+      },
+      {
+        'title': 'Office Supplies',
+        'date': '28 Mar',
+        'amount': 'SAR 850',
+        'status': 'Paid',
+      },
     ];
 
     return ListView.builder(
@@ -408,7 +503,8 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: (isPending ? AppColors.warning : AppColors.success).withOpacity(0.1),
+                    color: (isPending ? AppColors.warning : AppColors.success)
+                        .withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
@@ -422,21 +518,38 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(inv['title']!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                      Text(
+                        inv['title']!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
                       const SizedBox(height: 4),
-                      Text(inv['date']!, style: TextStyle(color: AppColors.grey, fontSize: 12)),
+                      Text(
+                        inv['date']!,
+                        style: TextStyle(color: AppColors.grey, fontSize: 12),
+                      ),
                     ],
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(inv['amount']!, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)),
+                    Text(
+                      inv['amount']!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 14,
+                      ),
+                    ),
                     const SizedBox(height: 4),
                     Text(
                       inv['status']!,
                       style: TextStyle(
-                        color: isPending ? AppColors.warning : AppColors.success,
+                        color: isPending
+                            ? AppColors.warning
+                            : AppColors.success,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
@@ -453,7 +566,11 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
 
   // ── HELPERS ────────────────────────────────────────────────────────────────
 
-  Widget _buildNetSalaryHero(AppLocalizations l10n, double change, bool isDark) {
+  Widget _buildNetSalaryHero(
+    AppLocalizations l10n,
+    double change,
+    bool isDark,
+  ) {
     final isUp = change >= 0;
     return Container(
       margin: const EdgeInsets.all(20),
@@ -477,12 +594,30 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
             children: [
               Text(
                 l10n.netSalary.toUpperCase(),
-                style: const TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.w900, letterSpacing: 1.2),
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.2,
+                ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), borderRadius: BorderRadius.circular(12)),
-                child: Text('${_current.month} 2026', style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold)),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '${_current.month} 2026',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),
@@ -491,19 +626,40 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
             children: [
-              Text(_formatCurrency(_current.netSalary), style: const TextStyle(color: Colors.white, fontSize: 34, fontWeight: FontWeight.w900)),
+              Text(
+                _formatCurrency(_current.netSalary),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 34,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
               const SizedBox(width: 12),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: (isUp ? Colors.greenAccent : Colors.redAccent).withOpacity(0.2),
+                  color: (isUp ? Colors.greenAccent : Colors.redAccent)
+                      .withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
                   children: [
-                    Icon(isUp ? Icons.arrow_upward_rounded : Icons.arrow_downward_rounded, color: isUp ? Colors.greenAccent : Colors.redAccent, size: 14),
+                    Icon(
+                      isUp
+                          ? Icons.arrow_upward_rounded
+                          : Icons.arrow_downward_rounded,
+                      color: isUp ? Colors.greenAccent : Colors.redAccent,
+                      size: 14,
+                    ),
                     const SizedBox(width: 4),
-                    Text('${change.abs().toStringAsFixed(1)}%', style: TextStyle(color: isUp ? Colors.greenAccent : Colors.redAccent, fontSize: 12, fontWeight: FontWeight.w900)),
+                    Text(
+                      '${change.abs().toStringAsFixed(1)}%',
+                      style: TextStyle(
+                        color: isUp ? Colors.greenAccent : Colors.redAccent,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -514,7 +670,13 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
     );
   }
 
-  Widget _salaryChangeItem(String title, String date, String change, bool isDark, bool isPositive) {
+  Widget _salaryChangeItem(
+    String title,
+    String date,
+    String change,
+    bool isDark,
+    bool isPositive,
+  ) {
     return FadeInUp(
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
@@ -529,23 +691,46 @@ class _SalaryScreenState extends State<SalaryScreen> with SingleTickerProviderSt
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: (isPositive ? AppColors.success : AppColors.primary).withOpacity(0.1),
+                color: (isPositive ? AppColors.success : AppColors.primary)
+                    .withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(isPositive ? Icons.trending_up_rounded : Icons.work_history_rounded, color: isPositive ? AppColors.success : AppColors.primary, size: 20),
+              child: Icon(
+                isPositive
+                    ? Icons.trending_up_rounded
+                    : Icons.work_history_rounded,
+                color: isPositive ? AppColors.success : AppColors.primary,
+                size: 20,
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
                   const SizedBox(height: 4),
-                  Text(date, style: TextStyle(color: AppColors.grey, fontSize: 12)),
+                  Text(
+                    date,
+                    style: TextStyle(color: AppColors.grey, fontSize: 12),
+                  ),
                 ],
               ),
             ),
-            Text(change, style: TextStyle(color: isPositive ? AppColors.success : AppColors.primary, fontWeight: FontWeight.w900, fontSize: 15)),
+            Text(
+              change,
+              style: TextStyle(
+                color: isPositive ? AppColors.success : AppColors.primary,
+                fontWeight: FontWeight.w900,
+                fontSize: 15,
+              ),
+            ),
           ],
         ),
       ),
@@ -559,7 +744,12 @@ class _HeroPill extends StatelessWidget {
   final Color color;
   final bool isDeduction;
 
-  const _HeroPill({required this.label, required this.value, required this.color, this.isDeduction = false});
+  const _HeroPill({
+    required this.label,
+    required this.value,
+    required this.color,
+    this.isDeduction = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -575,9 +765,23 @@ class _HeroPill extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: const TextStyle(fontSize: 11, color: AppColors.textSecondary, fontWeight: FontWeight.bold)),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 11,
+                color: AppColors.textSecondary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 6),
-            Text('SAR ${value.toInt()}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: isDeduction ? AppColors.error : AppColors.primary)),
+            Text(
+              'SAR ${value.toInt()}',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: isDeduction ? AppColors.error : AppColors.primary,
+              ),
+            ),
           ],
         ),
       ),
@@ -602,7 +806,16 @@ class _CollapsibleSection extends StatelessWidget {
   final VoidCallback onToggle;
   final List<_LineItem> items;
 
-  const _CollapsibleSection({required this.title, required this.icon, required this.iconColor, required this.isExpanded, required this.total, required this.totalColor, required this.onToggle, required this.items});
+  const _CollapsibleSection({
+    required this.title,
+    required this.icon,
+    required this.iconColor,
+    required this.isExpanded,
+    required this.total,
+    required this.totalColor,
+    required this.onToggle,
+    required this.items,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -610,7 +823,11 @@ class _CollapsibleSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        decoration: BoxDecoration(color: isDark ? AppColors.darkSurface : AppColors.surface, borderRadius: BorderRadius.circular(24), boxShadow: AppColors.cardShadow),
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.darkSurface : AppColors.surface,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: AppColors.cardShadow,
+        ),
         child: Column(
           children: [
             InkWell(
@@ -620,12 +837,40 @@ class _CollapsibleSection extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
-                    Container(width: 40, height: 40, decoration: BoxDecoration(color: iconColor.withOpacity(0.1), borderRadius: BorderRadius.circular(12)), child: Icon(icon, color: iconColor, size: 20)),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: iconColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(icon, color: iconColor, size: 20),
+                    ),
                     const SizedBox(width: 14),
-                    Expanded(child: Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),
-                    Text('SAR ${total.toInt()}', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: totalColor)),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      'SAR ${total.toInt()}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w900,
+                        color: totalColor,
+                      ),
+                    ),
                     const SizedBox(width: 8),
-                    Icon(isExpanded ? Icons.keyboard_arrow_up_rounded : Icons.keyboard_arrow_down_rounded, color: AppColors.grey),
+                    Icon(
+                      isExpanded
+                          ? Icons.keyboard_arrow_up_rounded
+                          : Icons.keyboard_arrow_down_rounded,
+                      color: AppColors.grey,
+                    ),
                   ],
                 ),
               ),
@@ -637,21 +882,39 @@ class _CollapsibleSection extends StatelessWidget {
                   children: [
                     const Divider(),
                     const SizedBox(height: 12),
-                    ...items.map((item) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(item.label, style: TextStyle(fontSize: 14, color: isDark ? Colors.white70 : AppColors.textSecondary)),
-                              Text('SAR ${item.value.toInt()}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-                            ],
-                          ),
-                        )),
+                    ...items.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              item.label,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: isDark
+                                    ? Colors.white70
+                                    : AppColors.textSecondary,
+                              ),
+                            ),
+                            Text(
+                              'SAR ${item.value.toInt()}',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
               secondChild: const SizedBox.shrink(),
-              crossFadeState: isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
               duration: const Duration(milliseconds: 300),
             ),
           ],
